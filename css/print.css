@@ -1,0 +1,82 @@
+/* A5 single-sheet print for binder (fichário) */
+
+@page {
+  size: A5;
+  margin: 12mm 12mm 12mm 16mm; /* left margin slightly wider for binder holes */
+}
+
+@media print {
+  html,
+  body {
+    background: #fff !important;
+    color: #000;
+    font-size: 10.5pt;
+    line-height: 1.35;
+  }
+
+  body * {
+    box-shadow: none !important;
+  }
+
+  .no-print,
+  .site-header,
+  .site-footer,
+  .site-nav,
+  .recipe-actions,
+  .category-nav,
+  .hero p.screen-only {
+    display: none !important;
+  }
+
+  .recipe-page {
+    max-width: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .recipe-card {
+    border: none;
+    background: #fff;
+    padding: 0;
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  .recipe-card .category {
+    font-size: 8pt;
+    margin-bottom: 2mm;
+  }
+
+  .recipe-card h1 {
+    font-size: 16pt;
+    margin-bottom: 3mm;
+  }
+
+  .meta {
+    gap: 2mm 6mm;
+    margin-bottom: 4mm;
+    padding-bottom: 3mm;
+    font-size: 9pt;
+  }
+
+  .recipe-card h2 {
+    font-size: 11pt;
+    margin: 3.5mm 0 2mm;
+  }
+
+  .ingredients li,
+  .steps li {
+    margin-bottom: 1.2mm;
+  }
+
+  .notes {
+    margin-top: 3mm;
+    padding-top: 2.5mm;
+    font-size: 9pt;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+}
