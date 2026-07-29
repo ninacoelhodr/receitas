@@ -42,6 +42,22 @@
       <a href="#outros">Outros</a>
     </nav>
 
+    <div class="search-bar no-print">
+      <label class="visually-hidden" for="recipe-search">Buscar receita</label>
+      <input
+        type="search"
+        id="recipe-search"
+        class="recipe-search"
+        placeholder="Buscar receita…"
+        autocomplete="off"
+        enterkeyhint="search"
+      />
+    </div>
+
+    <p id="search-empty" class="search-empty no-print" hidden>
+      Nenhuma receita encontrada.
+    </p>
+
     <main class="recipe-index" id="receitas">
       <section class="category-block" id="bolos">
         <h2>Bolos</h2>
@@ -172,5 +188,7 @@
         <strong>processa entradas</strong>.
       </p>
     </footer>
+
+    <script src="./js/search.js" defer></script>
   </body>
 </html>
