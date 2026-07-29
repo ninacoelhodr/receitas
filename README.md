@@ -16,7 +16,15 @@ A margem esquerda é um pouco maior para o furo do fichário.
 
 ## Adicionar uma receita nova
 
-Envie a foto da receita no chat (com o agente neste repositório). O fluxo é:
+### Pelo Telegram (recomendado no celular)
+
+1. Abra o bot no Telegram e envie a **foto** (legenda opcional com categoria/nome).
+2. Em até ~5 minutos a foto aparece em `entradas/pending/` (Actions “Telegram → entradas”).
+3. No Cursor, diga: **processa entradas**.
+
+### Direto no chat
+
+Envie a foto ou o link aqui. O fluxo é:
 
 1. Transcrição e estruturação (título, categoria, ingredientes, modo de preparo).
 2. Criação de `receitas/<categoria>/<slug>.html` no molde A5.
