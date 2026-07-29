@@ -33,7 +33,7 @@ Envie a foto ou o link aqui. O fluxo é:
 3. Atualização do `index.html`.
 4. Commit/push quando você pedir.
 
-Categorias: `bolos`, `doces`, `salgados`, `massas`, `carnes`, `aves`, `sopas`, `acompanhamentos`, `bebidas`, `outros`.
+Categorias: `bolos`, `doces`, `salgados`, `massas`, `carnes`, `aves`, `frutos-do-mar`, `sopas`, `acompanhamentos`, `bebidas`, `outros`.
 
 ## Publicação (GitHub Pages)
 

@@ -47,7 +47,7 @@ Task Progress:
 ### Nova receita
 
 1. Escolher categoria: `bolos`, `doces`, `salgados`, `massas`, `carnes`,
-   `aves`, `sopas`, `acompanhamentos`, `bebidas`, `outros`.
+   `aves`, `frutos-do-mar`, `sopas`, `acompanhamentos`, `bebidas`, `outros`.
 2. Criar `receitas/<categoria>/<slug>.html` no molde abaixo (sem foto).
 3. Incluir link em `index.html` na seção da categoria (ordem alfabética por
    título, se já houver lista ordenada).
