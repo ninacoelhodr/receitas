@@ -4,3 +4,6 @@ Thumbs.db
 *.swp
 .idea/
 .vscode/
+work-*.png
+
+fotos/photo_*.jpg

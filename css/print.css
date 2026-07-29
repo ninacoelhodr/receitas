@@ -24,6 +24,7 @@
   .site-nav,
   .recipe-actions,
   .category-nav,
+  .source-photo,
   .hero p.screen-only {
     display: none !important;
   }

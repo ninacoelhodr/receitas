@@ -18,9 +18,11 @@ A margem esquerda é um pouco maior para o furo do fichário.
 
 ### Pelo Telegram (recomendado no celular)
 
-1. Abra o bot no Telegram e envie a **foto** (legenda opcional com categoria/nome).
-2. Em até ~5 minutos a foto aparece em `entradas/pending/` (Actions “Telegram → entradas”).
+1. Abra o bot no Telegram ([@Receitasnina_bot](https://t.me/Receitasnina_bot)) e envie a **foto** (legenda opcional com categoria/nome).
+2. Em até ~5 minutos a foto aparece em `entradas/pending/` (Actions “Telegram → entradas”, também dá para clicar em **Run workflow**).
 3. No Cursor, diga: **processa entradas**.
+
+Ao processar: **ignorar fotos repetidas** da mesma receita; se faltar texto na foto, **completar com bom senso** ou receita clássica parecida.
 
 ### Direto no chat
 
