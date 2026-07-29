@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Poll Telegram for recipe photos and save them under entradas/pending/
+# Poll Telegram for recipe photos and links → entradas/pending/
 set -euo pipefail
 
 TOKEN="${TELEGRAM_BOT_TOKEN:?TELEGRAM_BOT_TOKEN is required}"
@@ -35,6 +35,23 @@ fi
 max_offset="$offset"
 imported=0
 
+slugify() {
+  local raw="${1:-entrada}"
+  local s
+  s="$(echo "$raw" | iconv -f utf-8 -t ascii//TRANSLIT 2>/dev/null || echo "$raw")"
+  s="$(echo "$s" | tr '[:upper:]' '[:lower:]' | sed -E 's/https?:\/\///g; s/[^a-z0-9]+/-/g; s/^-+//; s/-+$//; s/^$/entrada/')"
+  echo "${s:0:40}"
+}
+
+send_msg() {
+  local chat="$1"
+  local text="$2"
+  curl -sS -X POST "${API}/sendMessage" \
+    -d "chat_id=${chat}" \
+    --data-urlencode "text=${text}" \
+    >/dev/null
+}
+
 for i in $(seq 0 $((count - 1))); do
   update="$(echo "$updates" | jq -c ".result[$i]")"
   update_id="$(echo "$update" | jq -r '.update_id')"
@@ -53,8 +70,20 @@ for i in $(seq 0 $((count - 1))); do
     continue
   fi
 
-  caption="$(echo "$update" | jq -r '.message.caption // .message.text // empty')"
-  # Skip pure /start and help texts without media
+  text="$(echo "$update" | jq -r '.message.text // empty')"
+  caption="$(echo "$update" | jq -r '.message.caption // empty')"
+  combined="${caption}"$'\n'"${text}"
+
+  if [[ "$text" == "/start" || "$text" == "/help" ]]; then
+    send_msg "$chat_id" "Olá! Envie:
+1) Foto da receita (legenda opcional com categoria/nome), ou
+2) Link de uma receita na internet (share.google, blog, etc.).
+
+Em alguns minutos aparece em entradas/pending no GitHub. Depois diga no Cursor: processa entradas."
+    continue
+  fi
+
+  # —— Photos / image documents ——
   file_id="$(echo "$update" | jq -r '
     if (.message.photo | type) == "array" and (.message.photo | length) > 0 then
       .message.photo[-1].file_id
@@ -65,50 +94,81 @@ for i in $(seq 0 $((count - 1))); do
     end
   ')"
 
-  if [[ -z "$file_id" ]]; then
-    text="$(echo "$update" | jq -r '.message.text // empty')"
-    if [[ "$text" == "/start" || "$text" == "/help" ]]; then
-      curl -sS -X POST "${API}/sendMessage" \
-        -d "chat_id=${chat_id}" \
-        --data-urlencode "text=Olá! Envie a foto da receita (pode colocar a categoria ou o nome na legenda). Em alguns minutos ela aparece em entradas/pending no GitHub. Depois diga no Cursor: processa entradas." \
-        >/dev/null
+  if [[ -n "$file_id" ]]; then
+    file_info="$(curl -sS "${API}/getFile?file_id=${file_id}")"
+    file_path="$(echo "$file_info" | jq -r '.result.file_path // empty')"
+    if [[ -z "$file_path" ]]; then
+      echo "Could not resolve file_path for update ${update_id}"
+      continue
+    fi
+
+    ext="${file_path##*.}"
+    [[ -z "$ext" || "$ext" == "$file_path" ]] && ext="jpg"
+
+    label="${caption:-receita}"
+    slug="$(slugify "$label")"
+    ts="$(date -u +%Y%m%d-%H%M%S)"
+    out="${PENDING_DIR}/${ts}-${update_id}-${slug}.${ext}"
+
+    echo "Downloading photo -> ${out}"
+    curl -sS -o "$out" "https://api.telegram.org/file/bot${TOKEN}/${file_path}"
+
+    if [[ -n "$caption" ]]; then
+      printf '%s\n' "$caption" > "${out}.txt"
+    fi
+
+    send_msg "$chat_id" "Foto recebida: ${out}. No Cursor: processa entradas."
+    imported=$((imported + 1))
+    continue
+  fi
+
+  # —— Links (plain text, entities, text_link) ——
+  urls="$(echo "$update" | jq -r '
+    [
+      (.message.entities // []),
+      (.message.caption_entities // [])
+    ]
+    | add
+    | map(select(.type == "text_link") | .url)
+    | .[]
+  ' 2>/dev/null || true)"
+
+  # URLs typed plainly in text/caption
+  plain_urls="$(printf '%s\n' "$combined" | grep -oE 'https?://[^[:space:]<>\"]+' || true)"
+  urls="$(printf '%s\n%s\n' "$urls" "$plain_urls" | sed '/^$/d' | awk '!seen[$0]++')"
+
+  if [[ -z "$urls" ]]; then
+    if [[ -n "$text" ]]; then
+      send_msg "$chat_id" "Não achei foto nem link. Envie uma foto da receita ou um URL (https://...)."
     fi
     continue
   fi
 
-  file_info="$(curl -sS "${API}/getFile?file_id=${file_id}")"
-  file_path="$(echo "$file_info" | jq -r '.result.file_path // empty')"
-  if [[ -z "$file_path" ]]; then
-    echo "Could not resolve file_path for update ${update_id}"
-    continue
-  fi
+  while IFS= read -r url; do
+    [[ -z "$url" ]] && continue
+    # strip trailing punctuation often glued by messengers
+    url="$(echo "$url" | sed -E 's/[),.;:]+$//')"
+    slug="$(slugify "$url")"
+    ts="$(date -u +%Y%m%d-%H%M%S)"
+    out="${PENDING_DIR}/${ts}-${update_id}-${slug}.link.txt"
 
-  ext="${file_path##*.}"
-  [[ -z "$ext" || "$ext" == "$file_path" ]] && ext="jpg"
+    note="$(printf '%s\n' "$combined" | grep -vE 'https?://' | sed '/^$/d' | head -c 500 || true)"
 
-  slug="$(echo "${caption:-receita}" \
-    | iconv -f utf-8 -t ascii//TRANSLIT 2>/dev/null || echo "${caption:-receita}")"
-  slug="$(echo "$slug" | tr '[:upper:]' '[:lower:]' | sed -E 's/[^a-z0-9]+/-/g; s/^-+//; s/-+$//; s/^$/receita/')"
-  slug="${slug:0:40}"
-  ts="$(date -u +%Y%m%d-%H%M%S)"
-  out="${PENDING_DIR}/${ts}-${update_id}-${slug}.${ext}"
+    {
+      echo "url: ${url}"
+      if [[ -n "$note" ]]; then
+        echo "note: ${note}"
+      fi
+      echo "from: telegram"
+      echo "update_id: ${update_id}"
+    } > "$out"
 
-  echo "Downloading -> ${out}"
-  curl -sS -o "$out" "https://api.telegram.org/file/bot${TOKEN}/${file_path}"
-
-  note=""
-  if [[ -n "$caption" ]]; then
-    printf '%s\n' "$caption" > "${out}.txt"
-    note=" Legenda: ${caption}"
-  fi
-
-  curl -sS -X POST "${API}/sendMessage" \
-    -d "chat_id=${chat_id}" \
-    --data-urlencode "text=Recebido! Salvei como ${out}.${note} Quando quiser, no Cursor diga: processa entradas." \
-    >/dev/null
-
-  imported=$((imported + 1))
+    echo "Saved link -> ${out}"
+    send_msg "$chat_id" "Link recebido: ${url}
+Salvei em ${out}. No Cursor: processa entradas."
+    imported=$((imported + 1))
+  done <<< "$urls"
 done
 
 echo "$max_offset" > "$OFFSET_FILE"
-echo "Imported ${imported} photo(s). Next offset: ${max_offset}"
+echo "Imported ${imported} item(s). Next offset: ${max_offset}"

@@ -1,12 +1,18 @@
-# Entradas (fotos brutas)
+# Entradas (fotos e links)
 
-Fotos enviadas ao bot do Telegram caem em [`pending/`](pending/).
+Itens enviados ao bot do Telegram caem em [`pending/`](pending/).
+
+## O que enviar no bot
+
+1. **Foto** da receita (legenda opcional: categoria ou nome).
+2. **Link** de uma receita na internet (`https://...` — share.google, blog, etc.).
 
 ## Fluxo
 
-1. No celular, abra o bot do Telegram e envie a **foto** da receita.
-2. Opcional: legenda com categoria ou nome (ex.: `Doces — pudim da vó`).
-3. Em até ~5 minutos o GitHub Actions grava o arquivo aqui.
-4. No Cursor, diga: **processa entradas**.
+1. Envie foto ou link no [@Receitasnina_bot](https://t.me/Receitasnina_bot).
+2. Em até ~5 minutos (ou após **Run workflow**), o Actions grava em `pending/`:
+   - fotos: `*.jpg` / `*.png` (+ `*.txt` de legenda)
+   - links: `*.link.txt` com o URL
+3. No Cursor, diga: **processa entradas**.
 
-Arquivos processados podem ser movidos para `processadas/` pelo agente.
+Arquivos processados vão para [`processadas/`](processadas/).
