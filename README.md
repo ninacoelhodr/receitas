@@ -8,9 +8,11 @@ Site estático com fichas de receita em **A5**, prontas para imprimir e guardar 
 ## Como usar
 
 1. Abra o site (ou `index.html` no navegador).
-2. Escolha a receita na categoria.
-3. Clique em **Imprimir** (ou Ctrl+P / Cmd+P).
-4. No diálogo de impressão, selecione papel **A5** (ou “Ajustar à página” se a impressora não listar A5) e imprima **uma página** por receita.
+2. Busque ou escolha a receita na categoria.
+3. Na tela, a ficha mostra uma **foto de referência** do prato (ilustrativa).
+4. Clique em **Imprimir** (ou Ctrl+P / Cmd+P) — a foto **não** sai na folha A5.
+5. Selecione papel **A5** e imprima uma página por receita.
+
 
 A margem esquerda é um pouco maior para o furo do fichário.
 

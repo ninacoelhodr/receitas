@@ -2,7 +2,8 @@
 name: processar-receitas-foto
 description: >-
   Analisa fotos de receitas e cria ou completa fichas HTML A5 no livro
-  (receitas/<categoria>/<slug>.html + index.html), sem embutir a foto na ficha.
+  (receitas/<categoria>/<slug>.html + index.html). Foto manuscrita nunca vai
+  na ficha; foto de referência do prato pronto (tela) é desejável.
   Use when processing recipe photos from Telegram, entradas/pending/, fotos/,
   chat attachments, or when the user says processa entradas / processar fotos.
 ---
@@ -16,29 +17,35 @@ explícito (“processa entradas”, “processar esta foto”).
 
 ## Regras obrigatórias
 
-1. **Não adicionar a foto à receita.** Sem seção `source-photo`, sem `<img>` da
-   foto original na ficha. A foto é só origem do texto; depois de usada, move
-   ou apaga conforme o fluxo abaixo.
-2. **Foto repetida** (mesma receita já em `index.html` / `receitas/`):
+1. **Não adicionar a foto manuscrita/fonte à receita.** Sem `source-photo`, sem
+   `<img>` da foto do caderno/Telegram. Essa foto é só origem do texto; depois
+   move para `entradas/processadas/` ou apaga.
+2. **Foto de referência do prato (desejável).** Depois de criar/completar a
+   ficha, incluir (se possível) uma imagem ilustrativa do **prato pronto** —
+   de uso livre (Wikimedia Commons, etc.) ou gerada — em
+   `imagens/<slug>.jpg` + bloco `figure.dish-photo.no-print` na ficha.
+   Só na tela (classe `no-print`); não sai na impressão A5. Legenda curta
+   tipo “Referência visual (não é a foto da receita da família).”
+3. **Foto repetida** (mesma receita já em `index.html` / `receitas/`):
    - Revisar a ficha existente.
-   - Se faltar algo → completar a ficha.
-   - Se estiver completa → **só deletar a foto** (não recriar ficha, não
-     duplicar no índice).
-3. Várias fotos do mesmo cartão/página (espelho, ângulo, verso vazio) → tratar
-   como **uma** receita; preferir a imagem mais legível.
-4. Texto cortado/ilegível → completar com bom senso de cozinha ou receita
-   clássica parecida (sem inventar outro prato). Marcar o que foi inferido em
-   `<p class="notes">`.
-5. Ficha compacta: cabe em **uma página A5** (ingredientes, preparo, dicas
-   curtas).
+   - Se faltar algo → completar a ficha (e a referência visual se ainda não
+     houver).
+   - Se estiver completa → **só deletar a foto fonte** (não recriar ficha).
+4. Várias fotos do mesmo cartão/página → **uma** receita; preferir a mais
+   legível.
+5. Texto cortado/ilegível → completar com bom senso ou receita clássica
+   parecida. Marcar o inferido em `<p class="notes">`.
+6. Ficha compacta para **uma página A5** (a foto de referência não conta —
+   some na impressão).
 
 ## Fluxo
 
 ```
 Task Progress:
-- [ ] Ler a foto e extrair título, ingredientes, preparo, meta
+- [ ] Ler a foto fonte e extrair título, ingredientes, preparo, meta
 - [ ] Buscar duplicata no índice / receitas/
-- [ ] Criar OU completar ficha (nunca embutir foto)
+- [ ] Criar OU completar ficha (nunca embutir a foto fonte)
+- [ ] Garantir foto de referência do prato (imagens/ + dish-photo)
 - [ ] Atualizar index.html se receita nova
 - [ ] Mover pending → processadas/ OU deletar se só repetição completa
 - [ ] Commit/push só se a usuária pedir (ou lote que ela mandou processar)
@@ -46,36 +53,32 @@ Task Progress:
 
 ### Nova receita
 
-1. Escolher categoria: `bolos`, `doces`, `salgados`, `massas`, `carnes`,
-   `aves`, `frutos-do-mar`, `sopas`, `acompanhamentos`, `bebidas`, `outros`.
-2. Criar `receitas/<categoria>/<slug>.html` no molde abaixo (sem foto).
-3. Incluir link em `index.html` na seção da categoria (ordem alfabética por
-   título, se já houver lista ordenada).
-4. Se veio de `entradas/pending/`, mover a foto para `entradas/processadas/`.
+1. Categoria: `bolos`, `doces`, `salgados`, `massas`, `carnes`, `aves`,
+   `frutos-do-mar`, `sopas`, `acompanhamentos`, `bebidas`, `outros`.
+2. Criar `receitas/<categoria>/<slug>.html` no molde (com `dish-photo` se
+   houver imagem).
+3. Link em `index.html` na categoria.
+4. Se veio de `entradas/pending/`, mover a fonte para `processadas/`.
 
 ### Receita já existente
 
-1. Abrir a ficha e comparar com a foto.
+1. Comparar ficha com a foto fonte.
 2. Completar lacunas se necessário.
-3. Se nada a acrescentar: **deletar a foto** (pending ou o arquivo bruto) e
-   parar. Não alterar o índice só por causa da foto.
+3. Se nada a acrescentar: **deletar a foto fonte** e parar.
 
-## Molde da ficha (sem foto)
+## Molde da ficha
 
-Copiar estrutura de fichas existentes (ex. `receitas/bolos/bolo-de-cenoura.html`).
-Campos típicos:
+Depois de `div.meta` (ou do `h1` se não houver meta):
 
-- `p.category`, `h1`, `div.meta` (rendimento / tempo)
-- `h2` + `ul.ingredients`
-- `h2` + `ol.steps`
-- opcional: `p.notes` com observações
+```html
+<figure class="dish-photo no-print">
+  <img src="../../imagens/<slug>.jpg" alt="Referência: <nome do prato>" />
+  <figcaption>Referência visual (não é a foto da receita da família).</figcaption>
+</figure>
+```
 
-**Proibido:** `<section class="source-photo">` e qualquer `<img>` da fonte.
+Campos: `p.category`, `h1`, `div.meta`, dish-photo, ingredientes, passos, notes.
 
-CSS: `../../css/site.css` e `../../css/print.css`. Links do header/voltar para
-`../../index.html` (e âncora da categoria).
+**Proibido:** `<section class="source-photo">` e `<img>` da foto manuscrita.
 
-## Depois do lote
-
-Commit e push quando a usuária pedir, ou ao concluir um lote que ela mandou
-processar. Mensagem clara (ex.: qual receita foi criada/completada).
+CSS: `../../css/site.css` e `../../css/print.css`.
