@@ -7,8 +7,11 @@ alwaysApply: true
 
 Ao analisar fotos (Telegram, `entradas/`, `fotos/` ou anexos no chat):
 
-1. **Não duplicar.** Se a mesma receita já existe no índice/`receitas/`, ou se várias fotos são o mesmo recorte/página (espelho, ângulo, verso sem conteúdo novo), criar **uma** ficha só. Preferir a imagem mais legível.
-2. **Completar lacunas.** Se o texto da foto estiver cortado, ilegível ou incompleto, usar bom senso de cozinha e, se preciso, uma receita clássica parecida na internet para fechar ingredientes/passos — sem inventar outro prato. Marcar na observação quando algo tiver sido inferido.
-3. **Uma página A5.** Manter a ficha compacta (ingredientes, modo de preparo, dicas curtas).
-4. **Atualizar** `index.html` na categoria certa; mover fotos processadas de `entradas/pending/` para `entradas/processadas/` quando houver.
-5. **Commit e push** quando a usuária pedir, ou ao concluir um lote que ela mandou processar.
+1. **Não duplicar.** Se a mesma receita já existe no índice/`receitas/`, **revisar a ficha**: completar o que faltar; se estiver completa, **só deletar a foto**. Várias fotos do mesmo recorte/página (espelho, ângulo, verso sem conteúdo novo) = **uma** ficha; preferir a imagem mais legível.
+2. **Não embutir foto na ficha.** Sem seção `source-photo`, sem `<img>` da foto original na receita. A foto é só fonte do texto.
+3. **Completar lacunas.** Se o texto da foto estiver cortado, ilegível ou incompleto, usar bom senso de cozinha e, se preciso, uma receita clássica parecida na internet para fechar ingredientes/passos — sem inventar outro prato. Marcar na observação quando algo tiver sido inferido.
+4. **Uma página A5.** Manter a ficha compacta (ingredientes, modo de preparo, dicas curtas).
+5. **Atualizar** `index.html` na categoria certa (só se receita nova); mover fotos processadas de `entradas/pending/` para `entradas/processadas/` quando houver (ou deletar se era só repetição completa).
+6. **Commit e push** quando a usuária pedir, ou ao concluir um lote que ela mandou processar.
+
+Detalhes do fluxo: skill do projeto `.cursor/skills/processar-receitas-foto/`.
