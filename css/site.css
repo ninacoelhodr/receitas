@@ -121,7 +121,7 @@ a:hover {
   gap: 0.5rem;
   max-width: 68rem;
   margin: 0 auto;
-  padding: 0.5rem 1.5rem 1.5rem;
+  padding: 0.5rem 1.5rem 0.85rem;
 }
 
 .category-nav a {
@@ -157,12 +157,12 @@ a:hover {
 .search-bar {
   max-width: 68rem;
   margin: 0 auto;
-  padding: 0 1.5rem 1.25rem;
+  padding: 0 1.5rem 1.5rem;
 }
 
 .recipe-search {
+  display: block;
   width: 100%;
-  max-width: 28rem;
   appearance: none;
   border: 1px solid var(--line);
   border-radius: 0.45rem;
