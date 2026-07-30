@@ -21,23 +21,19 @@ A margem esquerda é um pouco maior para o furo do fichário.
 ### Pelo Telegram (recomendado no celular)
 
 1. Abra o bot ([@Receitasnina_bot](https://t.me/Receitasnina_bot)) e envie:
-   - a **foto** da receita (legenda opcional com categoria/nome), **ou**
-   - um **link** `https://...` de receita na internet (share.google, blog, etc.).
-2. Em até ~5 minutos (ou **Run workflow** em Actions → Telegram → entradas) o
-   item aparece em `entradas/pending/` (fotos ou `*.link.txt`).
-3. No Cursor, diga: **processa entradas**.
+   - a **foto** da receita (legenda opcional), **ou**
+   - um **link** `https://...`, **ou**
+   - o **texto completo** da receita (ingredientes + preparo).
+2. Em até ~5 minutos (ou **Run workflow**) cai em `entradas/pending/`
+   (imagem, `*.link.txt` ou `*.recipe.txt`).
+3. No Cursor: **processa entradas**.
 
-Ao processar: ignorar entradas repetidas; completar lacunas com bom senso.
-Foto do caderno nunca na ficha; foto de referência do prato (tela) sim.
+Fonte processada é **deletada**. Foto do caderno nunca na ficha; referência do
+prato na tela só com curadoria (`curar-foto-prato`).
 
 ### Direto no chat
 
-Envie a foto ou o link aqui. O fluxo é:
-
-1. Transcrição e estruturação (título, categoria, ingredientes, modo de preparo).
-2. Criação de `receitas/<categoria>/<slug>.html` no molde A5.
-3. Atualização do `index.html`.
-4. Commit/push quando você pedir.
+Envie foto, link ou texto da receita aqui.
 
 Categorias: `bolos`, `doces`, `salgados`, `massas`, `carnes`, `aves`, `frutos-do-mar`, `sopas`, `acompanhamentos`, `bebidas`, `outros`.
 

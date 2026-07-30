@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Poll Telegram for recipe photos and links → entradas/pending/
+# Poll Telegram for recipe photos, links, and full recipe text → entradas/pending/
 set -euo pipefail
 
 TOKEN="${TELEGRAM_BOT_TOKEN:?TELEGRAM_BOT_TOKEN is required}"
@@ -52,6 +52,28 @@ send_msg() {
     >/dev/null
 }
 
+# Looks like a pasted full recipe (not a short chat line)
+looks_like_recipe_text() {
+  local t="$1"
+  local len=${#t}
+  if (( len < 80 )); then
+    return 1
+  fi
+  if echo "$t" | grep -qiE 'ingrediente|modo de preparo|\bpreparo\b|x[ií]cara|colher|forno|rendimento|receita|massa|assado|cozinhe|bata |misture'; then
+    return 0
+  fi
+  # Long paste without keywords still accepted (user said complete recipe text)
+  if (( len >= 200 )); then
+    return 0
+  fi
+  return 1
+}
+
+title_from_text() {
+  # First non-empty line, stripped
+  printf '%s\n' "$1" | sed '/^[[:space:]]*$/d' | head -n 1 | head -c 80
+}
+
 for i in $(seq 0 $((count - 1))); do
   update="$(echo "$updates" | jq -c ".result[$i]")"
   update_id="$(echo "$update" | jq -r '.update_id')"
@@ -75,11 +97,12 @@ for i in $(seq 0 $((count - 1))); do
   combined="${caption}"$'\n'"${text}"
 
   if [[ "$text" == "/start" || "$text" == "/help" ]]; then
-    send_msg "$chat_id" "Olá! Envie:
-1) Foto da receita (legenda opcional com categoria/nome), ou
-2) Link de uma receita na internet (share.google, blog, etc.).
+    send_msg "$chat_id" "Olá! Envie de qualquer um destes jeitos:
+1) Foto da receita (legenda opcional)
+2) Link https://... de uma receita
+3) Texto completo da receita (ingredientes + preparo)
 
-Em alguns minutos aparece em entradas/pending no GitHub. Depois diga no Cursor: processa entradas."
+Em breve aparece em entradas/pending. Depois no Cursor: processa entradas."
     continue
   fi
 
@@ -117,12 +140,12 @@ Em alguns minutos aparece em entradas/pending no GitHub. Depois diga no Cursor: 
       printf '%s\n' "$caption" > "${out}.txt"
     fi
 
-    send_msg "$chat_id" "Foto recebida: ${out}. No Cursor: processa entradas."
+    send_msg "$chat_id" "Foto recebida. No Cursor: processa entradas."
     imported=$((imported + 1))
     continue
   fi
 
-  # —— Links (plain text, entities, text_link) ——
+  # —— Links ——
   urls="$(echo "$update" | jq -r '
     [
       (.message.entities // []),
@@ -133,41 +156,75 @@ Em alguns minutos aparece em entradas/pending no GitHub. Depois diga no Cursor: 
     | .[]
   ' 2>/dev/null || true)"
 
-  # URLs typed plainly in text/caption
   plain_urls="$(printf '%s\n' "$combined" | grep -oE 'https?://[^[:space:]<>\"]+' || true)"
   urls="$(printf '%s\n%s\n' "$urls" "$plain_urls" | sed '/^$/d' | awk '!seen[$0]++')"
 
-  if [[ -z "$urls" ]]; then
-    if [[ -n "$text" ]]; then
-      send_msg "$chat_id" "Não achei foto nem link. Envie uma foto da receita ou um URL (https://...)."
+  if [[ -n "$urls" ]]; then
+    while IFS= read -r url; do
+      [[ -z "$url" ]] && continue
+      url="$(echo "$url" | sed -E 's/[),.;:]+$//')"
+      slug="$(slugify "$url")"
+      ts="$(date -u +%Y%m%d-%H%M%S)"
+      out="${PENDING_DIR}/${ts}-${update_id}-${slug}.link.txt"
+
+      note="$(printf '%s\n' "$combined" | grep -vE 'https?://' | sed '/^$/d' | head -c 2000 || true)"
+
+      {
+        echo "url: ${url}"
+        if [[ -n "$note" ]]; then
+          echo "note: ${note}"
+        fi
+        echo "from: telegram"
+        echo "update_id: ${update_id}"
+      } > "$out"
+
+      echo "Saved link -> ${out}"
+      send_msg "$chat_id" "Link recebido. No Cursor: processa entradas."
+      imported=$((imported + 1))
+    done <<< "$urls"
+
+    # If the same message also has a long recipe body, save it too
+    body_only="$(printf '%s\n' "$text" | grep -vE 'https?://' || true)"
+    if looks_like_recipe_text "$body_only"; then
+      title="$(title_from_text "$body_only")"
+      slug="$(slugify "${title:-receita-texto}")"
+      ts="$(date -u +%Y%m%d-%H%M%S)"
+      out="${PENDING_DIR}/${ts}-${update_id}-${slug}.recipe.txt"
+      {
+        echo "from: telegram"
+        echo "update_id: ${update_id}"
+        echo "type: recipe_text"
+        echo "---"
+        printf '%s\n' "$body_only"
+      } > "$out"
+      echo "Saved recipe text (with link msg) -> ${out}"
+      imported=$((imported + 1))
     fi
     continue
   fi
 
-  while IFS= read -r url; do
-    [[ -z "$url" ]] && continue
-    # strip trailing punctuation often glued by messengers
-    url="$(echo "$url" | sed -E 's/[),.;:]+$//')"
-    slug="$(slugify "$url")"
+  # —— Full recipe text (no photo, no URL) ——
+  if [[ -n "$text" ]] && looks_like_recipe_text "$text"; then
+    title="$(title_from_text "$text")"
+    slug="$(slugify "${title:-receita-texto}")"
     ts="$(date -u +%Y%m%d-%H%M%S)"
-    out="${PENDING_DIR}/${ts}-${update_id}-${slug}.link.txt"
-
-    note="$(printf '%s\n' "$combined" | grep -vE 'https?://' | sed '/^$/d' | head -c 500 || true)"
-
+    out="${PENDING_DIR}/${ts}-${update_id}-${slug}.recipe.txt"
     {
-      echo "url: ${url}"
-      if [[ -n "$note" ]]; then
-        echo "note: ${note}"
-      fi
       echo "from: telegram"
       echo "update_id: ${update_id}"
+      echo "type: recipe_text"
+      echo "---"
+      printf '%s\n' "$text"
     } > "$out"
-
-    echo "Saved link -> ${out}"
-    send_msg "$chat_id" "Link recebido: ${url}
-Salvei em ${out}. No Cursor: processa entradas."
+    echo "Saved recipe text -> ${out}"
+    send_msg "$chat_id" "Texto da receita recebido. No Cursor: processa entradas."
     imported=$((imported + 1))
-  done <<< "$urls"
+    continue
+  fi
+
+  if [[ -n "$text" ]]; then
+    send_msg "$chat_id" "Não reconheci. Envie: foto, link https://... ou o texto completo da receita (ingredientes + preparo)."
+  fi
 done
 
 echo "$max_offset" > "$OFFSET_FILE"

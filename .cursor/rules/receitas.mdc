@@ -5,15 +5,15 @@ alwaysApply: true
 
 # Processamento de receitas
 
-Ao analisar fotos (Telegram, `entradas/`, `fotos/` ou anexos no chat):
+Ao analisar entradas (Telegram `pending/`, `fotos/` ou anexos):
 
-1. **Não duplicar.** Se a receita já existe, revisar/completar; se completa, só **deletar** a entrada fonte.
-2. **Não embutir a foto manuscrita/fonte** na ficha.
-3. **Links** (`*.link.txt`): abrir URL e seguir o mesmo fluxo.
-4. **Foto de referência do prato:** skill `curar-foto-prato` (~5 candidatas; senão sem foto).
-5. **Fonte processada → deletar.** Depois que virou receita, apagar o arquivo em `pending/` (não arquivar em `processadas/`).
+1. **Não duplicar** — revisar/completar; se completa, só **deletar** a fonte.
+2. **Não embutir** foto manuscrita/Telegram na ficha.
+3. Aceitar **foto**, **link** (`*.link.txt`) ou **texto completo** (`*.recipe.txt`).
+4. **Foto de referência:** skill `curar-foto-prato` (5 candidatas; senão sem).
+5. **Fonte processada → deletar** de `pending/` (não arquivar).
 6. Completar lacunas com bom senso; marcar o inferido.
-7. Uma página A5 (referência visual não imprime).
-8. Commit/push quando a usuária pedir ou ao fechar um lote pedido.
+7. Uma página A5.
+8. Commit/push quando pedir ou ao fechar lote.
 
 Skills: `processar-receitas-foto`, `curar-foto-prato`.
