@@ -27,7 +27,6 @@
     if (!raw) return { categoryId: null, subSlug: null };
     const parts = raw.split("/").filter(Boolean);
     const categoryId = parts[0] || null;
-    // Anchors for page chrome (not recipe categories)
     if (categoryId === "categorias" || categoryId === "receitas") {
       return { categoryId: null, subSlug: null };
     }
@@ -39,8 +38,10 @@
 
   function setHash(categoryId, subSlug) {
     let next = "";
-    if (categoryId) {
-      next = subSlug ? "#" + categoryId + "/" + subSlug : "#" + categoryId;
+    if (categoryId && subSlug) {
+      next = "#" + categoryId + "/" + subSlug;
+    } else if (categoryId) {
+      next = "#" + categoryId;
     } else {
       next = "#";
     }
@@ -75,7 +76,6 @@
       list.setAttribute("data-sub-slug", slug);
       if (prev && prev.classList.contains("subcategory")) {
         prev.setAttribute("data-sub-slug", slug);
-        prev.id = id + "--" + slug;
       }
       subs.push({
         slug: slug,
@@ -94,7 +94,7 @@
       if (!subNav) {
         subNav = document.createElement("nav");
         subNav.className = "subcategory-nav no-print";
-        subNav.setAttribute("aria-label", "Ir para subcategoria em " + title);
+        subNav.setAttribute("aria-label", "Subcategorias de " + title);
         const h2 = block.querySelector("h2");
         if (h2 && h2.nextSibling) {
           block.insertBefore(subNav, h2.nextSibling);
@@ -115,29 +115,26 @@
     catalog.set(id, { block: block, title: title, subs: subs, isLeaf: isLeaf });
   });
 
-  function clearSearchVisibility() {
+  function clearItemVisibility() {
     blocks.forEach(function (block) {
-      block.hidden = false;
-      block.querySelectorAll(".subcategory, .recipe-list, .recipe-list > li").forEach(
-        function (el) {
-          el.hidden = false;
-        }
-      );
+      block.querySelectorAll(".recipe-list > li").forEach(function (el) {
+        el.hidden = false;
+      });
     });
     if (emptyMsg) emptyMsg.hidden = true;
   }
 
-  function scrollToSub(entry, subSlug) {
-    if (!entry || !subSlug) return;
-    const sub = entry.subs.find(function (s) {
-      return s.slug === subSlug;
-    });
-    if (!sub) return;
-    const target = sub.heading || sub.list;
-    if (!target) return;
+  function scrollToEl(el) {
+    if (!el) return;
     requestAnimationFrame(function () {
-      target.scrollIntoView({ behavior: "smooth", block: "start" });
+      el.scrollIntoView({ behavior: "smooth", block: "start" });
     });
+  }
+
+  function goHome(e) {
+    if (e) e.preventDefault();
+    if (input) input.value = "";
+    setHash(null, null);
   }
 
   function renderBreadcrumbs(categoryId, subSlug, searching) {
@@ -149,18 +146,13 @@
       const home = document.createElement("a");
       home.href = "./index.html";
       home.textContent = "Início";
-      home.addEventListener("click", function (e) {
-        e.preventDefault();
-        if (input) input.value = "";
-        setHash(null, null);
-        filterAndNavigate();
-      });
+      home.addEventListener("click", goHome);
       breadcrumbs.appendChild(home);
       breadcrumbs.appendChild(document.createTextNode(" › Busca"));
       return;
     }
 
-    if (!categoryId) {
+    if (!categoryId || !subSlug) {
       breadcrumbs.hidden = true;
       return;
     }
@@ -171,73 +163,103 @@
       return;
     }
 
+    const sub = entry.subs.find(function (s) {
+      return s.slug === subSlug;
+    });
+
     breadcrumbs.hidden = false;
     const home = document.createElement("a");
     home.href = "./index.html";
     home.textContent = "Início";
-    home.addEventListener("click", function (e) {
-      e.preventDefault();
-      setHash(null, null);
-    });
+    home.addEventListener("click", goHome);
     breadcrumbs.appendChild(home);
     breadcrumbs.appendChild(document.createTextNode(" › "));
 
-    if (subSlug && !entry.isLeaf) {
-      const catLink = document.createElement("a");
-      catLink.href = "#" + categoryId;
-      catLink.textContent = entry.title;
-      breadcrumbs.appendChild(catLink);
-      breadcrumbs.appendChild(document.createTextNode(" › "));
-      const sub = entry.subs.find(function (s) {
-        return s.slug === subSlug;
-      });
-      const current = document.createElement("span");
-      current.setAttribute("aria-current", "page");
-      current.textContent = sub ? sub.label : subSlug;
-      breadcrumbs.appendChild(current);
-    } else {
-      const current = document.createElement("span");
-      current.setAttribute("aria-current", "page");
-      current.textContent = entry.title;
-      breadcrumbs.appendChild(current);
+    const catLink = document.createElement("a");
+    catLink.href = "#" + categoryId;
+    catLink.textContent = entry.title;
+    catLink.addEventListener("click", function (e) {
+      e.preventDefault();
+      if (input) input.value = "";
+      setHash(categoryId, null);
+    });
+    breadcrumbs.appendChild(catLink);
+    breadcrumbs.appendChild(document.createTextNode(" › "));
+
+    const current = document.createElement("span");
+    current.setAttribute("aria-current", "page");
+    current.textContent = sub ? sub.label : subSlug;
+    breadcrumbs.appendChild(current);
+  }
+
+  /** Home: all categories; with-subs show only sub links; leaves show recipes. */
+  function showHome(scrollCategoryId) {
+    indexRoot.dataset.nav = "home";
+    if (categoryNav) categoryNav.hidden = false;
+    clearItemVisibility();
+
+    blocks.forEach(function (block) {
+      block.hidden = false;
+      block.classList.remove("is-active", "is-sub-active");
+      const entry = catalog.get(block.id);
+      const subNav = block.querySelector(":scope > .subcategory-nav");
+
+      if (entry && !entry.isLeaf) {
+        if (subNav) subNav.hidden = false;
+        entry.subs.forEach(function (s) {
+          if (s.heading) s.heading.hidden = true;
+          s.list.hidden = true;
+        });
+      } else {
+        if (subNav) subNav.hidden = true;
+        block.querySelectorAll(":scope > .recipe-list").forEach(function (list) {
+          list.hidden = false;
+        });
+        block.querySelectorAll(":scope > .subcategory").forEach(function (h) {
+          h.hidden = false;
+        });
+      }
+    });
+
+    renderBreadcrumbs(null, null, false);
+
+    if (scrollCategoryId) {
+      const entry = catalog.get(scrollCategoryId);
+      if (entry) scrollToEl(entry.block);
     }
   }
 
-  function showCategory(entry, categoryId, subSlug) {
-    if (categoryNav) categoryNav.hidden = true;
-
-    blocks.forEach(function (b) {
-      const active = b === entry.block;
-      b.classList.toggle("is-active", active);
-      b.classList.remove("is-sub-active");
-      b.hidden = !active;
+  /** Subcategory drill-down: recipes for one sub only. */
+  function showSub(entry, categoryId, subSlug) {
+    const sub = entry.subs.find(function (s) {
+      return s.slug === subSlug;
     });
-
-    indexRoot.dataset.nav = "recipes";
-
-    entry.block.querySelectorAll(":scope > .recipe-list, :scope > .subcategory").forEach(
-      function (el) {
-        el.hidden = false;
-      }
-    );
-
-    const subNav = entry.block.querySelector(":scope > .subcategory-nav");
-    if (subNav) subNav.hidden = false;
-
-    if (subSlug && !entry.isLeaf) {
-      const sub = entry.subs.find(function (s) {
-        return s.slug === subSlug;
-      });
-      if (!sub) {
-        setHash(categoryId, null);
-        return;
-      }
-      renderBreadcrumbs(categoryId, subSlug, false);
-      scrollToSub(entry, subSlug);
+    if (!sub) {
+      showHome(categoryId);
       return;
     }
 
-    renderBreadcrumbs(categoryId, null, false);
+    indexRoot.dataset.nav = "sub";
+    if (categoryNav) categoryNav.hidden = true;
+    clearItemVisibility();
+
+    blocks.forEach(function (b) {
+      const active = b === entry.block;
+      b.hidden = !active;
+      b.classList.toggle("is-active", active);
+      b.classList.toggle("is-sub-active", active);
+    });
+
+    const subNav = entry.block.querySelector(":scope > .subcategory-nav");
+    if (subNav) subNav.hidden = true;
+
+    entry.subs.forEach(function (s) {
+      const show = s === sub;
+      if (s.heading) s.heading.hidden = !show;
+      s.list.hidden = !show;
+    });
+
+    renderBreadcrumbs(categoryId, subSlug, false);
   }
 
   function applyView() {
@@ -247,33 +269,26 @@
       return;
     }
 
-    clearSearchVisibility();
     const { categoryId, subSlug } = parseHash();
     const entry = categoryId ? catalog.get(categoryId) : null;
 
-    if (categoryId && !entry) {
-      indexRoot.dataset.nav = "home";
-      if (categoryNav) categoryNav.hidden = false;
-      blocks.forEach(function (b) {
-        b.classList.remove("is-active", "is-sub-active");
-        b.hidden = true;
-      });
-      renderBreadcrumbs(null, null, false);
+    if (!categoryId || !entry) {
+      showHome();
       return;
     }
 
-    if (!entry) {
-      indexRoot.dataset.nav = "home";
-      if (categoryNav) categoryNav.hidden = false;
-      blocks.forEach(function (b) {
-        b.classList.remove("is-active", "is-sub-active");
-        b.hidden = true;
-      });
-      renderBreadcrumbs(null, null, false);
+    // #categoria alone → stay on full home, jump to that section
+    if (!subSlug) {
+      showHome(categoryId);
       return;
     }
 
-    showCategory(entry, categoryId, subSlug);
+    if (entry.isLeaf) {
+      showHome(categoryId);
+      return;
+    }
+
+    showSub(entry, categoryId, subSlug);
   }
 
   function applySearch(query) {
@@ -283,6 +298,7 @@
 
     blocks.forEach(function (block) {
       block.classList.remove("is-active", "is-sub-active");
+      block.hidden = false;
       const categoryName = normalize(block.querySelector("h2")?.textContent || "");
       const lists = block.querySelectorAll(":scope > .recipe-list");
       let visibleInBlock = 0;
@@ -337,11 +353,12 @@
     applyView();
   }
 
+  // Top category chips: jump within the home structure
   if (categoryNav) {
     categoryNav.querySelectorAll("a[href^='#']").forEach(function (a) {
       a.addEventListener("click", function (e) {
         const href = a.getAttribute("href") || "";
-        const id = href.replace(/^#\/?/, "");
+        const id = href.replace(/^#\/?/, "").split("/")[0];
         if (!id || !catalog.has(id)) return;
         e.preventDefault();
         if (input) input.value = "";
@@ -350,7 +367,6 @@
     });
   }
 
-  // Jump links: keep all recipes visible; hash only scrolls to the subheading.
   indexRoot.addEventListener("click", function (e) {
     const link = e.target.closest(".subcategory-nav a");
     if (!link || !indexRoot.contains(link)) return;

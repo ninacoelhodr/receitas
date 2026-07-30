@@ -196,15 +196,18 @@ a:hover {
   color: var(--accent);
 }
 
-.recipe-index[data-nav="home"] .category-block {
-  display: none;
-}
+/* Home shows full structure; JS hides recipe lists under categories that have subs. */
 
-.recipe-index[data-nav="recipes"] .category-block:not(.is-active) {
+.recipe-index[data-nav="sub"] .category-block:not(.is-active) {
   display: none;
 }
 
 .recipe-index[data-nav="search"] .subcategory-nav {
+  display: none;
+}
+
+.recipe-index[data-nav="home"] .category-block:not(.is-leaf) .subcategory,
+.recipe-index[data-nav="home"] .category-block:not(.is-leaf) .recipe-list {
   display: none;
 }
 

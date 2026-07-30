@@ -60,7 +60,8 @@ Categorias: `doces`, `salgados`, `tortas-salgadas`, `massas`, `carnes`, `aves`, 
 
 Nas pastas com subcategorias, a ficha usa `Categoria · Subcategoria` em
 `p.category` (ex.: `Doces · Musses`); o índice agrupa sob `<h3 class="subcategory">`
-e o índice lista por categoria com um clique (hash `#doces`; saltos opcionais `#doces/musses`).
+e o índice na home mostra subcategorias (ou receitas diretas se não houver sub);
+clique na sub abre a lista (`#doces/musses`).
 Categorias sem sub (Massas, Sopas, etc.) abrem a lista direto.
 
 ## Arquitetura
