@@ -7,13 +7,13 @@ alwaysApply: true
 
 Ao analisar fotos (Telegram, `entradas/`, `fotos/` ou anexos no chat):
 
-1. **Não duplicar.** Se a mesma receita já existe, **revisar a ficha**: completar o que faltar; se estiver completa, **só arquivar/deletar a entrada** (foto ou `*.link.txt`). Várias fotos do mesmo recorte = **uma** ficha.
-2. **Não embutir a foto manuscrita/fonte.** Sem `source-photo` / `<img>` do caderno ou Telegram.
-3. **Links do Telegram** (`*.link.txt` em `entradas/pending/`): abrir a URL, extrair a receita e seguir o mesmo fluxo das fotos.
-4. **Foto de referência do prato (tela):** desejável em `imagens/<slug>.jpg` + `figure.dish-photo.no-print` (some na impressão A5).
-5. **Completar lacunas** com bom senso / receita clássica parecida; marcar o inferido.
-6. **Uma página A5** (a referência visual não imprime).
-7. Atualizar `index.html` se receita nova; pending → processadas (ou deletar se só repetição).
+1. **Não duplicar.** Se a receita já existe, revisar/completar; se completa, só **deletar** a entrada fonte.
+2. **Não embutir a foto manuscrita/fonte** na ficha.
+3. **Links** (`*.link.txt`): abrir URL e seguir o mesmo fluxo.
+4. **Foto de referência do prato:** skill `curar-foto-prato` (~5 candidatas; senão sem foto).
+5. **Fonte processada → deletar.** Depois que virou receita, apagar o arquivo em `pending/` (não arquivar em `processadas/`).
+6. Completar lacunas com bom senso; marcar o inferido.
+7. Uma página A5 (referência visual não imprime).
 8. Commit/push quando a usuária pedir ou ao fechar um lote pedido.
 
-Detalhes: `.cursor/skills/processar-receitas-foto/`.
+Skills: `processar-receitas-foto`, `curar-foto-prato`.
