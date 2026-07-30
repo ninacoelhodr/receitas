@@ -75,6 +75,7 @@
       list.setAttribute("data-sub-slug", slug);
       if (prev && prev.classList.contains("subcategory")) {
         prev.setAttribute("data-sub-slug", slug);
+        prev.id = id + "--" + slug;
       }
       subs.push({
         slug: slug,
@@ -93,7 +94,7 @@
       if (!subNav) {
         subNav = document.createElement("nav");
         subNav.className = "subcategory-nav no-print";
-        subNav.setAttribute("aria-label", "Subcategorias de " + title);
+        subNav.setAttribute("aria-label", "Ir para subcategoria em " + title);
         const h2 = block.querySelector("h2");
         if (h2 && h2.nextSibling) {
           block.insertBefore(subNav, h2.nextSibling);
@@ -124,6 +125,19 @@
       );
     });
     if (emptyMsg) emptyMsg.hidden = true;
+  }
+
+  function scrollToSub(entry, subSlug) {
+    if (!entry || !subSlug) return;
+    const sub = entry.subs.find(function (s) {
+      return s.slug === subSlug;
+    });
+    if (!sub) return;
+    const target = sub.heading || sub.list;
+    if (!target) return;
+    requestAnimationFrame(function () {
+      target.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
   }
 
   function renderBreadcrumbs(categoryId, subSlug, searching) {
@@ -166,7 +180,6 @@
       setHash(null, null);
     });
     breadcrumbs.appendChild(home);
-
     breadcrumbs.appendChild(document.createTextNode(" › "));
 
     if (subSlug && !entry.isLeaf) {
@@ -190,6 +203,43 @@
     }
   }
 
+  function showCategory(entry, categoryId, subSlug) {
+    if (categoryNav) categoryNav.hidden = true;
+
+    blocks.forEach(function (b) {
+      const active = b === entry.block;
+      b.classList.toggle("is-active", active);
+      b.classList.remove("is-sub-active");
+      b.hidden = !active;
+    });
+
+    indexRoot.dataset.nav = "recipes";
+
+    entry.block.querySelectorAll(":scope > .recipe-list, :scope > .subcategory").forEach(
+      function (el) {
+        el.hidden = false;
+      }
+    );
+
+    const subNav = entry.block.querySelector(":scope > .subcategory-nav");
+    if (subNav) subNav.hidden = false;
+
+    if (subSlug && !entry.isLeaf) {
+      const sub = entry.subs.find(function (s) {
+        return s.slug === subSlug;
+      });
+      if (!sub) {
+        setHash(categoryId, null);
+        return;
+      }
+      renderBreadcrumbs(categoryId, subSlug, false);
+      scrollToSub(entry, subSlug);
+      return;
+    }
+
+    renderBreadcrumbs(categoryId, null, false);
+  }
+
   function applyView() {
     const query = input ? normalize(input.value) : "";
     if (query) {
@@ -205,7 +255,7 @@
       indexRoot.dataset.nav = "home";
       if (categoryNav) categoryNav.hidden = false;
       blocks.forEach(function (b) {
-        b.classList.remove("is-active");
+        b.classList.remove("is-active", "is-sub-active");
         b.hidden = true;
       });
       renderBreadcrumbs(null, null, false);
@@ -223,53 +273,7 @@
       return;
     }
 
-    if (categoryNav) categoryNav.hidden = true;
-
-    blocks.forEach(function (b) {
-      const active = b === entry.block;
-      b.classList.toggle("is-active", active);
-      b.classList.remove("is-sub-active");
-      b.hidden = !active;
-    });
-
-    if (entry.isLeaf) {
-      indexRoot.dataset.nav = "recipes";
-      entry.block.querySelectorAll(":scope > .recipe-list").forEach(function (list) {
-        list.hidden = false;
-      });
-      renderBreadcrumbs(categoryId, null, false);
-      return;
-    }
-
-    if (subSlug) {
-      const sub = entry.subs.find(function (s) {
-        return s.slug === subSlug;
-      });
-      if (!sub) {
-        setHash(categoryId, null);
-        return;
-      }
-      indexRoot.dataset.nav = "recipes";
-      entry.block.classList.add("is-sub-active");
-      entry.subs.forEach(function (s) {
-        const show = s === sub;
-        if (s.heading) s.heading.hidden = !show;
-        s.list.hidden = !show;
-      });
-      const subNav = entry.block.querySelector(":scope > .subcategory-nav");
-      if (subNav) subNav.hidden = true;
-      renderBreadcrumbs(categoryId, subSlug, false);
-      return;
-    }
-
-    indexRoot.dataset.nav = "category";
-    entry.subs.forEach(function (s) {
-      if (s.heading) s.heading.hidden = true;
-      s.list.hidden = true;
-    });
-    const subNav = entry.block.querySelector(":scope > .subcategory-nav");
-    if (subNav) subNav.hidden = false;
-    renderBreadcrumbs(categoryId, null, false);
+    showCategory(entry, categoryId, subSlug);
   }
 
   function applySearch(query) {
@@ -346,6 +350,7 @@
     });
   }
 
+  // Jump links: keep all recipes visible; hash only scrolls to the subheading.
   indexRoot.addEventListener("click", function (e) {
     const link = e.target.closest(".subcategory-nav a");
     if (!link || !indexRoot.contains(link)) return;

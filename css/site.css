@@ -200,23 +200,7 @@ a:hover {
   display: none;
 }
 
-.recipe-index[data-nav="category"] .category-block:not(.is-active) {
-  display: none;
-}
-
-.recipe-index[data-nav="category"] .category-block.is-active .subcategory,
-.recipe-index[data-nav="category"] .category-block.is-active .recipe-list {
-  display: none;
-}
-
 .recipe-index[data-nav="recipes"] .category-block:not(.is-active) {
-  display: none;
-}
-
-.recipe-index[data-nav="recipes"] .category-block.is-active:not(.is-leaf):not(.is-sub-active)
-  .recipe-list,
-.recipe-index[data-nav="recipes"] .category-block.is-active:not(.is-leaf):not(.is-sub-active)
-  .subcategory {
   display: none;
 }
 
