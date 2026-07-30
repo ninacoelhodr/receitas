@@ -73,6 +73,22 @@ Categorias: `doces`, `salgados`, `tortas-salgadas`, `massas`, `carnes`,
 (Sem `bolos` nem `outros` — bolos entram em doces; use a categoria mais
 próxima em vez de “outros”.)
 
+**Subcategorias** (quando a pasta tiver): em `p.category` use
+`Categoria · Subcategoria` (ex.: `Doces · Musses`). O índice agrupa por esse
+campo. Mapa:
+
+| Categoria | Subcategorias |
+|-----------|----------------|
+| Doces | Biscoitos · Musses · Tortas e bolos · Outros doces |
+| Salgados | Petiscos · Massas fritas/assadas · Outros |
+| Carnes | Bovinos · Suínos · Outros |
+| Aves | Frango · Outras aves |
+| Frutos do mar | Peixes · Camarões e frutos · Massas com frutos do mar |
+
+Sem subcategoria: Sopas, Acompanhamentos, Bebidas, Tortas salgadas, Massas
+(massas com frutos do mar ficam em `frutos-do-mar`). No index: `<h3 class="subcategory">`
++ `data-subcategory` na lista. Nav da ficha: link `../../index.html#<categoria>`.
+
 ## Molde (referência visual, só se curada)
 
 ```html

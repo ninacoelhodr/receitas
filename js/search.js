@@ -19,23 +19,43 @@
 
     blocks.forEach(function (block) {
       const categoryName = normalize(block.querySelector("h2")?.textContent || "");
-      const items = block.querySelectorAll(".recipe-list > li");
+      const lists = block.querySelectorAll(".recipe-list");
       let visibleInBlock = 0;
 
-      items.forEach(function (li) {
-        if (li.classList.contains("empty")) {
-          li.hidden = Boolean(query);
-          return;
+      lists.forEach(function (list) {
+        const subHeading = list.previousElementSibling;
+        const subName =
+          subHeading && subHeading.classList.contains("subcategory")
+            ? normalize(subHeading.textContent || "")
+            : normalize(list.getAttribute("data-subcategory") || "");
+        const items = list.querySelectorAll(":scope > li");
+        let visibleInList = 0;
+
+        items.forEach(function (li) {
+          if (li.classList.contains("empty")) {
+            li.hidden = Boolean(query);
+            return;
+          }
+
+          const recipeName = normalize(li.textContent || "");
+          const match =
+            !query ||
+            recipeName.includes(query) ||
+            categoryName.includes(query) ||
+            subName.includes(query);
+
+          li.hidden = !match;
+          if (match) {
+            visibleInList += 1;
+            visibleInBlock += 1;
+          }
+        });
+
+        const showList = query ? visibleInList > 0 : true;
+        list.hidden = !showList;
+        if (subHeading && subHeading.classList.contains("subcategory")) {
+          subHeading.hidden = !showList;
         }
-
-        const recipeName = normalize(li.textContent || "");
-        const match =
-          !query ||
-          recipeName.includes(query) ||
-          categoryName.includes(query);
-
-        li.hidden = !match;
-        if (match) visibleInBlock += 1;
       });
 
       const showBlock = query ? visibleInBlock > 0 : true;

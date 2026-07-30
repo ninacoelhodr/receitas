@@ -37,6 +37,9 @@ Envie foto, link ou texto da receita aqui.
 
 Categorias: `doces`, `salgados`, `tortas-salgadas`, `massas`, `carnes`, `aves`, `frutos-do-mar`, `sopas`, `acompanhamentos`, `bebidas`.
 
+Nas pastas com subcategorias, a ficha usa `Categoria · Subcategoria` em
+`p.category` (ex.: `Doces · Musses`); o índice agrupa sob `<h3 class="subcategory">`.
+
 ## Publicação (GitHub Pages)
 
 O site é estático na raiz do branch `main`. Em **Settings → Pages**:

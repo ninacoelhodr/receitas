@@ -14,6 +14,8 @@ Ao analisar entradas (Telegram `pending/`, `fotos/` ou anexos):
 5. **Fonte processada → deletar** de `pending/` (não arquivar).
 6. Completar lacunas com bom senso; marcar o inferido.
 7. Uma página A5.
-8. Commit/push quando pedir ou ao fechar lote.
+8. **Subcategorias** nas pastas Doces / Salgados / Carnes / Aves / Frutos do mar:
+   `p.category` = `Categoria · Sub` (ver skill `processar-receitas-foto`).
+9. Commit/push quando pedir ou ao fechar lote.
 
 Skills: `processar-receitas-foto`, `curar-foto-prato`.
