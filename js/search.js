@@ -135,6 +135,13 @@
         })
         .filter(Boolean);
 
+      if (specs.length && !li.querySelector(".also-hint")) {
+        const hint = document.createElement("span");
+        hint.className = "also-hint";
+        hint.textContent = "também em " + specs.join(", ");
+        li.appendChild(hint);
+      }
+
       specs.forEach(function (spec) {
         const parts = spec.split(/\s*·\s*/).map(function (p) {
           return p.trim();
@@ -159,6 +166,8 @@
         const clone = li.cloneNode(true);
         clone.removeAttribute("data-also");
         clone.setAttribute("data-also-clone", "1");
+        const cloneHint = clone.querySelector(".also-hint");
+        if (cloneHint) cloneHint.remove();
         insertSorted(list, clone);
       });
     });

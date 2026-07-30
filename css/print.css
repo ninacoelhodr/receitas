@@ -47,6 +47,12 @@
     margin-bottom: 2mm;
   }
 
+  .recipe-card .category-also {
+    font-size: 7.5pt;
+    margin: -1mm 0 2mm;
+    color: #444;
+  }
+
   .recipe-card h1 {
     font-size: 16pt;
     margin-bottom: 3mm;

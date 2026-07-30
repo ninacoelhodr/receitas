@@ -93,13 +93,14 @@ hash `#<categoria>/<sub-slug>`). Nav da ficha: link `../../index.html#<categoria
 **Categorias extras** (aparecer em mais de um lugar no índice, sem duplicar o
 HTML da ficha):
 
-1. Pasta / URL / nav / `p.category` = **categoria primária** só.
-2. No `<article class="recipe-card">` e no `<li>` do index (entrada primária):
-   `data-also="Frutos do mar · Peixes"` (várias: separadas por vírgula).
-   Aceita `Categoria` ou `Categoria · Sub`. Em categorias com subs, preferir
-   `· Sub`.
-3. O `js/search.js` clona o link para cada extra (mesmo `href`). Não listar
-   a receita de novo manualmente nas outras seções do index.
+1. Pasta / URL / nav primária / `p.category` = **categoria primária**.
+2. Na ficha: `data-also="…"` no `<article>` **e** linha visível
+   `<p class="category-also">Também em …</p>`; no nav, link também para o extra
+   (`#categoria/sub` quando houver sub).
+3. No index: `data-also` no `<li>` da entrada **primária** (o JS mostra
+   “também em …” e clona se faltar). **Também** incluir o mesmo link
+   (mesmo `href` da pasta primária) na lista da categoria extra — assim a
+   dual listing aparece mesmo sem JS. Aceita `Categoria` ou `Categoria · Sub`.
 
 ## Molde (referência visual, só se curada)
 

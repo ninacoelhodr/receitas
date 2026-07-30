@@ -326,6 +326,15 @@ a:hover {
   border-bottom-color: var(--line);
 }
 
+.recipe-list .also-hint {
+  display: block;
+  margin: -0.2rem 0 0.35rem;
+  color: var(--ink-soft);
+  font-size: 0.78rem;
+  font-weight: 500;
+  font-style: italic;
+}
+
 .recipe-list .empty {
   color: var(--ink-soft);
   font-style: italic;
@@ -401,6 +410,14 @@ a:hover {
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
+}
+
+.recipe-card .category-also {
+  margin: -0.15rem 0 0.45rem;
+  color: var(--ink-soft);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
 }
 
 .recipe-card h1 {
