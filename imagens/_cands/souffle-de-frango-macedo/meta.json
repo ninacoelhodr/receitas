@@ -1,0 +1,33 @@
+{
+  "slug": "souffle-de-frango-macedo",
+  "queries": [
+    "chicken souffle",
+    "souffle savoureux"
+  ],
+  "files": [
+    {
+      "n": 1,
+      "title": "File:3 Brown Boiled Chicken Eggs.jpg",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/bb/3_Brown_Boiled_Chicken_Eggs.jpg/960px-3_Brown_Boiled_Chicken_Eggs.jpg",
+      "query": "chicken souffle"
+    },
+    {
+      "n": 2,
+      "title": "File:Lenôtre-Volaille au curry, tuile de riz soufflé, patate douce et ananas.jpg",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5b/Len%C3%B4tre-Volaille_au_curry%2C_tuile_de_riz_souffl%C3%A9%2C_patate_douce_et_ananas.jpg/960px-Len%C3%B4tre-Volaille_au_curry%2C_tuile_de_riz_souffl%C3%A9%2C_patate_douce_et_ananas.jpg",
+      "query": "chicken souffle"
+    },
+    {
+      "n": 3,
+      "title": "File:Profiteroles - Annie Smithers Bistrot.jpg",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/Profiteroles_-_Annie_Smithers_Bistrot.jpg/960px-Profiteroles_-_Annie_Smithers_Bistrot.jpg",
+      "query": "chicken souffle"
+    },
+    {
+      "n": 4,
+      "title": "File:The ideal cook book (1902) (14761855391).jpg",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/The_ideal_cook_book_%281902%29_%2814761855391%29.jpg/960px-The_ideal_cook_book_%281902%29_%2814761855391%29.jpg",
+      "query": "chicken souffle"
+    }
+  ]
+}

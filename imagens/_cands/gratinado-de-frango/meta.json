@@ -1,0 +1,39 @@
+{
+  "slug": "gratinado-de-frango",
+  "queries": [
+    "chicken gratin casserole",
+    "chicken potato gratin"
+  ],
+  "files": [
+    {
+      "n": 1,
+      "title": "File:Mrs. Beeton's Book of Household Management (Part 1).djvu",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Mrs._Beeton%27s_Book_of_Household_Management_%28Part_1%29.djvu/page1-960px-Mrs._Beeton%27s_Book_of_Household_Management_%28Part_1%29.djvu.jpg",
+      "query": "chicken gratin casserole"
+    },
+    {
+      "n": 2,
+      "title": "File:Chicken potato gratin (5022340365).jpg",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/39/Chicken_potato_gratin_%285022340365%29.jpg/960px-Chicken_potato_gratin_%285022340365%29.jpg",
+      "query": "chicken potato gratin"
+    },
+    {
+      "n": 3,
+      "title": "File:The Boston Cooking School magazine of culinary science and domestic economics (1905) (14586802127).jpg",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/93/The_Boston_Cooking_School_magazine_of_culinary_science_and_domestic_economics_%281905%29_%2814586802127%29.jpg/960px-The_Boston_Cooking_School_magazine_of_culinary_science_and_domestic_economics_%281905%29_%2814586802127%29.jpg",
+      "query": "chicken potato gratin"
+    },
+    {
+      "n": 4,
+      "title": "File:The Boston Cooking School magazine of culinary science and domestic economics (1905) (14773284755).jpg",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/The_Boston_Cooking_School_magazine_of_culinary_science_and_domestic_economics_%281905%29_%2814773284755%29.jpg/960px-The_Boston_Cooking_School_magazine_of_culinary_science_and_domestic_economics_%281905%29_%2814773284755%29.jpg",
+      "query": "chicken potato gratin"
+    },
+    {
+      "n": 5,
+      "title": "File:The Boston Cooking School magazine of culinary science and domestic economics (1913) (14777809375).jpg",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/62/The_Boston_Cooking_School_magazine_of_culinary_science_and_domestic_economics_%281913%29_%2814777809375%29.jpg/960px-The_Boston_Cooking_School_magazine_of_culinary_science_and_domestic_economics_%281913%29_%2814777809375%29.jpg",
+      "query": "chicken potato gratin"
+    }
+  ]
+}

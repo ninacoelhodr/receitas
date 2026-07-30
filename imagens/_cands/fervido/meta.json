@@ -1,0 +1,39 @@
+{
+  "slug": "fervido",
+  "queries": [
+    "fish stew bowl",
+    "Brazilian fish stew"
+  ],
+  "files": [
+    {
+      "n": 1,
+      "title": "File:DSCF1009 Hearty fish stew simmering in a rich orange broth studded with tender chunks of fish and vegetables.jpg",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/69/DSCF1009_Hearty_fish_stew_simmering_in_a_rich_orange_broth_studded_with_tender_chunks_of_fish_and_vegetables.jpg/960px-DSCF1009_Hearty_fish_stew_simmering_in_a_rich_orange_broth_studded_with_tender_chunks_of_fish_and_vegetables.jpg",
+      "query": "fish stew bowl"
+    },
+    {
+      "n": 2,
+      "title": "File:Egusi Stew and Eba.jpg",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5b/Egusi_Stew_and_Eba.jpg/960px-Egusi_Stew_and_Eba.jpg",
+      "query": "fish stew bowl"
+    },
+    {
+      "n": 3,
+      "title": "File:Fish soup bee hoon at Food Junction, May 26, 2013.jpg",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/c/c7/Fish_soup_bee_hoon_at_Food_Junction%2C_May_26%2C_2013.jpg",
+      "query": "fish stew bowl"
+    },
+    {
+      "n": 4,
+      "title": "File:Lettuce Fish Soup.jpg",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7f/Lettuce_Fish_Soup.jpg/960px-Lettuce_Fish_Soup.jpg",
+      "query": "fish stew bowl"
+    },
+    {
+      "n": 5,
+      "title": "File:Okro stew in a bowl.jpg",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/a/a3/Okro_stew_in_a_bowl.jpg",
+      "query": "fish stew bowl"
+    }
+  ]
+}

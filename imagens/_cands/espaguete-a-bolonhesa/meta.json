@@ -1,0 +1,39 @@
+{
+  "slug": "espaguete-a-bolonhesa",
+  "queries": [
+    "spaghetti bolognese plate",
+    "spaghetti meat sauce"
+  ],
+  "files": [
+    {
+      "n": 1,
+      "title": "File:Liat Portal for Foodie Disorder - Spaghetti Bolognese with mushrooms, carrots and green onions.jpg",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/Liat_Portal_for_Foodie_Disorder_-_Spaghetti_Bolognese_with_mushrooms%2C_carrots_and_green_onions.jpg/960px-Liat_Portal_for_Foodie_Disorder_-_Spaghetti_Bolognese_with_mushrooms%2C_carrots_and_green_onions.jpg",
+      "query": "spaghetti bolognese plate"
+    },
+    {
+      "n": 2,
+      "title": "File:Liat Portal for Foodie Disorder - Spaghetti Bolognese with peas and broccoli.jpg",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/47/Liat_Portal_for_Foodie_Disorder_-_Spaghetti_Bolognese_with_peas_and_broccoli.jpg/960px-Liat_Portal_for_Foodie_Disorder_-_Spaghetti_Bolognese_with_peas_and_broccoli.jpg",
+      "query": "spaghetti bolognese plate"
+    },
+    {
+      "n": 3,
+      "title": "File:Liat Portal for Foodie Disorder - Spaghetti Bolognese with vegetables.jpg",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Liat_Portal_for_Foodie_Disorder_-_Spaghetti_Bolognese_with_vegetables.jpg/960px-Liat_Portal_for_Foodie_Disorder_-_Spaghetti_Bolognese_with_vegetables.jpg",
+      "query": "spaghetti bolognese plate"
+    },
+    {
+      "n": 4,
+      "title": "File:Liat Portal for Foodie Disorder - Spaghetti bolognese with peas.jpg",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/26/Liat_Portal_for_Foodie_Disorder_-_Spaghetti_bolognese_with_peas.jpg/960px-Liat_Portal_for_Foodie_Disorder_-_Spaghetti_bolognese_with_peas.jpg",
+      "query": "spaghetti bolognese plate"
+    },
+    {
+      "n": 5,
+      "title": "File:Lidl spaghetti bolognese at home.jpg",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f0/Lidl_spaghetti_bolognese_at_home.jpg/960px-Lidl_spaghetti_bolognese_at_home.jpg",
+      "query": "spaghetti bolognese plate"
+    }
+  ]
+}

@@ -35,7 +35,7 @@ prato na tela só com curadoria (`curar-foto-prato`).
 
 Envie foto, link ou texto da receita aqui.
 
-Categorias: `bolos`, `doces`, `salgados`, `massas`, `carnes`, `aves`, `frutos-do-mar`, `sopas`, `acompanhamentos`, `bebidas`, `outros`.
+Categorias: `doces`, `salgados`, `tortas-salgadas`, `massas`, `carnes`, `aves`, `frutos-do-mar`, `sopas`, `acompanhamentos`, `bebidas`.
 
 ## Publicação (GitHub Pages)
 

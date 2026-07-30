@@ -1,0 +1,39 @@
+{
+  "slug": "pato-com-repolho-roxo",
+  "queries": [
+    "duck red cabbage",
+    "roast duck cabbage"
+  ],
+  "files": [
+    {
+      "n": 1,
+      "title": "File:034 Polish cuisine, Silesian cuisine - Duck leg with Silesian dumplings, red cabbage.jpg",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/034_Polish_cuisine%2C_Silesian_cuisine_-_Duck_leg_with_Silesian_dumplings%2C_red_cabbage.jpg/960px-034_Polish_cuisine%2C_Silesian_cuisine_-_Duck_leg_with_Silesian_dumplings%2C_red_cabbage.jpg",
+      "query": "duck red cabbage"
+    },
+    {
+      "n": 2,
+      "title": "File:Leg of duck, Berlin.jpg",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/25/Leg_of_duck%2C_Berlin.jpg/960px-Leg_of_duck%2C_Berlin.jpg",
+      "query": "duck red cabbage"
+    },
+    {
+      "n": 3,
+      "title": "File:Pommery grain mustard ice cream with red cabbage gazpacho (7349309168).jpg",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f9/Pommery_grain_mustard_ice_cream_with_red_cabbage_gazpacho_%287349309168%29.jpg/960px-Pommery_grain_mustard_ice_cream_with_red_cabbage_gazpacho_%287349309168%29.jpg",
+      "query": "duck red cabbage"
+    },
+    {
+      "n": 4,
+      "title": "File:Red Cabbage Gazpacho.jpg",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Red_Cabbage_Gazpacho.jpg/960px-Red_Cabbage_Gazpacho.jpg",
+      "query": "duck red cabbage"
+    },
+    {
+      "n": 5,
+      "title": "File:Roast duck with dumplings (Czech).JPG",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/dc/Roast_duck_with_dumplings_%28Czech%29.JPG/960px-Roast_duck_with_dumplings_%28Czech%29.JPG",
+      "query": "duck red cabbage"
+    }
+  ]
+}

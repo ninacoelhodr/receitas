@@ -1,0 +1,39 @@
+{
+  "slug": "frango-macedo-a-napolitana",
+  "queries": [
+    "chicken napoletana tomato",
+    "chicken tomato cheese"
+  ],
+  "files": [
+    {
+      "n": 1,
+      "title": "File:Maria Gentile (1919).djvu",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/45/Maria_Gentile_%281919%29.djvu/page1-960px-Maria_Gentile_%281919%29.djvu.jpg",
+      "query": "chicken napoletana tomato"
+    },
+    {
+      "n": 2,
+      "title": "File:Argentine chicken burger sandwich with lettuce, tomato, fried egg, and mozzarella cheese on Don Yeyo bun - Close-up.jpg",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Argentine_chicken_burger_sandwich_with_lettuce%2C_tomato%2C_fried_egg%2C_and_mozzarella_cheese_on_Don_Yeyo_bun_-_Close-up.jpg/960px-Argentine_chicken_burger_sandwich_with_lettuce%2C_tomato%2C_fried_egg%2C_and_mozzarella_cheese_on_Don_Yeyo_bun_-_Close-up.jpg",
+      "query": "chicken tomato cheese"
+    },
+    {
+      "n": 3,
+      "title": "File:Argentine chicken burger sandwich with lettuce, tomato, fried egg, and mozzarella cheese on Don Yeyo bun - Front view.jpg",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4a/Argentine_chicken_burger_sandwich_with_lettuce%2C_tomato%2C_fried_egg%2C_and_mozzarella_cheese_on_Don_Yeyo_bun_-_Front_view.jpg/960px-Argentine_chicken_burger_sandwich_with_lettuce%2C_tomato%2C_fried_egg%2C_and_mozzarella_cheese_on_Don_Yeyo_bun_-_Front_view.jpg",
+      "query": "chicken tomato cheese"
+    },
+    {
+      "n": 4,
+      "title": "File:Argentine chicken burger sandwich with lettuce, tomato, fried egg, and mozzarella cheese on Don Yeyo bun - High angle view.jpg",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/92/Argentine_chicken_burger_sandwich_with_lettuce%2C_tomato%2C_fried_egg%2C_and_mozzarella_cheese_on_Don_Yeyo_bun_-_High_angle_view.jpg/960px-Argentine_chicken_burger_sandwich_with_lettuce%2C_tomato%2C_fried_egg%2C_and_mozzarella_cheese_on_Don_Yeyo_bun_-_High_angle_view.jpg",
+      "query": "chicken tomato cheese"
+    },
+    {
+      "n": 5,
+      "title": "File:Argentine chicken burger sandwiches with lettuce, tomato, fried egg, and mozzarella cheese on Don Yeyo buns.jpg",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ad/Argentine_chicken_burger_sandwiches_with_lettuce%2C_tomato%2C_fried_egg%2C_and_mozzarella_cheese_on_Don_Yeyo_buns.jpg/960px-Argentine_chicken_burger_sandwiches_with_lettuce%2C_tomato%2C_fried_egg%2C_and_mozzarella_cheese_on_Don_Yeyo_buns.jpg",
+      "query": "chicken tomato cheese"
+    }
+  ]
+}

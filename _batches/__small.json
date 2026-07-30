@@ -1,0 +1,258 @@
+[
+  {
+    "slug": "molho-branco-sem-fogo",
+    "title": "Molho branco (sem ir ao fogo)",
+    "queries": [
+      "bechamel sauce bowl",
+      "white cream sauce"
+    ],
+    "ings": [
+      "½ lata de creme de leite",
+      "1 copo de requeijão",
+      "1 colher de farinha de trigo",
+      "1 colher de tempero pronto",
+      "1 pitada de noz-moscada"
+    ],
+    "path": "C:/Users/Nina/Documents/GitHub/personal/receitas/receitas/acompanhamentos/molho-branco-sem-fogo.html"
+  },
+  {
+    "slug": "pate-de-miudos-de-frango",
+    "title": "Patê de miúdos de frango",
+    "queries": [
+      "chicken liver pate",
+      "pate foie volaille"
+    ],
+    "ings": [
+      "1 kg de miúdos de frango (moela, fígado e coração)",
+      "1 molho de cebolinha e salsa",
+      "1 folha de louro",
+      "2 tomates sem pele e sem sementes",
+      "1 pimentão verde e 1 vermelho"
+    ],
+    "path": "C:/Users/Nina/Documents/GitHub/personal/receitas/receitas/acompanhamentos/pate-de-miudos-de-frango.html"
+  },
+  {
+    "slug": "ponche-quero-karo",
+    "title": "Ponche Quero-Karo",
+    "queries": [
+      "fruit punch bowl",
+      "ponche fruits"
+    ],
+    "ings": [
+      "1 abacaxi maduro, cortado em cubinhos",
+      "2 xícaras (chá) de Karo",
+      "1 ½ xícara (chá) de conhaque",
+      "2 garrafas de sidra gelada",
+      "Gelo picado a gosto"
+    ],
+    "path": "C:/Users/Nina/Documents/GitHub/personal/receitas/receitas/bebidas/ponche-quero-karo.html"
+  },
+  {
+    "slug": "xixi-de-anjo",
+    "title": "Xixi de anjo",
+    "queries": [
+      "angel hair pudding dessert",
+      "fios de ovos dessert"
+    ],
+    "ings": [
+      "1 lata de leite condensado (Leite Moça)",
+      "1 ½ vez a mesma medida de pinga",
+      "1 xícara (chá) de suco de laranja",
+      "4 colheres (sopa) de suco de limão",
+      "Gelo picado a gosto"
+    ],
+    "path": "C:/Users/Nina/Documents/GitHub/personal/receitas/receitas/bebidas/xixi-de-anjo.html"
+  },
+  {
+    "slug": "bolo-de-cenoura",
+    "title": "Bolo de cenoura",
+    "queries": [
+      "Brazilian carrot cake chocolate frosting",
+      "bolo de cenoura cobertura"
+    ],
+    "ings": [
+      "3 cenouras médias (cerca de 300 g), descascadas e picadas",
+      "3 ovos",
+      "1 xícara (chá) de óleo",
+      "2 xícaras (chá) de açúcar",
+      "2 xícaras (chá) de farinha de trigo"
+    ],
+    "path": "C:/Users/Nina/Documents/GitHub/personal/receitas/receitas/bolos/bolo-de-cenoura.html"
+  },
+  {
+    "slug": "escalope-de-foie-gras-com-maca-verde",
+    "title": "Escalope de foie gras com maçã verde glaçada",
+    "queries": [
+      "foie gras seared apple",
+      "escalope foie gras"
+    ],
+    "ings": [
+      "320 g de escalope de foie gras",
+      "Sal e pimenta",
+      "50 g de manteiga sem sal + 50 g de açúcar + 1 maçã verde em fatias finas",
+      "100 g de manteiga trufada, 50 ml de aceto balsâmico, 30 g de açúcar (molho)",
+      "1 alho-poró em tiras finas, 500 ml de óleo de soja"
+    ],
+    "path": "C:/Users/Nina/Documents/GitHub/personal/receitas/receitas/outros/escalope-de-foie-gras-com-maca-verde.html"
+  },
+  {
+    "slug": "fervido",
+    "title": "Fervido",
+    "queries": [
+      "fish stew bowl",
+      "Brazilian fish stew"
+    ],
+    "ings": [
+      "2 kg de peito com osso (ou peito / coxão)",
+      "1 kg de batata-doce",
+      "500 g de cenoura",
+      "500 g de nabo",
+      "1 kg de batata inglesa"
+    ],
+    "path": "C:/Users/Nina/Documents/GitHub/personal/receitas/receitas/sopas/fervido.html"
+  },
+  {
+    "slug": "espaguete-a-bolonhesa",
+    "title": "Espaguete à bolonhesa",
+    "queries": [
+      "spaghetti bolognese plate",
+      "spaghetti meat sauce"
+    ],
+    "ings": [
+      "2 fatias de bacon picado",
+      "2 colheres (sopa) de óleo",
+      "2 cebolas raladas",
+      "1 cenoura picada",
+      "1 alho-poró (parte branca), em rodelas"
+    ],
+    "path": "C:/Users/Nina/Documents/GitHub/personal/receitas/receitas/massas/espaguete-a-bolonhesa.html"
+  },
+  {
+    "slug": "espaguete-a-carbonara",
+    "title": "Espaguete à carbonara",
+    "queries": [
+      "spaghetti carbonara plate",
+      "pasta carbonara bowl"
+    ],
+    "ings": [
+      "4 colheres (sopa) de azeite",
+      "500 g de espaguete de sêmola cozido",
+      "100 g de parmesão ralado",
+      "1 pote de creme de leite fresco",
+      "Salsinha a gosto e sal"
+    ],
+    "path": "C:/Users/Nina/Documents/GitHub/personal/receitas/receitas/massas/espaguete-a-carbonara.html"
+  },
+  {
+    "slug": "espaguete-aos-quatro-queijos",
+    "title": "Espaguete aos quatro queijos",
+    "queries": [
+      "four cheese pasta",
+      "pasta ai quattro formaggi"
+    ],
+    "ings": [
+      "1 pacote de espaguete (500 g) cozido",
+      "4 xícaras (chá) de leite",
+      "4 colheres (sopa) de farinha de trigo",
+      "1 colher (sopa) de margarina",
+      "1 colher (sopa) de gorgonzola picado"
+    ],
+    "path": "C:/Users/Nina/Documents/GitHub/personal/receitas/receitas/massas/espaguete-aos-quatro-queijos.html"
+  },
+  {
+    "slug": "lasanha-aos-quatro-queijos",
+    "title": "Lasanha aos quatro queijos",
+    "queries": [
+      "four cheese lasagna",
+      "lasagna formaggi"
+    ],
+    "ings": [
+      "1 xícara (chá) de leite",
+      "4 latas de creme de leite com soro",
+      "100 g de parmesão ralado",
+      "2 copos de requeijão cremoso",
+      "1 kg de massa de lasanha"
+    ],
+    "path": "C:/Users/Nina/Documents/GitHub/personal/receitas/receitas/massas/lasanha-aos-quatro-queijos.html"
+  },
+  {
+    "slug": "macarrao-a-moda-do-sul",
+    "title": "Macarrão à moda do Sul",
+    "queries": [
+      "sausage pasta tomato",
+      "pasta with sausage plate"
+    ],
+    "ings": [
+      "250 g de macarrão cozido em água e sal",
+      "2 cubinhos de caldo de carne dissolvidos em 1 xícara de leite quente",
+      "3 colheres (sopa) de queijo ralado",
+      "1 colher (sopa) de margarina",
+      "150 g de presunto picadinho"
+    ],
+    "path": "C:/Users/Nina/Documents/GitHub/personal/receitas/receitas/massas/macarrao-a-moda-do-sul.html"
+  },
+  {
+    "slug": "macarrao-a-napolitana",
+    "title": "Macarrão à napolitana",
+    "queries": [
+      "pasta napoletana tomato",
+      "spaghetti marinara plate"
+    ],
+    "ings": [
+      "1 colher (sopa) de óleo",
+      "1 cebola ralada",
+      "2 dentes de alho esmagados",
+      "8 tomates maduros, sem pele e sem sementes, picados",
+      "1 pitada de açúcar"
+    ],
+    "path": "C:/Users/Nina/Documents/GitHub/personal/receitas/receitas/massas/macarrao-a-napolitana.html"
+  },
+  {
+    "slug": "macarrao-ao-creme",
+    "title": "Macarrão ao creme",
+    "queries": [
+      "creamy pasta alfredo",
+      "pasta cream sauce plate"
+    ],
+    "ings": [
+      "1 pacote de macarrão (500 g) de sua preferência",
+      "1 lata de creme de leite",
+      "4 colheres (sopa) de leite",
+      "1 xícara (chá) de ervilha",
+      "1 xícara (chá) de presunto em cubinhos"
+    ],
+    "path": "C:/Users/Nina/Documents/GitHub/personal/receitas/receitas/massas/macarrao-ao-creme.html"
+  },
+  {
+    "slug": "macarrao-com-azeitonas",
+    "title": "Macarrão com azeitonas",
+    "queries": [
+      "pasta olives tomato",
+      "pasta with black olives"
+    ],
+    "ings": [
+      "500 g de macarrão espaguete",
+      "1 colher (sopa) de azeite",
+      "1 cebola picada",
+      "4 tomates, sem pele, em quartos",
+      "1 tablete de caldo de galinha dissolvido em ½ xícara (chá) de água\n            fervente"
+    ],
+    "path": "C:/Users/Nina/Documents/GitHub/personal/receitas/receitas/massas/macarrao-com-azeitonas.html"
+  },
+  {
+    "slug": "macarrao-tentador",
+    "title": "Macarrão tentador",
+    "queries": [
+      "baked pasta cheese",
+      "pasta casserole cheese"
+    ],
+    "ings": [
+      "300 g de talharim fresco fino",
+      "2 xícaras (chá) de peito de frango cozido e desfiado",
+      "5 xícaras (chá) de queijo ralado",
+      "1½ xícara (chá) de caldo de galinha",
+      "1½ xícara (chá) de leite"
+    ],
+    "path": "C:/Users/Nina/Documents/GitHub/personal/receitas/receitas/massas/macarrao-tentador.html"
+  }
+]

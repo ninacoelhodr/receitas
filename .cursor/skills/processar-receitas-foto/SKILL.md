@@ -67,8 +67,11 @@ Task Progress:
 
 ### Nova receita
 
-Categorias: `bolos`, `doces`, `salgados`, `massas`, `carnes`, `aves`,
-`frutos-do-mar`, `sopas`, `acompanhamentos`, `bebidas`, `outros`.
+Categorias: `doces`, `salgados`, `tortas-salgadas`, `massas`, `carnes`,
+`aves`, `frutos-do-mar`, `sopas`, `acompanhamentos`, `bebidas`.
+
+(Sem `bolos` nem `outros` — bolos entram em doces; use a categoria mais
+próxima em vez de “outros”.)
 
 ## Molde (referência visual, só se curada)
 
