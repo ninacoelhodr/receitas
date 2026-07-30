@@ -90,6 +90,17 @@ Sem subcategoria: Sopas, Acompanhamentos, Bebidas, Tortas salgadas, Massas
 + `data-subcategory` na lista (o JS monta o drill-down Categoria → Sub → receitas;
 hash `#<categoria>/<sub-slug>`). Nav da ficha: link `../../index.html#<categoria>`.
 
+**Categorias extras** (aparecer em mais de um lugar no índice, sem duplicar o
+HTML da ficha):
+
+1. Pasta / URL / nav / `p.category` = **categoria primária** só.
+2. No `<article class="recipe-card">` e no `<li>` do index (entrada primária):
+   `data-also="Frutos do mar · Peixes"` (várias: separadas por vírgula).
+   Aceita `Categoria` ou `Categoria · Sub`. Em categorias com subs, preferir
+   `· Sub`.
+3. O `js/search.js` clona o link para cada extra (mesmo `href`). Não listar
+   a receita de novo manualmente nas outras seções do index.
+
 ## Molde (referência visual, só se curada)
 
 ```html

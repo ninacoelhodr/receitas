@@ -51,6 +51,119 @@
     });
   }
 
+  /** Map category display title → section id (from h2). */
+  function categoryIdByTitle(title) {
+    const key = normalize(title);
+    for (let i = 0; i < blocks.length; i++) {
+      const block = blocks[i];
+      if (!block.id) continue;
+      const h2 = (block.querySelector("h2")?.textContent || "").trim();
+      if (normalize(h2) === key) return block.id;
+    }
+    const asSlug = slugify(title);
+    if (asSlug && document.getElementById(asSlug)) return asSlug;
+    return null;
+  }
+
+  function findTargetList(block, subLabel) {
+    const lists = Array.from(block.querySelectorAll(":scope > .recipe-list"));
+    if (!lists.length) return null;
+
+    if (subLabel) {
+      const want = normalize(subLabel);
+      for (let i = 0; i < lists.length; i++) {
+        const list = lists[i];
+        const prev = list.previousElementSibling;
+        const fromHeading =
+          prev && prev.classList.contains("subcategory")
+            ? (prev.textContent || "").trim()
+            : "";
+        const fromAttr = (list.getAttribute("data-subcategory") || "").trim();
+        const label = fromHeading || fromAttr;
+        if (normalize(label) === want) return list;
+      }
+      return null;
+    }
+
+    // Leaf category: single list without subcategory, or sole list.
+    const unlabeled = lists.filter(function (list) {
+      const prev = list.previousElementSibling;
+      const hasHeading = prev && prev.classList.contains("subcategory");
+      const hasAttr = !!(list.getAttribute("data-subcategory") || "").trim();
+      return !hasHeading && !hasAttr;
+    });
+    if (unlabeled.length) return unlabeled[0];
+    if (lists.length === 1) return lists[0];
+    return null;
+  }
+
+  function insertSorted(list, li) {
+    const label = normalize(li.textContent || "");
+    const items = Array.from(list.querySelectorAll(":scope > li")).filter(
+      function (el) {
+        return !el.classList.contains("empty");
+      }
+    );
+    for (let i = 0; i < items.length; i++) {
+      if (label.localeCompare(normalize(items[i].textContent || "")) < 0) {
+        list.insertBefore(li, items[i]);
+        return;
+      }
+    }
+    list.appendChild(li);
+  }
+
+  /**
+   * Extra categories: primary <li data-also="Cat · Sub, Outra"> clones into
+   * those lists (same href). Specs: "Categoria" or "Categoria · Sub".
+   */
+  function expandAlsoCategories() {
+    const sources = [];
+    blocks.forEach(function (block) {
+      block.querySelectorAll(".recipe-list > li[data-also]").forEach(function (li) {
+        sources.push(li);
+      });
+    });
+
+    sources.forEach(function (li) {
+      const href = li.querySelector("a[href]")?.getAttribute("href");
+      if (!href) return;
+      const specs = String(li.getAttribute("data-also") || "")
+        .split(",")
+        .map(function (s) {
+          return s.trim();
+        })
+        .filter(Boolean);
+
+      specs.forEach(function (spec) {
+        const parts = spec.split(/\s*·\s*/).map(function (p) {
+          return p.trim();
+        }).filter(Boolean);
+        if (!parts.length) return;
+        const catTitle = parts[0];
+        const subLabel = parts[1] || null;
+        const catId = categoryIdByTitle(catTitle);
+        if (!catId) return;
+        const block = document.getElementById(catId);
+        if (!block) return;
+        const list = findTargetList(block, subLabel);
+        if (!list) return;
+
+        const already = Array.from(list.querySelectorAll("a[href]")).some(
+          function (a) {
+            return a.getAttribute("href") === href;
+          }
+        );
+        if (already) return;
+
+        const clone = li.cloneNode(true);
+        clone.removeAttribute("data-also");
+        clone.setAttribute("data-also-clone", "1");
+        insertSorted(list, clone);
+      });
+    });
+  }
+
   function hasCadernoFilter() {
     return !!(cadernoFilter.status || cadernoFilter.rating);
   }
@@ -163,6 +276,7 @@
     catalog.set(id, { block: block, title: title, subs: subs, isLeaf: isLeaf });
   });
 
+  expandAlsoCategories();
   tagRecipeItems();
 
   function clearItemVisibility() {
