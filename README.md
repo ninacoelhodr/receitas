@@ -3,7 +3,7 @@
 Fichas de receita em **A5**, prontas para imprimir, com um **caderno pessoal**
 (quero fazer / já fiz, estrelas e notas) por usuário.
 
-- **Site (Railway):** deploy do próprio repositório (URL após o primeiro deploy)
+- **Site (Railway):** https://web-production-7896c2.up.railway.app/
 - Conta / repo: [ninacoelhodr/receitas](https://github.com/ninacoelhodr/receitas)
 - GitHub Pages (legado): https://ninacoelhodr.github.io/receitas/ — pode desligar
   depois que a URL do Railway estiver estável
