@@ -62,42 +62,152 @@
     return node;
   }
 
-  function mountPanel() {
+  function focusLogin(panel) {
+    if (!panel) return;
+    panel.scrollIntoView({ behavior: "smooth", block: "nearest" });
+    const input = panel.querySelector('input[type="email"]');
+    if (input) input.focus();
+  }
+
+  function updateNavLabel(user) {
+    const btn = document.getElementById("caderno-nav-btn");
+    if (!btn) return;
+    btn.textContent = user ? "Meu caderno" : "Entrar";
+    btn.setAttribute("aria-label", user ? "Meu caderno" : "Entrar no Meu caderno");
+  }
+
+  function ensureHeaderEntry(onActivate) {
+    const header = document.querySelector(".site-header");
+    if (!header || document.getElementById("caderno-nav-btn")) return;
+
+    let nav = header.querySelector(".site-nav");
+    if (!nav) {
+      nav = el("nav", { className: "site-nav", "aria-label": "Principal" });
+      header.appendChild(nav);
+    }
+
+    const btn = el("button", {
+      type: "button",
+      id: "caderno-nav-btn",
+      className: "caderno-nav-btn",
+      text: "Entrar",
+      "aria-label": "Entrar no Meu caderno",
+      onClick: function () {
+        onActivate();
+      },
+    });
+    nav.appendChild(btn);
+  }
+
+  function ensureRecipeJump(main) {
+    const actions = main.querySelector(".recipe-actions");
+    if (!actions || actions.querySelector(".caderno-jump")) return;
+    actions.appendChild(
+      el("a", {
+        href: "#meu-caderno",
+        className: "btn btn-ghost caderno-jump",
+        text: "Meu caderno",
+        onClick: function (e) {
+          e.preventDefault();
+          focusLogin(document.getElementById("meu-caderno"));
+        },
+      })
+    );
+  }
+
+  function mountRecipePanel() {
     const slug = recipeSlugFromPath();
-    if (!slug) return;
+    if (!slug) return null;
 
     const main = document.querySelector("main.recipe-page");
-    if (!main || document.getElementById("meu-caderno")) return;
+    if (!main) return null;
 
+    ensureRecipeJump(main);
+
+    let panel = document.getElementById("meu-caderno");
+    if (!panel) {
+      panel = el("aside", {
+        id: "meu-caderno",
+        className: "caderno no-print",
+        "aria-label": "Meu caderno",
+      });
+      const actions = main.querySelector(".recipe-actions");
+      if (actions) {
+        actions.insertAdjacentElement("afterend", panel);
+      } else {
+        main.insertBefore(panel, main.firstChild);
+      }
+    }
+
+    render(panel, slug);
+    return panel;
+  }
+
+  function mountIndexPanel() {
+    if (recipeSlugFromPath()) return null;
+    if (document.getElementById("meu-caderno")) {
+      return document.getElementById("meu-caderno");
+    }
+
+    const header = document.querySelector(".site-header");
     const panel = el("aside", {
       id: "meu-caderno",
-      className: "caderno no-print",
+      className: "caderno caderno-index no-print",
       "aria-label": "Meu caderno",
+      hidden: true,
     });
-    main.appendChild(panel);
-    render(panel, slug);
+
+    if (header && header.parentNode) {
+      header.insertAdjacentElement("afterend", panel);
+    } else {
+      document.body.insertBefore(panel, document.body.firstChild);
+    }
+
+    renderIndex(panel);
+    return panel;
+  }
+
+  async function currentUser() {
+    try {
+      const me = await api("/api/auth/me");
+      return me.user;
+    } catch (err) {
+      if (err.status === 401) return null;
+      throw err;
+    }
   }
 
   async function render(panel, slug) {
     panel.innerHTML = "";
-    panel.appendChild(el("h2", { className: "caderno-title", text: "Meu caderno" }));
+    panel.appendChild(
+      el("h2", { className: "caderno-title", text: "Meu caderno" })
+    );
     const body = el("div", { className: "caderno-body" });
     panel.appendChild(body);
     body.textContent = "Carregando…";
 
     let user = null;
     try {
-      const me = await api("/api/auth/me");
-      user = me.user;
-    } catch (err) {
-      if (err.status !== 401) {
-        body.textContent = "Não foi possível conectar ao caderno.";
-        return;
-      }
+      user = await currentUser();
+    } catch {
+      body.textContent = "Não foi possível conectar ao caderno.";
+      updateNavLabel(null);
+      return;
     }
 
+    updateNavLabel(user);
+
     if (!user) {
-      renderLogin(body, panel, slug);
+      body.innerHTML = "";
+      body.appendChild(
+        el("p", {
+          className: "caderno-hint",
+          text: "Entre para marcar receitas e guardar notas.",
+        })
+      );
+      renderLogin(body, function () {
+        render(panel, slug);
+      });
       return;
     }
 
@@ -112,15 +222,69 @@
     renderEditor(body, panel, slug, user, meta);
   }
 
-  function renderLogin(body, panel, slug) {
+  async function renderIndex(panel) {
+    panel.innerHTML = "";
+    panel.appendChild(
+      el("h2", { className: "caderno-title", text: "Meu caderno" })
+    );
+    const body = el("div", { className: "caderno-body" });
+    panel.appendChild(body);
+    body.textContent = "Carregando…";
+
+    let user = null;
+    try {
+      user = await currentUser();
+    } catch {
+      body.textContent = "Não foi possível conectar ao caderno.";
+      updateNavLabel(null);
+      panel.hidden = false;
+      return;
+    }
+
+    updateNavLabel(user);
+
+    if (!user) {
+      body.innerHTML = "";
+      body.appendChild(
+        el("p", {
+          className: "caderno-hint",
+          text: "Entre para marcar receitas e guardar notas nas fichas.",
+        })
+      );
+      renderLogin(body, function () {
+        renderIndex(panel);
+      });
+      return;
+    }
+
     body.innerHTML = "";
+    body.appendChild(
+      el("div", { className: "caderno-user" }, [
+        el("span", { text: user.email }),
+        el("button", {
+          type: "button",
+          className: "btn btn-ghost caderno-logout",
+          text: "Sair",
+          onClick: async function () {
+            try {
+              await api("/api/auth/logout", { method: "POST" });
+            } catch {
+              /* ignore */
+            }
+            renderIndex(panel);
+          },
+        }),
+      ])
+    );
     body.appendChild(
       el("p", {
         className: "caderno-hint",
-        text: "Entre para marcar receitas e guardar notas.",
+        text: "Abra uma receita para marcar Quero fazer / Já fiz, estrelas e notas.",
       })
     );
+  }
 
+  function renderLogin(body, onSuccess) {
     const form = el("form", { className: "caderno-form" });
     const email = el("input", {
       type: "email",
@@ -158,7 +322,7 @@
             password: password.value,
           }),
         });
-        render(panel, slug);
+        onSuccess();
       } catch (err) {
         msg.textContent = (err.data && err.data.error) || "Falha no login";
         msg.hidden = false;
@@ -196,7 +360,6 @@
       { value: "quero_fazer", label: "Quero fazer" },
       { value: "ja_fiz", label: "Já fiz" },
     ];
-    const statusBtns = {};
     statuses.forEach(function (s) {
       const btn = el("button", {
         type: "button",
@@ -208,13 +371,13 @@
           save({ status: s.value });
         },
       });
-      statusBtns[String(s.value)] = btn;
       statusRow.appendChild(btn);
     });
     body.appendChild(statusRow);
 
     const ratingWrap = el("div", {
-      className: "caderno-rating" + (meta.status === "ja_fiz" ? "" : " is-disabled"),
+      className:
+        "caderno-rating" + (meta.status === "ja_fiz" ? "" : " is-disabled"),
     });
     ratingWrap.appendChild(
       el("span", { className: "caderno-label", text: "Nota" })
@@ -228,8 +391,7 @@
       stars.appendChild(
         el("button", {
           type: "button",
-          className:
-            "caderno-star" + (meta.rating >= i ? " is-on" : ""),
+          className: "caderno-star" + (meta.rating >= i ? " is-on" : ""),
           "aria-label": i + " estrela" + (i > 1 ? "s" : ""),
           text: "★",
           onClick: function () {
@@ -291,9 +453,46 @@
     }
   }
 
+  function activateCaderno() {
+    const slug = recipeSlugFromPath();
+    if (slug) {
+      const panel = document.getElementById("meu-caderno") || mountRecipePanel();
+      focusLogin(panel);
+      return;
+    }
+
+    const panel = document.getElementById("meu-caderno") || mountIndexPanel();
+    if (!panel) return;
+    panel.hidden = false;
+    focusLogin(panel);
+  }
+
+  function boot() {
+    ensureHeaderEntry(activateCaderno);
+
+    if (recipeSlugFromPath()) {
+      mountRecipePanel();
+    } else {
+      mountIndexPanel();
+      // Na home, o painel só aparece ao clicar em Entrar (exceto se já logada).
+      currentUser()
+        .then(function (user) {
+          updateNavLabel(user);
+          const panel = document.getElementById("meu-caderno");
+          if (panel && user) {
+            panel.hidden = false;
+            renderIndex(panel);
+          }
+        })
+        .catch(function () {
+          updateNavLabel(null);
+        });
+    }
+  }
+
   if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", mountPanel);
+    document.addEventListener("DOMContentLoaded", boot);
   } else {
-    mountPanel();
+    boot();
   }
 })();

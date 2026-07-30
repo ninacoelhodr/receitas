@@ -1,9 +1,32 @@
+.caderno-nav-btn {
+  appearance: none;
+  border: 1px solid var(--accent);
+  border-radius: 0.4rem;
+  background: transparent;
+  color: var(--accent);
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  font-weight: 700;
+  padding: 0.35rem 0.85rem;
+  cursor: pointer;
+}
+
+.caderno-nav-btn:hover {
+  background: var(--accent-soft);
+}
+
 .caderno {
-  margin: 1.5rem 0 0;
+  margin: 1.25rem 0 1.5rem;
   padding: 1.15rem 1.2rem 1.25rem;
   border: 1px solid var(--line);
   border-radius: 0.6rem;
   background: linear-gradient(180deg, #fffefb 0%, var(--accent-soft) 160%);
+}
+
+.caderno-index {
+  max-width: 68rem;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .caderno-title {

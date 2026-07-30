@@ -19,7 +19,8 @@ Fichas de receita em **A5**, prontas para imprimir, com um **caderno pessoal**
 
 ### Meu caderno
 
-Nas fichas de receita, o painel **Meu caderno** (só na tela) permite:
+No site (home ou ficha), use **Entrar** / **Meu caderno** no canto do header.
+Nas fichas, o painel também fica sob os botões Voltar/Imprimir (só na tela):
 
 - Status: *Quero fazer* / *Já fiz* / limpar
 - Nota de 1 a 5 estrelas (quando *Já fiz*)
@@ -56,7 +57,9 @@ Envie foto, link ou texto da receita aqui.
 Categorias: `doces`, `salgados`, `tortas-salgadas`, `massas`, `carnes`, `aves`, `frutos-do-mar`, `sopas`, `acompanhamentos`, `bebidas`.
 
 Nas pastas com subcategorias, a ficha usa `Categoria · Subcategoria` em
-`p.category` (ex.: `Doces · Musses`); o índice agrupa sob `<h3 class="subcategory">`.
+`p.category` (ex.: `Doces · Musses`); o índice agrupa sob `<h3 class="subcategory">`
+e navega em três níveis: categorias → subcategorias → lista (hash `#doces/musses`).
+Categorias sem sub (Massas, Sopas, etc.) abrem a lista direto.
 
 ## Arquitetura
 

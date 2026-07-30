@@ -15,19 +15,21 @@
     <header class="site-header no-print">
       <a class="brand" href="./index.html">Livro de Receitas</a>
       <nav class="site-nav" aria-label="Principal">
+        <a href="./index.html">Início</a>
         <a href="#categorias">Categorias</a>
-        <a href="#receitas">Receitas</a>
       </nav>
     </header>
 
     <section class="hero">
       <h1>Livro de Receitas</h1>
       <p>
-        Receitas da família, digitadas e organizadas por categoria. Abra uma
-        ficha e use <strong>Imprimir</strong> para ter uma folha A5 pronta para
-        o fichário.
+        Receitas da família, digitadas e organizadas por categoria. Escolha uma
+        categoria, depois a subcategoria (quando houver). Abra uma ficha e use
+        <strong>Imprimir</strong> para ter uma folha A5 pronta para o fichário.
       </p>
     </section>
+
+    <nav class="breadcrumbs no-print" id="breadcrumbs" aria-label="Trilha" hidden></nav>
 
     <nav class="category-nav no-print" id="categorias" aria-label="Categorias">
       <a href="#doces">Doces</a>
@@ -58,7 +60,7 @@
       Nenhuma receita encontrada.
     </p>
 
-    <main class="recipe-index" id="receitas">
+    <main class="recipe-index" id="receitas" data-nav="home">
       <section class="category-block" id="doces">
         <h2>Doces</h2>
         <h3 class="subcategory">Biscoitos</h3>

@@ -87,7 +87,8 @@ campo. Mapa:
 
 Sem subcategoria: Sopas, Acompanhamentos, Bebidas, Tortas salgadas, Massas
 (massas com frutos do mar ficam em `frutos-do-mar`). No index: `<h3 class="subcategory">`
-+ `data-subcategory` na lista. Nav da ficha: link `../../index.html#<categoria>`.
++ `data-subcategory` na lista (o JS monta o drill-down Categoria → Sub → receitas;
+hash `#<categoria>/<sub-slug>`). Nav da ficha: link `../../index.html#<categoria>`.
 
 ## Molde (referência visual, só se curada)
 
@@ -101,5 +102,6 @@ Sem subcategoria: Sopas, Acompanhamentos, Bebidas, Tortas salgadas, Massas
 CSS: `../../css/site.css` e `../../css/print.css`.
 
 **Meu caderno:** o app no Railway injeta `caderno.css` / `config.js` / `caderno.js`
-nas fichas ao servir. **Não** é preciso incluir esses scripts no HTML da ficha.
-Após commit/push, o redeploy do Railway publica a receita nova.
+na home e nas fichas ao servir (botão **Entrar** no header). **Não** é preciso
+incluir esses scripts no HTML da ficha. Após commit/push, o redeploy do Railway
+publica a receita nova.

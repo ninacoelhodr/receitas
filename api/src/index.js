@@ -44,6 +44,17 @@ function sendHtmlWithCaderno(res, filePath) {
   res.type("html").send(html);
 }
 
+function serveIndexWithCaderno(_req, res, next) {
+  const filePath = path.join(SITE_ROOT, "index.html");
+  if (!fs.existsSync(filePath) || !fs.statSync(filePath).isFile()) {
+    return next();
+  }
+  return sendHtmlWithCaderno(res, filePath);
+}
+
+app.get("/", serveIndexWithCaderno);
+app.get("/index.html", serveIndexWithCaderno);
+
 app.use((req, res, next) => {
   if (req.method !== "GET" && req.method !== "HEAD") return next();
   if (!req.path.startsWith("/receitas/")) return next();
