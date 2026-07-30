@@ -49,6 +49,22 @@ function parseMetaBody(body) {
   return { data: out };
 }
 
+async function listMeta(req, res) {
+  try {
+    const result = await query(
+      `SELECT recipe_slug, status, rating, notes, updated_at
+       FROM recipe_meta
+       WHERE user_id = $1
+       ORDER BY updated_at DESC NULLS LAST`,
+      [req.user.id]
+    );
+    res.json({ items: result.rows });
+  } catch (err) {
+    console.error("[recipes/list meta]", err);
+    res.status(500).json({ error: "Erro ao listar metadados" });
+  }
+}
+
 async function getMeta(req, res) {
   try {
     const slug = normalizeSlug(req.params[0]);
@@ -132,6 +148,9 @@ async function putMeta(req, res) {
     res.status(500).json({ error: "Erro ao salvar metadados" });
   }
 }
+
+// Lista em lote (antes do splat :slug/meta)
+router.get("/meta", requireAuth, listMeta);
 
 // Express 4: splat captura doces/bolo-de-cenoura antes de /meta
 router.get(/^\/(.+)\/meta\/?$/, requireAuth, getMeta);

@@ -29,6 +29,7 @@ O admin só é **criado** se ainda não existir. Trocar a senha depois exige upd
 - `POST /api/auth/login` `{ email, password }`
 - `POST /api/auth/logout`
 - `GET /api/auth/me`
+- `GET /api/recipes/meta` (auth) — todos os metadados do usuário (`{ items: [...] }`)
 - `GET /api/recipes/:slug/meta` (auth) — slug com `/`, ex. `doces/bolo-de-cenoura`
 - `PUT /api/recipes/:slug/meta` (auth) `{ status?, rating?, notes? }`
 

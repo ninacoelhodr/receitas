@@ -79,14 +79,21 @@ a:hover {
 
 .site-nav {
   display: flex;
-  gap: 1.25rem;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.85rem 1.25rem;
   font-weight: 600;
   font-size: 0.95rem;
+  line-height: 1.2;
 }
 
 .site-nav a {
+  display: inline-flex;
+  align-items: center;
   color: var(--ink-soft);
   text-decoration: none;
+  line-height: 1.2;
+  padding: 0.35rem 0;
 }
 
 .site-nav a:hover {

@@ -8,6 +8,11 @@
 
   if (!indexRoot || !blocks.length) return;
 
+  /** @type {Record<string, { status: string|null, rating: number|null }>} */
+  let metaBySlug = {};
+  /** @type {{ status: string|null, rating: null|"any"|number }} */
+  let cadernoFilter = { status: null, rating: null };
+
   function normalize(text) {
     return String(text || "")
       .toLowerCase()
@@ -20,6 +25,49 @@
     return normalize(text)
       .replace(/[^a-z0-9]+/g, "-")
       .replace(/^-+|-+$/g, "");
+  }
+
+  function slugFromHref(href) {
+    const path = String(href || "").replace(/\\/g, "/");
+    const marker = "/receitas/";
+    const idx = path.indexOf(marker);
+    if (idx === -1) return null;
+    return path
+      .slice(idx + marker.length)
+      .replace(/\.html$/i, "")
+      .replace(/[?#].*$/, "")
+      .replace(/^\/+|\/+$/g, "");
+  }
+
+  function tagRecipeItems() {
+    blocks.forEach(function (block) {
+      block.querySelectorAll(".recipe-list > li").forEach(function (li) {
+        if (li.classList.contains("empty")) return;
+        const a = li.querySelector("a[href]");
+        if (!a) return;
+        const slug = slugFromHref(a.getAttribute("href"));
+        if (slug) li.setAttribute("data-recipe-slug", slug);
+      });
+    });
+  }
+
+  function hasCadernoFilter() {
+    return !!(cadernoFilter.status || cadernoFilter.rating);
+  }
+
+  function matchesCaderno(li) {
+    if (!hasCadernoFilter()) return true;
+    const slug = li.getAttribute("data-recipe-slug");
+    const meta = slug ? metaBySlug[slug] : null;
+    if (cadernoFilter.status) {
+      if (!meta || meta.status !== cadernoFilter.status) return false;
+    }
+    if (cadernoFilter.rating === "any") {
+      if (!meta || meta.rating == null) return false;
+    } else if (typeof cadernoFilter.rating === "number") {
+      if (!meta || Number(meta.rating) !== cadernoFilter.rating) return false;
+    }
+    return true;
   }
 
   function parseHash() {
@@ -115,6 +163,8 @@
     catalog.set(id, { block: block, title: title, subs: subs, isLeaf: isLeaf });
   });
 
+  tagRecipeItems();
+
   function clearItemVisibility() {
     blocks.forEach(function (block) {
       block.querySelectorAll(".recipe-list > li").forEach(function (el) {
@@ -148,7 +198,10 @@
       home.textContent = "Início";
       home.addEventListener("click", goHome);
       breadcrumbs.appendChild(home);
-      breadcrumbs.appendChild(document.createTextNode(" › Busca"));
+      const label = hasCadernoFilter() && !(input && input.value.trim())
+        ? " › Filtro do caderno"
+        : " › Busca";
+      breadcrumbs.appendChild(document.createTextNode(label));
       return;
     }
 
@@ -214,6 +267,13 @@
         if (subNav) subNav.hidden = true;
         block.querySelectorAll(":scope > .recipe-list").forEach(function (list) {
           list.hidden = false;
+          list.querySelectorAll(":scope > li").forEach(function (li) {
+            if (li.classList.contains("empty")) {
+              li.hidden = true;
+              return;
+            }
+            li.hidden = !matchesCaderno(li);
+          });
         });
         block.querySelectorAll(":scope > .subcategory").forEach(function (h) {
           h.hidden = false;
@@ -257,6 +317,15 @@
       const show = s === sub;
       if (s.heading) s.heading.hidden = !show;
       s.list.hidden = !show;
+      if (show) {
+        s.list.querySelectorAll(":scope > li").forEach(function (li) {
+          if (li.classList.contains("empty")) {
+            li.hidden = true;
+            return;
+          }
+          li.hidden = !matchesCaderno(li);
+        });
+      }
     });
 
     renderBreadcrumbs(categoryId, subSlug, false);
@@ -264,8 +333,8 @@
 
   function applyView() {
     const query = input ? normalize(input.value) : "";
-    if (query) {
-      applySearch(query);
+    if (query || hasCadernoFilter()) {
+      applyListFilter(query);
       return;
     }
 
@@ -291,13 +360,20 @@
     showSub(entry, categoryId, subSlug);
   }
 
-  function applySearch(query) {
-    indexRoot.dataset.nav = "search";
+  function applyListFilter(query) {
+    indexRoot.dataset.nav = query ? "search" : "filter";
     if (categoryNav) categoryNav.hidden = true;
+    const { categoryId, subSlug } = parseHash();
     let anyVisible = false;
 
     blocks.forEach(function (block) {
       block.classList.remove("is-active", "is-sub-active");
+      const inCategoryScope = !categoryId || block.id === categoryId;
+      if (!inCategoryScope) {
+        block.hidden = true;
+        return;
+      }
+
       block.hidden = false;
       const categoryName = normalize(block.querySelector("h2")?.textContent || "");
       const lists = block.querySelectorAll(":scope > .recipe-list");
@@ -306,6 +382,14 @@
       if (subNav) subNav.hidden = true;
 
       lists.forEach(function (list) {
+        const listSub = list.getAttribute("data-sub-slug") || "";
+        if (subSlug && listSub && listSub !== subSlug) {
+          list.hidden = true;
+          const prev = list.previousElementSibling;
+          if (prev && prev.classList.contains("subcategory")) prev.hidden = true;
+          return;
+        }
+
         const subHeading = list.previousElementSibling;
         const subName =
           subHeading && subHeading.classList.contains("subcategory")
@@ -321,10 +405,12 @@
           }
 
           const recipeName = normalize(li.textContent || "");
-          const match =
+          const textMatch =
+            !query ||
             recipeName.includes(query) ||
             categoryName.includes(query) ||
             subName.includes(query);
+          const match = textMatch && matchesCaderno(li);
 
           li.hidden = !match;
           if (match) {
@@ -345,7 +431,12 @@
       if (showBlock) anyVisible = true;
     });
 
-    if (emptyMsg) emptyMsg.hidden = anyVisible;
+    if (emptyMsg) {
+      emptyMsg.hidden = anyVisible;
+      emptyMsg.textContent = hasCadernoFilter()
+        ? "Nenhuma receita com esse filtro."
+        : "Nenhuma receita encontrada.";
+    }
     renderBreadcrumbs(null, null, true);
   }
 
@@ -384,5 +475,35 @@
   }
 
   window.addEventListener("hashchange", applyView);
+
+  window.ReceitasIndex = {
+    setCadernoMeta: function (items) {
+      metaBySlug = {};
+      (items || []).forEach(function (row) {
+        if (!row || !row.recipe_slug) return;
+        metaBySlug[row.recipe_slug] = {
+          status: row.status || null,
+          rating: row.rating == null ? null : Number(row.rating),
+        };
+      });
+      applyView();
+    },
+    setCadernoFilter: function (next) {
+      cadernoFilter = {
+        status: (next && next.status) || null,
+        rating:
+          next && next.rating != null && next.rating !== ""
+            ? next.rating
+            : null,
+      };
+      applyView();
+    },
+    clearCadernoFilter: function () {
+      cadernoFilter = { status: null, rating: null };
+      applyView();
+    },
+    refresh: applyView,
+  };
+
   applyView();
 })();

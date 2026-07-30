@@ -69,11 +69,42 @@
     if (input) input.focus();
   }
 
-  function updateNavLabel(user) {
+  function updateNav(user) {
     const btn = document.getElementById("caderno-nav-btn");
-    if (!btn) return;
-    btn.textContent = user ? "Meu caderno" : "Entrar";
-    btn.setAttribute("aria-label", user ? "Meu caderno" : "Entrar no Meu caderno");
+    if (btn) {
+      btn.textContent = user ? "Meu caderno" : "Entrar";
+      btn.setAttribute(
+        "aria-label",
+        user ? "Meu caderno" : "Entrar no Meu caderno"
+      );
+    }
+
+    let logout = document.getElementById("caderno-logout-nav");
+    if (user) {
+      if (!logout) {
+        const nav = document.querySelector(".site-header .site-nav");
+        if (nav) {
+          logout = el("button", {
+            type: "button",
+            id: "caderno-logout-nav",
+            className: "caderno-logout-nav",
+            text: "Sair",
+            "aria-label": "Sair do Meu caderno",
+            onClick: async function () {
+              try {
+                await api("/api/auth/logout", { method: "POST" });
+              } catch {
+                /* ignore */
+              }
+              afterLogout();
+            },
+          });
+          nav.appendChild(logout);
+        }
+      }
+    } else if (logout) {
+      logout.remove();
+    }
   }
 
   function ensureHeaderEntry(onActivate) {
@@ -126,7 +157,6 @@
 
     let panel = document.getElementById("meu-caderno");
     if (!panel) {
-      // After the recipe body so login never sits above ingredientes/preparo.
       panel = el("aside", {
         id: "meu-caderno",
         className: "caderno no-print",
@@ -164,7 +194,6 @@
       document.body.insertBefore(panel, document.body.firstChild);
     }
 
-    renderIndex(panel);
     return panel;
   }
 
@@ -192,11 +221,11 @@
       user = await currentUser();
     } catch {
       body.textContent = "Não foi possível conectar ao caderno.";
-      updateNavLabel(null);
+      updateNav(null);
       return;
     }
 
-    updateNavLabel(user);
+    updateNav(user);
 
     if (!user) {
       body.innerHTML = "";
@@ -223,7 +252,7 @@
     renderEditor(body, panel, slug, user, meta);
   }
 
-  async function renderIndex(panel) {
+  async function renderIndexLogin(panel) {
     panel.innerHTML = "";
     panel.appendChild(
       el("h2", { className: "caderno-title", text: "Meu caderno" })
@@ -237,52 +266,206 @@
       user = await currentUser();
     } catch {
       body.textContent = "Não foi possível conectar ao caderno.";
-      updateNavLabel(null);
+      updateNav(null);
       panel.hidden = false;
       return;
     }
 
-    updateNavLabel(user);
+    updateNav(user);
 
-    if (!user) {
-      body.innerHTML = "";
-      body.appendChild(
-        el("p", {
-          className: "caderno-hint",
-          text: "Receitas são abertas a todos. Entre só para o acompanhamento pessoal (Quero fazer / Já fiz, estrelas e notas) nas fichas.",
-        })
-      );
-      renderLogin(body, function () {
-        renderIndex(panel);
-      });
+    if (user) {
+      panel.hidden = true;
+      panel.innerHTML = "";
+      await setupIndexFilters();
       return;
     }
 
+    panel.hidden = false;
+    hideIndexFilters();
     body.innerHTML = "";
-    body.appendChild(
-      el("div", { className: "caderno-user" }, [
-        el("span", { text: user.email }),
-        el("button", {
-          type: "button",
-          className: "btn btn-ghost caderno-logout",
-          text: "Sair",
-          onClick: async function () {
-            try {
-              await api("/api/auth/logout", { method: "POST" });
-            } catch {
-              /* ignore */
-            }
-            renderIndex(panel);
-          },
-        }),
-      ])
-    );
     body.appendChild(
       el("p", {
         className: "caderno-hint",
-        text: "Abra uma receita para marcar Quero fazer / Já fiz, estrelas e notas.",
+        text: "Receitas são abertas a todos. Entre só para o acompanhamento pessoal (Quero fazer / Já fiz, estrelas e notas) nas fichas.",
       })
     );
+    renderLogin(body, async function () {
+      panel.hidden = true;
+      panel.innerHTML = "";
+      updateNav(await currentUser());
+      await setupIndexFilters();
+    });
+  }
+
+  function hideIndexFilters() {
+    const filters = document.getElementById("caderno-filters");
+    if (filters) filters.hidden = true;
+    if (window.ReceitasIndex && window.ReceitasIndex.clearCadernoFilter) {
+      window.ReceitasIndex.clearCadernoFilter();
+      window.ReceitasIndex.setCadernoMeta([]);
+    }
+  }
+
+  function ensureFiltersMount() {
+    let root = document.getElementById("caderno-filters");
+    if (root) return root;
+
+    root = el("section", {
+      id: "caderno-filters",
+      className: "caderno-filters no-print",
+      "aria-label": "Filtros do Meu caderno",
+      hidden: true,
+    });
+
+    const searchBar = document.querySelector(".search-bar");
+    if (searchBar && searchBar.parentNode) {
+      searchBar.insertAdjacentElement("afterend", root);
+    } else {
+      const index = document.getElementById("receitas");
+      if (index) index.insertAdjacentElement("beforebegin", root);
+      else document.body.appendChild(root);
+    }
+    return root;
+  }
+
+  let filterState = { status: null, rating: null };
+
+  function paintFilterChips(root) {
+    root.querySelectorAll("[data-filter-group]").forEach(function (row) {
+      const group = row.getAttribute("data-filter-group");
+      row.querySelectorAll(".caderno-chip").forEach(function (chip) {
+        const raw = chip.getAttribute("data-value");
+        let active = false;
+        if (group === "status") {
+          active =
+            (raw === "" && !filterState.status) ||
+            raw === filterState.status;
+        } else if (group === "rating") {
+          if (raw === "") active = filterState.rating == null;
+          else if (raw === "any") active = filterState.rating === "any";
+          else active = Number(raw) === filterState.rating;
+        }
+        chip.classList.toggle("is-active", active);
+      });
+    });
+  }
+
+  function applyFilterState() {
+    if (window.ReceitasIndex && window.ReceitasIndex.setCadernoFilter) {
+      window.ReceitasIndex.setCadernoFilter(filterState);
+    }
+  }
+
+  async function setupIndexFilters() {
+    if (recipeSlugFromPath()) return;
+    if (!document.getElementById("receitas")) return;
+
+    const root = ensureFiltersMount();
+    root.hidden = false;
+    root.innerHTML = "";
+
+    const inner = el("div", { className: "caderno-filters-inner" });
+    inner.appendChild(
+      el("h2", { className: "caderno-filters-title", text: "Meu caderno" })
+    );
+
+    const statusRow = el("div", {
+      className: "caderno-filters-row",
+      "data-filter-group": "status",
+    });
+    statusRow.appendChild(
+      el("span", { className: "caderno-label", text: "Status" })
+    );
+    [
+      { value: "", label: "Todas" },
+      { value: "quero_fazer", label: "Quero fazer" },
+      { value: "ja_fiz", label: "Já fiz" },
+    ].forEach(function (opt) {
+      statusRow.appendChild(
+        el("button", {
+          type: "button",
+          className: "caderno-chip",
+          "data-value": opt.value,
+          text: opt.label,
+          onClick: function () {
+            filterState.status = opt.value || null;
+            paintFilterChips(root);
+            applyFilterState();
+          },
+        })
+      );
+    });
+    inner.appendChild(statusRow);
+
+    const ratingRow = el("div", {
+      className: "caderno-filters-row",
+      "data-filter-group": "rating",
+    });
+    ratingRow.appendChild(
+      el("span", { className: "caderno-label", text: "Nota" })
+    );
+    const ratingOpts = [
+      { value: "", label: "Todas" },
+      { value: "any", label: "Com nota" },
+      { value: "5", label: "5★" },
+      { value: "4", label: "4★" },
+      { value: "3", label: "3★" },
+      { value: "2", label: "2★" },
+      { value: "1", label: "1★" },
+    ];
+    ratingOpts.forEach(function (opt) {
+      ratingRow.appendChild(
+        el("button", {
+          type: "button",
+          className: "caderno-chip",
+          "data-value": opt.value,
+          text: opt.label,
+          onClick: function () {
+            if (!opt.value) filterState.rating = null;
+            else if (opt.value === "any") filterState.rating = "any";
+            else filterState.rating = Number(opt.value);
+            paintFilterChips(root);
+            applyFilterState();
+          },
+        })
+      );
+    });
+    inner.appendChild(ratingRow);
+
+    root.appendChild(inner);
+    paintFilterChips(root);
+
+    try {
+      const data = await api("/api/recipes/meta");
+      if (window.ReceitasIndex && window.ReceitasIndex.setCadernoMeta) {
+        window.ReceitasIndex.setCadernoMeta(data.items || []);
+      }
+    } catch {
+      /* filtros ficam sem meta se a API falhar */
+    }
+    applyFilterState();
+  }
+
+  async function afterLogout() {
+    updateNav(null);
+    filterState = { status: null, rating: null };
+    hideIndexFilters();
+
+    const slug = recipeSlugFromPath();
+    if (slug) {
+      const panel = document.getElementById("meu-caderno") || mountRecipePanel();
+      if (panel) {
+        panel.hidden = true;
+        panel.innerHTML = "";
+      }
+      return;
+    }
+
+    const panel = document.getElementById("meu-caderno");
+    if (panel) {
+      panel.hidden = true;
+      panel.innerHTML = "";
+    }
   }
 
   function renderLogin(body, onSuccess) {
@@ -347,6 +530,7 @@
           } catch {
             /* ignore */
           }
+          afterLogout();
           render(panel, slug);
         },
       }),
@@ -466,12 +650,38 @@
       return;
     }
 
-    const panel = document.getElementById("meu-caderno") || mountIndexPanel();
-    if (!panel) return;
-    panel.hidden = false;
-    renderIndex(panel).then(function () {
-      focusLogin(panel);
-    });
+    currentUser()
+      .then(function (user) {
+        updateNav(user);
+        if (user) {
+          const filters = document.getElementById("caderno-filters");
+          if (filters && !filters.hidden) {
+            filters.scrollIntoView({ behavior: "smooth", block: "nearest" });
+          } else {
+            setupIndexFilters().then(function () {
+              const elFilters = document.getElementById("caderno-filters");
+              if (elFilters) {
+                elFilters.scrollIntoView({
+                  behavior: "smooth",
+                  block: "nearest",
+                });
+              }
+            });
+          }
+          return;
+        }
+        const panel = mountIndexPanel();
+        if (!panel) return;
+        renderIndexLogin(panel).then(function () {
+          focusLogin(panel);
+        });
+      })
+      .catch(function () {
+        const panel = mountIndexPanel();
+        if (!panel) return;
+        panel.hidden = false;
+        renderIndexLogin(panel);
+      });
   }
 
   function boot() {
@@ -479,32 +689,33 @@
 
     if (recipeSlugFromPath()) {
       const panel = mountRecipePanel();
-      // Ficha sempre legível: painel só abre se já logada, ou ao clicar Entrar.
       currentUser()
         .then(function (user) {
-          updateNavLabel(user);
+          updateNav(user);
           if (panel && user) {
             panel.hidden = false;
             render(panel, recipeSlugFromPath());
           }
         })
         .catch(function () {
-          updateNavLabel(null);
+          updateNav(null);
         });
     } else {
       mountIndexPanel();
-      // Na home, o painel só aparece ao clicar em Entrar (exceto se já logada).
       currentUser()
         .then(function (user) {
-          updateNavLabel(user);
+          updateNav(user);
           const panel = document.getElementById("meu-caderno");
-          if (panel && user) {
-            panel.hidden = false;
-            renderIndex(panel);
+          if (panel) {
+            panel.hidden = true;
+            panel.innerHTML = "";
+          }
+          if (user) {
+            setupIndexFilters();
           }
         })
         .catch(function () {
-          updateNavLabel(null);
+          updateNav(null);
         });
     }
   }
