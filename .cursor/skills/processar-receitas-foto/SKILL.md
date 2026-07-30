@@ -99,3 +99,7 @@ Sem subcategoria: Sopas, Acompanhamentos, Bebidas, Tortas salgadas, Massas
 ```
 
 CSS: `../../css/site.css` e `../../css/print.css`.
+
+**Meu caderno:** o app no Railway injeta `caderno.css` / `config.js` / `caderno.js`
+nas fichas ao servir. **Não** é preciso incluir esses scripts no HTML da ficha.
+Após commit/push, o redeploy do Railway publica a receita nova.

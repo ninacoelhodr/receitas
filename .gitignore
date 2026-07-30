@@ -6,6 +6,11 @@ Thumbs.db
 .vscode/
 work-*.png
 
+# Node / API
+api/node_modules/
+api/.env
+.env
+
 fotos/photo_*.jpg
 # Curation / agent scratch
 imagens/_cands/
