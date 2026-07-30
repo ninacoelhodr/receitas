@@ -1,0 +1,12 @@
+{
+  "name": "receitas",
+  "private": true,
+  "description": "Livro de receitas — meta package para o Railway/Nixpacks detectar Node",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "start": "npm start --prefix api",
+    "postinstall": "npm install --prefix api --omit=dev"
+  }
+}
