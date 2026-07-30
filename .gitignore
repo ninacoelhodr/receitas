@@ -7,3 +7,10 @@ Thumbs.db
 work-*.png
 
 fotos/photo_*.jpg
+# Curation / agent scratch
+imagens/_cands/
+_batches/
+_build_batches.py
+_curate_apply.py
+_curate_fetch.py
+_inventory.json
