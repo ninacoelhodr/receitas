@@ -2,8 +2,10 @@
 
 App Express que:
 
-1. Serve o site estático (HTML A5, CSS, JS, imagens) a partir da raiz do repo
-2. Expõe autenticação e metadados pessoais (`recipe_meta`) em Postgres
+1. Serve o site estático (HTML A5, CSS, JS, imagens) a partir da raiz do repo —
+   **sempre público** (`/`, `/receitas/*`, assets). Sem middleware de auth.
+2. Expõe autenticação e metadados pessoais (`recipe_meta`) em Postgres —
+   login **só** para o caderno pessoal.
 
 ## Variáveis de ambiente
 

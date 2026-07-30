@@ -29,6 +29,7 @@ app.get("/health", (_req, res) => {
   res.json({ ok: true });
 });
 
+// Auth só na API do caderno (meta). HTML, busca e assets são públicos — sem login.
 app.use("/api/auth", authRoutes);
 app.use("/api/recipes", recipeRoutes);
 

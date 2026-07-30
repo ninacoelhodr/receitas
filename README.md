@@ -1,7 +1,8 @@
 # Livro de Receitas
 
-Fichas de receita em **A5**, prontas para imprimir, com um **caderno pessoal**
-(quero fazer / já fiz, estrelas e notas) por usuário.
+Fichas de receita em **A5**, prontas para imprimir. O livro é **público**
+(navegar, abrir, ler e imprimir sem login). O **caderno pessoal** (quero fazer /
+já fiz, estrelas e notas) é opcional e exige login.
 
 - **Site (Railway):** https://web-production-7896c2.up.railway.app/
 - Conta / repo: [ninacoelhodr/receitas](https://github.com/ninacoelhodr/receitas)
@@ -17,17 +18,18 @@ Fichas de receita em **A5**, prontas para imprimir, com um **caderno pessoal**
    **não** saem na folha A5.
 5. Selecione papel **A5** e imprima uma página por receita.
 
-### Meu caderno
+### Meu caderno (só acompanhamento pessoal)
 
-No site (home ou ficha), use **Entrar** / **Meu caderno** no canto do header.
-Nas fichas, o painel também fica sob os botões Voltar/Imprimir (só na tela):
+Receitas **não** pedem login. Use **Entrar** / **Meu caderno** no header (ou o
+atalho na ficha) apenas para marcar o que você quer fazer / já fez:
 
 - Status: *Quero fazer* / *Já fiz* / limpar
 - Nota de 1 a 5 estrelas (quando *Já fiz*)
 - Notas livres (ex.: “coloquei menos açúcar”)
 
-**Login:** use o e-mail e a senha configurados em `ADMIN_EMAIL` / `ADMIN_PASSWORD`
-no serviço Railway (usuário criado no primeiro boot). Sessão via cookie httpOnly.
+Deslogada, a ficha continua legível; o formulário de login só aparece ao clicar
+**Entrar**. Credenciais: `ADMIN_EMAIL` / `ADMIN_PASSWORD` no Railway (usuário
+criado no primeiro boot). Sessão via cookie httpOnly.
 
 A margem esquerda é um pouco maior para o furo do fichário.
 

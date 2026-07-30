@@ -99,7 +99,7 @@
     nav.appendChild(btn);
   }
 
-  function ensureRecipeJump(main) {
+  function ensureRecipeJump(main, onActivate) {
     const actions = main.querySelector(".recipe-actions");
     if (!actions || actions.querySelector(".caderno-jump")) return;
     actions.appendChild(
@@ -109,7 +109,7 @@
         text: "Meu caderno",
         onClick: function (e) {
           e.preventDefault();
-          focusLogin(document.getElementById("meu-caderno"));
+          onActivate();
         },
       })
     );
@@ -122,24 +122,25 @@
     const main = document.querySelector("main.recipe-page");
     if (!main) return null;
 
-    ensureRecipeJump(main);
+    ensureRecipeJump(main, activateCaderno);
 
     let panel = document.getElementById("meu-caderno");
     if (!panel) {
+      // After the recipe body so login never sits above ingredientes/preparo.
       panel = el("aside", {
         id: "meu-caderno",
         className: "caderno no-print",
         "aria-label": "Meu caderno",
+        hidden: true,
       });
-      const actions = main.querySelector(".recipe-actions");
-      if (actions) {
-        actions.insertAdjacentElement("afterend", panel);
+      const card = main.querySelector(".recipe-card");
+      if (card) {
+        card.insertAdjacentElement("afterend", panel);
       } else {
-        main.insertBefore(panel, main.firstChild);
+        main.appendChild(panel);
       }
     }
 
-    render(panel, slug);
     return panel;
   }
 
@@ -202,7 +203,7 @@
       body.appendChild(
         el("p", {
           className: "caderno-hint",
-          text: "Entre para marcar receitas e guardar notas.",
+          text: "A receita acima é pública. Entre só para marcar Quero fazer / Já fiz, estrelas e notas.",
         })
       );
       renderLogin(body, function () {
@@ -248,7 +249,7 @@
       body.appendChild(
         el("p", {
           className: "caderno-hint",
-          text: "Entre para marcar receitas e guardar notas nas fichas.",
+          text: "Receitas são abertas a todos. Entre só para o acompanhamento pessoal (Quero fazer / Já fiz, estrelas e notas) nas fichas.",
         })
       );
       renderLogin(body, function () {
@@ -457,21 +458,39 @@
     const slug = recipeSlugFromPath();
     if (slug) {
       const panel = document.getElementById("meu-caderno") || mountRecipePanel();
-      focusLogin(panel);
+      if (!panel) return;
+      panel.hidden = false;
+      render(panel, slug).then(function () {
+        focusLogin(panel);
+      });
       return;
     }
 
     const panel = document.getElementById("meu-caderno") || mountIndexPanel();
     if (!panel) return;
     panel.hidden = false;
-    focusLogin(panel);
+    renderIndex(panel).then(function () {
+      focusLogin(panel);
+    });
   }
 
   function boot() {
     ensureHeaderEntry(activateCaderno);
 
     if (recipeSlugFromPath()) {
-      mountRecipePanel();
+      const panel = mountRecipePanel();
+      // Ficha sempre legível: painel só abre se já logada, ou ao clicar Entrar.
+      currentUser()
+        .then(function (user) {
+          updateNavLabel(user);
+          if (panel && user) {
+            panel.hidden = false;
+            render(panel, recipeSlugFromPath());
+          }
+        })
+        .catch(function () {
+          updateNavLabel(null);
+        });
     } else {
       mountIndexPanel();
       // Na home, o painel só aparece ao clicar em Entrar (exceto se já logada).

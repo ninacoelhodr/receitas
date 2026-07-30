@@ -23,6 +23,10 @@
   background: linear-gradient(180deg, #fffefb 0%, var(--accent-soft) 160%);
 }
 
+.caderno[hidden] {
+  display: none;
+}
+
 .caderno-index {
   max-width: 68rem;
   margin-left: auto;
