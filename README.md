@@ -1,8 +1,9 @@
 # Livro de Receitas
 
-Fichas de receita em **A5**, prontas para imprimir. O livro é **público**
-(navegar, abrir, ler e imprimir sem login). O **caderno pessoal** (quero fazer /
-já fiz, estrelas e notas) é opcional e exige login.
+Fichas de receita em **A5**, prontas para imprimir, mais a seção **Na cozinha**
+(artigos e dicas para ler na tela). O livro é **público** (navegar, abrir, ler e
+imprimir sem login). O **caderno pessoal** (quero fazer / já fiz, estrelas e
+notas) é opcional e exige login — só nas fichas de receita.
 
 - **Site (Railway):** https://web-production-7896c2.up.railway.app/
 - Conta / repo: [ninacoelhodr/receitas](https://github.com/ninacoelhodr/receitas)
@@ -43,20 +44,25 @@ A margem esquerda é um pouco maior para o furo do fichário.
    - o **texto completo** da receita (ingredientes + preparo).
 2. Em até ~5 minutos (ou **Run workflow**) cai em `entradas/pending/`
    (imagem, `*.link.txt` ou `*.recipe.txt`).
-3. No Cursor: **processa entradas**.
-4. Commit/push no GitHub → o Railway redeploya e a ficha nova fica online.
+3. No Cursor: **processar dados** (skill `processar-dados`).
+4. Commit/push no GitHub → o Railway redeploya e o conteúdo novo fica online.
 
-Fonte processada é **deletada**. Foto do caderno nunca na ficha; referência do
-prato na tela só com curadoria (`curar-foto-prato`).
+O agente **classifica** cada item: receita → `receitas/`; dica/técnica →
+`na-cozinha/`. Fonte processada é **deletada**. Foto do caderno nunca na ficha;
+referência do prato na tela só com curadoria (`curar-foto-prato`).
 
 O fluxo Telegram → GitHub Actions → Cursor **não muda**: continua gravando HTML
 no repo. O app no Railway só **serve** esse conteúdo no deploy.
 
 ### Direto no chat
 
-Envie foto, link ou texto da receita aqui.
+Envie foto, link ou texto (receita **ou** artigo Na cozinha) e diga
+**processar dados**.
 
-Categorias: `doces`, `salgados`, `tortas-salgadas`, `massas`, `carnes`, `aves`, `frutos-do-mar`, `sopas`, `acompanhamentos`, `bebidas`.
+Categorias de receita: `doces`, `salgados`, `tortas-salgadas`, `massas`,
+`carnes`, `aves`, `frutos-do-mar`, `sopas`, `acompanhamentos`, `bebidas`.
+
+Artigos/dicas: pasta `na-cozinha/` (link **Na cozinha** no menu).
 
 Nas pastas com subcategorias, a ficha usa `Categoria · Subcategoria` em
 `p.category` (ex.: `Doces · Musses`); o índice agrupa sob `<h3 class="subcategory">`
@@ -69,10 +75,11 @@ Categorias sem sub (Massas, Sopas, etc.) abrem a lista direto.
 | Parte | Onde |
 |-------|------|
 | Fichas HTML A5, CSS, imagens, índice, busca | Repo (site estático) |
+| Artigos Na cozinha | `na-cozinha/` (site estático) |
 | Servidor + API do caderno | `api/` (Express) no **Railway** |
 | Postgres (`users`, `recipe_meta`) | Railway |
 | Import Telegram | GitHub Actions + `scripts/telegram-import.sh` |
-| Processar / curar fotos | Skills Cursor |
+| Processar dados / curar fotos | Skills Cursor (`processar-dados`, …) |
 
 Detalhes da API e variáveis: [`api/README.md`](api/README.md).
 

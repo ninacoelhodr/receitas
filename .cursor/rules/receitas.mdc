@@ -1,21 +1,21 @@
 ---
-description: Como processar fotos de receitas neste livro
+description: Como processar entradas (receitas e Na cozinha) neste livro
 alwaysApply: true
 ---
 
-# Processamento de receitas
+# Processamento de dados
 
-Ao analisar entradas (Telegram `pending/`, `fotos/` ou anexos):
+Ao analisar entradas (Telegram `pending/`, anexos ou texto no chat):
 
-1. **Não duplicar** — revisar/completar; se completa, só **deletar** a fonte.
-2. **Não embutir** foto manuscrita/Telegram na ficha.
-3. Aceitar **foto**, **link** (`*.link.txt`) ou **texto completo** (`*.recipe.txt`).
-4. **Foto de referência:** skill `curar-foto-prato` (5 candidatas; senão sem).
-5. **Fonte processada → deletar** de `pending/` (não arquivar).
-6. Completar lacunas com bom senso; marcar o inferido.
-7. Uma página A5.
-8. **Subcategorias** nas pastas Doces / Salgados / Carnes / Aves / Frutos do mar:
-   `p.category` = `Categoria · Sub` (ver skill `processar-receitas-foto`).
+1. Entrada do fluxo: skill **`processar-dados`** (“processar dados” /
+   “processa entradas”). Classifica **receita** vs artigo **Na cozinha**.
+2. **Receita** → skill `processar-receitas-foto` (ficha A5 + `curar-foto-prato`).
+3. **Na cozinha** → `na-cozinha/<slug>.html` + índice `na-cozinha/index.html`.
+4. **Não duplicar** — revisar/completar; se completa, só **deletar** a fonte.
+5. **Não embutir** foto manuscrita/Telegram no HTML.
+6. Aceitar **foto**, **link** (`*.link.txt`) ou **texto** (`*.recipe.txt` / chat).
+7. **Fonte processada → deletar** de `pending/` (não arquivar).
+8. Em dúvida na classificação: perguntar uma linha.
 9. Commit/push quando pedir ou ao fechar lote.
 
-Skills: `processar-receitas-foto`, `curar-foto-prato`.
+Skills: `processar-dados`, `processar-receitas-foto`, `curar-foto-prato`.

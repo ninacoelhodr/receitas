@@ -102,7 +102,7 @@ for i in $(seq 0 $((count - 1))); do
 2) Link https://... de uma receita
 3) Texto completo da receita (ingredientes + preparo)
 
-Em breve aparece em entradas/pending. Depois no Cursor: processa entradas."
+Em breve aparece em entradas/pending. Depois no Cursor: processar dados."
     continue
   fi
 
@@ -140,7 +140,7 @@ Em breve aparece em entradas/pending. Depois no Cursor: processa entradas."
       printf '%s\n' "$caption" > "${out}.txt"
     fi
 
-    send_msg "$chat_id" "Foto recebida. No Cursor: processa entradas."
+    send_msg "$chat_id" "Foto recebida. No Cursor: processar dados."
     imported=$((imported + 1))
     continue
   fi
@@ -179,7 +179,7 @@ Em breve aparece em entradas/pending. Depois no Cursor: processa entradas."
       } > "$out"
 
       echo "Saved link -> ${out}"
-      send_msg "$chat_id" "Link recebido. No Cursor: processa entradas."
+      send_msg "$chat_id" "Link recebido. No Cursor: processar dados."
       imported=$((imported + 1))
     done <<< "$urls"
 
@@ -217,7 +217,7 @@ Em breve aparece em entradas/pending. Depois no Cursor: processa entradas."
       printf '%s\n' "$text"
     } > "$out"
     echo "Saved recipe text -> ${out}"
-    send_msg "$chat_id" "Texto da receita recebido. No Cursor: processa entradas."
+    send_msg "$chat_id" "Texto recebido. No Cursor: processar dados."
     imported=$((imported + 1))
     continue
   fi

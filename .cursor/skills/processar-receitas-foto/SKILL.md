@@ -1,16 +1,21 @@
 ---
 name: processar-receitas-foto
 description: >-
-  Analisa fotos, links ou texto completo de receitas (Telegram/entradas) e cria
-  fichas HTML A5. Fonte processada: DELETAR. Foto de prato com curadoria.
-  Use when processing entradas/pending or “processa entradas”.
+  Cria fichas HTML A5 a partir de foto, link ou texto de receita já classificada.
+  Fonte processada: DELETAR. Foto de prato com curadoria. Prefer “processar
+  dados” / skill processar-dados when entradas may mix recipes and tips; use
+  this skill for recipe-only batches or when processar-dados routes a receita.
 ---
 
 # Processar foto / link / texto → ficha de receita
 
 ## Quando aplicar
 
-Itens em `entradas/pending/`, ou pedido “processa entradas”.
+Item **já classificado como receita** (via skill `processar-dados`), lote só de
+receitas, ou pedido explícito de ficha A5.
+
+Para misturas receita + dica (“processar dados” / “processa entradas”), começar
+por `processar-dados`.
 
 ## Tipos de entrada
 
@@ -88,7 +93,8 @@ campo. Mapa:
 Sem subcategoria: Sopas, Acompanhamentos, Bebidas, Tortas salgadas, Massas
 (massas com frutos do mar ficam em `frutos-do-mar`). No index: `<h3 class="subcategory">`
 + `data-subcategory` na lista (o JS monta o drill-down Categoria → Sub → receitas;
-hash `#<categoria>/<sub-slug>`). Nav da ficha: link `../../index.html#<categoria>`.
+hash `#<categoria>/<sub-slug>`). Nav da ficha: link `../../index.html#<categoria>` **e**
+`<a href="../../na-cozinha/">Na cozinha</a>`.
 
 **Categorias extras** (aparecer em mais de um lugar no índice, sem duplicar o
 HTML da ficha):

@@ -502,12 +502,101 @@ a:hover {
   color: var(--ink);
 }
 
+/* —— Na cozinha (artigos / dicas) —— */
+
+.tip-index {
+  max-width: 68rem;
+  margin: 0 auto;
+  padding: 0 1.5rem 3rem;
+}
+
+.tip-list .empty {
+  list-style: none;
+  margin: 0;
+  padding: 0.85rem 0;
+  color: var(--ink-soft);
+  font-style: italic;
+}
+
+.tip-page {
+  max-width: 40rem;
+  margin: 0 auto;
+  padding: 1rem 1.25rem 3rem;
+}
+
+.tip-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  align-items: center;
+  margin-bottom: 1.25rem;
+}
+
+.tip-article {
+  background: #fffdf9;
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow);
+  padding: 1.75rem 1.6rem 2rem;
+}
+
+.tip-article .eyebrow {
+  margin: 0 0 0.35rem;
+  color: var(--accent);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.tip-article h1 {
+  margin: 0 0 1rem;
+  font-family: var(--font-display);
+  font-size: clamp(1.85rem, 4vw, 2.45rem);
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+}
+
+.tip-article h2 {
+  margin: 1.5rem 0 0.55rem;
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.tip-article h3 {
+  margin: 1.15rem 0 0.4rem;
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+
+.tip-article p {
+  margin: 0 0 0.85rem;
+}
+
+.tip-article ul,
+.tip-article ol {
+  margin: 0 0 1rem;
+  padding-left: 1.25rem;
+}
+
+.tip-article li {
+  margin-bottom: 0.4rem;
+}
+
+.tip-article li > ul,
+.tip-article li > ol {
+  margin: 0.35rem 0 0.2rem;
+}
+
 @media (max-width: 640px) {
   .hero {
     padding-top: 1.5rem;
   }
 
-  .recipe-card {
+  .recipe-card,
+  .tip-article {
     padding: 1.35rem 1.1rem 1.5rem;
   }
 }
