@@ -124,7 +124,8 @@ a:hover {
 
 .category-nav[hidden],
 .subcategory-nav[hidden],
-.breadcrumbs[hidden] {
+.breadcrumbs[hidden],
+.recipe-list[hidden] {
   display: none !important;
 }
 
@@ -178,6 +179,12 @@ a:hover {
   color: var(--accent);
 }
 
+.category-nav a[aria-current="true"] {
+  border-color: var(--accent);
+  background: var(--accent);
+  color: #fff;
+}
+
 .subcategory-nav {
   display: flex;
   flex-wrap: wrap;
@@ -201,6 +208,45 @@ a:hover {
   border-color: var(--accent);
   background: var(--accent-soft);
   color: var(--accent);
+}
+
+.subcategory-nav a[aria-current="true"] {
+  border-color: var(--accent);
+  background: var(--accent);
+  color: #fff;
+}
+
+@media (max-width: 640px) {
+  .category-nav,
+  .subcategory-nav {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scrollbar-width: thin;
+    -webkit-overflow-scrolling: touch;
+    scroll-padding-inline: 1.5rem;
+    padding-bottom: 0.65rem;
+  }
+
+  .category-nav {
+    margin-bottom: -0.2rem;
+  }
+
+  .category-nav a,
+  .subcategory-nav a {
+    flex: none;
+    white-space: nowrap;
+  }
+
+  .category-nav::-webkit-scrollbar,
+  .subcategory-nav::-webkit-scrollbar {
+    height: 5px;
+  }
+
+  .category-nav::-webkit-scrollbar-thumb,
+  .subcategory-nav::-webkit-scrollbar-thumb {
+    background: var(--line);
+    border-radius: 3px;
+  }
 }
 
 /* Home shows full structure; JS hides recipe lists under categories that have subs. */
@@ -312,7 +358,73 @@ a:hover {
   gap: 0.35rem;
 }
 
-.recipe-list a {
+/* Índice: grade de quadrados (foto + título) */
+.recipe-index .recipe-list {
+  grid-template-columns: repeat(auto-fill, minmax(9.75rem, 1fr));
+  gap: 1.15rem 0.9rem;
+  margin-bottom: 0.75rem;
+}
+
+.recipe-index .recipe-list > li {
+  min-width: 0;
+}
+
+.recipe-tile {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  height: 100%;
+  color: var(--ink);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.recipe-tile:hover {
+  color: var(--accent);
+}
+
+.recipe-tile:hover .recipe-tile-media {
+  border-color: var(--accent);
+}
+
+.recipe-tile:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 0.2rem;
+}
+
+.recipe-tile-media {
+  display: block;
+  aspect-ratio: 1 / 1;
+  width: 100%;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 0.35rem;
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, 0.55) 0%, transparent 55%),
+    var(--paper-deep);
+}
+
+.recipe-tile-media img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.recipe-tile-title {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  line-clamp: 3;
+  overflow: hidden;
+  font-size: 0.92rem;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+}
+
+/* Lista textual (ex.: Na cozinha) */
+.tip-list a {
   display: block;
   padding: 0.55rem 0;
   color: var(--ink);
@@ -321,18 +433,19 @@ a:hover {
   border-bottom: 1px solid transparent;
 }
 
-.recipe-list a:hover {
+.tip-list a:hover {
   color: var(--accent);
   border-bottom-color: var(--line);
 }
 
 .recipe-list .also-hint {
   display: block;
-  margin: -0.2rem 0 0.35rem;
+  margin: 0.15rem 0 0;
   color: var(--ink-soft);
-  font-size: 0.78rem;
+  font-size: 0.72rem;
   font-weight: 500;
   font-style: italic;
+  line-height: 1.3;
 }
 
 .recipe-list .empty {
@@ -340,6 +453,7 @@ a:hover {
   font-style: italic;
   font-weight: 400;
   padding: 0.35rem 0;
+  grid-column: 1 / -1;
 }
 
 .site-footer {
@@ -516,6 +630,12 @@ a:hover {
   padding: 0.85rem 0;
   color: var(--ink-soft);
   font-style: italic;
+}
+
+.tip-index-note {
+  margin: 1rem 0 0;
+  color: var(--ink-soft);
+  font-size: 0.9rem;
 }
 
 .tip-page {
