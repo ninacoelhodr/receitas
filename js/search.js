@@ -39,6 +39,59 @@
       .replace(/^\/+|\/+$/g, "");
   }
 
+  function photoStem(slug) {
+    if (!slug) return null;
+    const base = slug.includes("/") ? slug.slice(slug.lastIndexOf("/") + 1) : slug;
+    return base || null;
+  }
+
+  function imageSrcForStem(stem) {
+    return "./imagens/" + stem + ".jpg";
+  }
+
+  /** Transforma <a>Texto</a> em tile: quadrado (foto ou vazio) + título. */
+  function enhanceRecipeTiles() {
+    blocks.forEach(function (block) {
+      block.querySelectorAll(".recipe-list > li").forEach(function (li) {
+        if (li.classList.contains("empty")) return;
+        const a = li.querySelector(":scope > a[href]");
+        if (!a || a.classList.contains("recipe-tile")) return;
+
+        const title = (a.textContent || "").trim();
+        const href = a.getAttribute("href") || "";
+        const stem = photoStem(slugFromHref(href));
+
+        a.className = "recipe-tile";
+        a.replaceChildren();
+
+        const media = document.createElement("span");
+        media.className = "recipe-tile-media";
+        media.setAttribute("aria-hidden", "true");
+        if (stem) {
+          const img = document.createElement("img");
+          img.src = imageSrcForStem(stem);
+          img.alt = "";
+          img.loading = "lazy";
+          img.decoding = "async";
+          img.hidden = true;
+          img.addEventListener("load", function () {
+            img.hidden = false;
+          });
+          img.addEventListener("error", function () {
+            img.remove();
+          });
+          media.appendChild(img);
+        }
+        a.appendChild(media);
+
+        const titleEl = document.createElement("span");
+        titleEl.className = "recipe-tile-title";
+        titleEl.textContent = title;
+        a.appendChild(titleEl);
+      });
+    });
+  }
+
   function tagRecipeItems() {
     blocks.forEach(function (block) {
       block.querySelectorAll(".recipe-list > li").forEach(function (li) {
@@ -286,6 +339,7 @@
   });
 
   expandAlsoCategories();
+  enhanceRecipeTiles();
   tagRecipeItems();
 
   function clearItemVisibility() {
@@ -295,6 +349,29 @@
       });
     });
     if (emptyMsg) emptyMsg.hidden = true;
+  }
+
+  function setCurrentChip(container, matchFn) {
+    if (!container) return;
+    container.querySelectorAll("a[href]").forEach(function (a) {
+      if (matchFn(a)) a.setAttribute("aria-current", "true");
+      else a.removeAttribute("aria-current");
+    });
+  }
+
+  function updateNavCurrent(categoryId, subSlug) {
+    setCurrentChip(categoryNav, function (a) {
+      const id = (a.getAttribute("href") || "").replace(/^#\/?/, "").split("/")[0];
+      return !!categoryId && id === categoryId;
+    });
+    blocks.forEach(function (block) {
+      const subNav = block.querySelector(":scope > .subcategory-nav");
+      if (!subNav) return;
+      const inThisBlock = block.id === categoryId;
+      setCurrentChip(subNav, function (a) {
+        return inThisBlock && !!subSlug && a.dataset.subSlug === subSlug;
+      });
+    });
   }
 
   function scrollToEl(el) {
@@ -405,6 +482,7 @@
     });
 
     renderBreadcrumbs(null, null, false);
+    updateNavCurrent(scrollCategoryId || null, null);
 
     if (scrollCategoryId) {
       const entry = catalog.get(scrollCategoryId);
@@ -423,7 +501,7 @@
     }
 
     indexRoot.dataset.nav = "sub";
-    if (categoryNav) categoryNav.hidden = true;
+    if (categoryNav) categoryNav.hidden = false;
     clearItemVisibility();
 
     blocks.forEach(function (b) {
@@ -434,7 +512,7 @@
     });
 
     const subNav = entry.block.querySelector(":scope > .subcategory-nav");
-    if (subNav) subNav.hidden = true;
+    if (subNav) subNav.hidden = false;
 
     entry.subs.forEach(function (s) {
       const show = s === sub;
@@ -452,6 +530,7 @@
     });
 
     renderBreadcrumbs(categoryId, subSlug, false);
+    updateNavCurrent(categoryId, subSlug);
   }
 
   function applyView() {
