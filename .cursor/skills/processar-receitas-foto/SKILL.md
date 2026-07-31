@@ -40,8 +40,9 @@ type: recipe_text
 1. **Não embutir foto manuscrita/fonte** na ficha.
 2. **Depois de processar → deletar a fonte** em `pending/` (foto, `.link.txt` ou
    `.recipe.txt`). Não arquivar em `processadas/`.
-3. **Foto de referência do prato:** skill `curar-foto-prato` (~5 candidatas;
-   senão sem foto).
+3. **Foto de referência do prato:** skill `curar-foto-prato` (5 primeiras do
+   Google Imagens; escolher a mais bonita/apetitosa que cabe; quase sempre
+   colocar foto).
 4. **Duplicata:** completar ficha ou só deletar a entrada.
 5. Texto incompleto → bom senso / receita clássica; marcar em notes.
 6. Ficha compacta A5.
