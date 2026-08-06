@@ -2,8 +2,8 @@ name: Telegram → entradas
 
 on:
   schedule:
-    # Automático a cada 5 minutos
-    - cron: "*/5 * * * *"
+    # A cada 15 min (*/5 gerava fila longa e cancels em outage de runners)
+    - cron: "*/15 * * * *"
   # Manual: Actions → Telegram → entradas → Run workflow (must be {} not null)
   workflow_dispatch: {}
 
@@ -17,6 +17,7 @@ concurrency:
 jobs:
   import:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -26,8 +27,10 @@ jobs:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_ALLOWED_CHAT_ID: ${{ secrets.TELEGRAM_ALLOWED_CHAT_ID }}
         run: |
-          sudo apt-get update -qq
-          sudo apt-get install -y -qq jq
+          if ! command -v jq >/dev/null 2>&1; then
+            sudo apt-get update -qq
+            sudo apt-get install -y -qq jq
+          fi
           chmod +x scripts/telegram-import.sh
           scripts/telegram-import.sh
 
