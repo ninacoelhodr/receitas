@@ -1,0 +1,3 @@
+url: https://x.com/fernandocruz37/status/2088359341015367785?s=52
+from: telegram
+update_id: 500470256
