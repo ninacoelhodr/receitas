@@ -16,6 +16,7 @@ const RECEITAS_ROOT = path.join(SITE_ROOT, "receitas");
 const CADERNO_INJECT = `
 <link rel="stylesheet" href="/css/caderno.css" />
 <script src="/js/config.js" defer></script>
+<script src="/js/recipe-layout.js" defer></script>
 <script src="/js/caderno.js" defer></script>
 `;
 

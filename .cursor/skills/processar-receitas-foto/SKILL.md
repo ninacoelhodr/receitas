@@ -118,9 +118,10 @@ HTML da ficha):
 </figure>
 ```
 
-CSS: `../../css/site.css` e `../../css/print.css`.
+CSS: `../../css/site.css` e `../../css/print.css`. Antes de `</body>`:
+`<script src="../../js/recipe-layout.js" defer></script>` (colunas ingredientes/preparo no desktop).
 
-**Meu caderno:** o app no Railway injeta `caderno.css` / `config.js` / `caderno.js`
+**Meu caderno:** o app no Railway injeta `caderno.css` / `config.js` / `recipe-layout.js` / `caderno.js`
 na home e nas fichas ao servir (botão **Entrar** no header). **Não** é preciso
 incluir esses scripts no HTML da ficha. Após commit/push, o redeploy do Railway
 publica a receita nova.
