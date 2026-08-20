@@ -8,7 +8,7 @@
       name="description"
       content="Livro de receitas da família — fichas em A5 prontas para imprimir e guardar no fichário."
     />
-    <link rel="stylesheet" href="./css/site.css?v=classic" />
+    <link rel="stylesheet" href="./css/site.css?v=classic-todas" />
     <link rel="stylesheet" href="./css/print.css" />
   </head>
   <body>
@@ -16,6 +16,7 @@
       <a class="brand" href="./index.html">Livro de Receitas</a>
       <nav class="site-nav" aria-label="Principal">
         <a href="./index.html">Início</a>
+        <a href="#todas">Todas</a>
         <a href="#categorias">Categorias</a>
         <a href="./na-cozinha/">Na cozinha</a>
       </nav>
@@ -28,11 +29,15 @@
         Receitas da família, organizadas para consultar na tela ou imprimir em
         ficha A5.
       </p>
+      <p class="book-cover-actions no-print">
+        <a class="btn" href="#todas">Ver todas as receitas</a>
+      </p>
     </section>
 
     <nav class="breadcrumbs no-print" id="breadcrumbs" aria-label="Trilha" hidden></nav>
 
     <nav class="category-nav no-print" id="categorias" aria-label="Categorias">
+      <a href="#todas">Todas</a>
       <a href="#doces">Doces</a>
       <a href="#salgados">Salgados</a>
       <a href="#tortas-salgadas">Tortas salgadas</a>
@@ -648,6 +653,6 @@
         Telegram — ou aqui no chat — e diga <strong>processar dados</strong>.
       </p>
     </footer>
-    <script src="./js/search.js?v=grid2" defer></script>
+    <script src="./js/search.js?v=todas1" defer></script>
   </body>
 </html>

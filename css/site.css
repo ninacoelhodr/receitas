@@ -102,6 +102,10 @@ a:hover {
   color: var(--accent);
 }
 
+.site-nav a[aria-current="true"] {
+  color: var(--accent);
+}
+
 .hero,
 .book-cover {
   max-width: 68rem;
@@ -145,6 +149,14 @@ a:hover {
   max-width: 28rem;
   color: var(--ink-soft);
   font-size: 1.08rem;
+}
+
+.book-cover-actions {
+  margin: 1.5rem 0 0;
+}
+
+.book-cover-actions .btn {
+  text-decoration: none;
 }
 
 .category-nav[hidden],
@@ -287,6 +299,19 @@ a:hover {
 .recipe-index[data-nav="home"] .category-block:not(.is-leaf) .subcategory,
 .recipe-index[data-nav="home"] .category-block:not(.is-leaf) .recipe-list {
   display: none;
+}
+
+.recipe-index[data-nav="all"] .subcategory-nav {
+  display: none;
+}
+
+.recipe-index[data-nav="all"] .category-block .subcategory,
+.recipe-index[data-nav="all"] .category-block .recipe-list {
+  display: grid;
+}
+
+.recipe-index[data-nav="all"] .category-block .subcategory {
+  display: block;
 }
 
 .visually-hidden {

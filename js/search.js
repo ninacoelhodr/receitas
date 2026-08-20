@@ -247,15 +247,19 @@
 
   function parseHash() {
     const raw = (location.hash || "").replace(/^#\/?/, "").trim();
-    if (!raw) return { categoryId: null, subSlug: null };
+    if (!raw) return { categoryId: null, subSlug: null, all: false };
     const parts = raw.split("/").filter(Boolean);
     const categoryId = parts[0] || null;
     if (categoryId === "categorias" || categoryId === "receitas") {
-      return { categoryId: null, subSlug: null };
+      return { categoryId: null, subSlug: null, all: false };
+    }
+    if (categoryId === "todas") {
+      return { categoryId: null, subSlug: null, all: true };
     }
     return {
       categoryId: categoryId,
       subSlug: parts[1] ? decodeURIComponent(parts[1]) : null,
+      all: false,
     };
   }
 
@@ -359,10 +363,15 @@
     });
   }
 
-  function updateNavCurrent(categoryId, subSlug) {
+  function updateNavCurrent(categoryId, subSlug, showingAll) {
     setCurrentChip(categoryNav, function (a) {
       const id = (a.getAttribute("href") || "").replace(/^#\/?/, "").split("/")[0];
+      if (showingAll) return id === "todas";
       return !!categoryId && id === categoryId;
+    });
+    document.querySelectorAll('.site-nav a[href="#todas"]').forEach(function (a) {
+      if (showingAll) a.setAttribute("aria-current", "true");
+      else a.removeAttribute("aria-current");
     });
     blocks.forEach(function (block) {
       const subNav = block.querySelector(":scope > .subcategory-nav");
@@ -387,7 +396,7 @@
     setHash(null, null);
   }
 
-  function renderBreadcrumbs(categoryId, subSlug, searching) {
+  function renderBreadcrumbs(categoryId, subSlug, searching, showingAll) {
     if (!breadcrumbs) return;
     breadcrumbs.replaceChildren();
 
@@ -402,6 +411,21 @@
         ? " › Filtro do caderno"
         : " › Busca";
       breadcrumbs.appendChild(document.createTextNode(label));
+      return;
+    }
+
+    if (showingAll) {
+      breadcrumbs.hidden = false;
+      const home = document.createElement("a");
+      home.href = "./index.html";
+      home.textContent = "Início";
+      home.addEventListener("click", goHome);
+      breadcrumbs.appendChild(home);
+      breadcrumbs.appendChild(document.createTextNode(" › "));
+      const current = document.createElement("span");
+      current.setAttribute("aria-current", "page");
+      current.textContent = "Todas as receitas";
+      breadcrumbs.appendChild(current);
       return;
     }
 
@@ -481,13 +505,51 @@
       }
     });
 
-    renderBreadcrumbs(null, null, false);
-    updateNavCurrent(scrollCategoryId || null, null);
+    renderBreadcrumbs(null, null, false, false);
+    updateNavCurrent(scrollCategoryId || null, null, false);
 
     if (scrollCategoryId) {
       const entry = catalog.get(scrollCategoryId);
       if (entry) scrollToEl(entry.block);
     }
+  }
+
+  /** All recipes: every category and subcategory expanded. */
+  function showAll() {
+    indexRoot.dataset.nav = "all";
+    if (categoryNav) categoryNav.hidden = false;
+    clearItemVisibility();
+
+    blocks.forEach(function (block) {
+      block.hidden = false;
+      block.classList.remove("is-active", "is-sub-active");
+      const subNav = block.querySelector(":scope > .subcategory-nav");
+      if (subNav) subNav.hidden = true;
+
+      block.querySelectorAll(":scope > .subcategory").forEach(function (h) {
+        h.hidden = false;
+      });
+
+      block.querySelectorAll(":scope > .recipe-list").forEach(function (list) {
+        list.hidden = false;
+        list.querySelectorAll(":scope > li").forEach(function (li) {
+          if (li.classList.contains("empty")) {
+            li.hidden = true;
+            return;
+          }
+          // Avoid listing the same recipe twice when it appears in extra categories.
+          if (li.getAttribute("data-also-clone") === "1") {
+            li.hidden = true;
+            return;
+          }
+          li.hidden = !matchesCaderno(li);
+        });
+      });
+    });
+
+    renderBreadcrumbs(null, null, false, true);
+    updateNavCurrent(null, null, true);
+    scrollToEl(indexRoot);
   }
 
   /** Subcategory drill-down: recipes for one sub only. */
@@ -529,8 +591,8 @@
       }
     });
 
-    renderBreadcrumbs(categoryId, subSlug, false);
-    updateNavCurrent(categoryId, subSlug);
+    renderBreadcrumbs(categoryId, subSlug, false, false);
+    updateNavCurrent(categoryId, subSlug, false);
   }
 
   function applyView() {
@@ -540,7 +602,12 @@
       return;
     }
 
-    const { categoryId, subSlug } = parseHash();
+    const { categoryId, subSlug, all } = parseHash();
+    if (all) {
+      showAll();
+      return;
+    }
+
     const entry = categoryId ? catalog.get(categoryId) : null;
 
     if (!categoryId || !entry) {
@@ -646,19 +713,34 @@
     applyView();
   }
 
-  // Top category chips: jump within the home structure
+  // Top category chips: jump within the home structure (or open #todas)
   if (categoryNav) {
     categoryNav.querySelectorAll("a[href^='#']").forEach(function (a) {
       a.addEventListener("click", function (e) {
         const href = a.getAttribute("href") || "";
         const id = href.replace(/^#\/?/, "").split("/")[0];
-        if (!id || !catalog.has(id)) return;
+        if (!id) return;
+        if (id === "todas") {
+          e.preventDefault();
+          if (input) input.value = "";
+          setHash("todas", null);
+          return;
+        }
+        if (!catalog.has(id)) return;
         e.preventDefault();
         if (input) input.value = "";
         setHash(id, null);
       });
     });
   }
+
+  document.querySelectorAll('a[href="#todas"]').forEach(function (a) {
+    a.addEventListener("click", function (e) {
+      e.preventDefault();
+      if (input) input.value = "";
+      setHash("todas", null);
+    });
+  });
 
   indexRoot.addEventListener("click", function (e) {
     const link = e.target.closest(".subcategory-nav a");
