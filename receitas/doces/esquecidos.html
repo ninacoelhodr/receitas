@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Esquecidos — Livro de Receitas</title>
+    <meta name="description" content="Esquecidos — ficha A5 para imprimir." />
+    <link rel="stylesheet" href="../../css/site.css" />
+    <link rel="stylesheet" href="../../css/print.css" />
+  </head>
+  <body>
+    <header class="site-header no-print">
+      <a class="brand" href="../../index.html">Livro de Receitas</a>
+      <nav class="site-nav" aria-label="Principal">
+        <a href="../../index.html#doces">Doces</a>
+        <a href="../../na-cozinha/">Na cozinha</a>
+      </nav>
+    </header>
+
+    <main class="recipe-page">
+      <div class="recipe-actions no-print">
+        <a class="btn btn-ghost" href="../../index.html">← Voltar</a>
+        <button class="btn" type="button" onclick="window.print()">
+          Imprimir
+        </button>
+      </div>
+
+      <article class="recipe-card">
+        <p class="category">Doces · Biscoitos</p>
+        <h1>Esquecidos</h1>
+        <figure class="dish-photo no-print">
+          <img src="../../imagens/esquecidos.jpg" alt="Referência: Esquecidos" />
+          <figcaption>Referência visual (não é a foto da receita da família).</figcaption>
+        </figure>
+
+        <h2>Ingredientes</h2>
+        <ul class="ingredients">
+          <li>1 1/2 xícara de açúcar</li>
+          <li>4 gemas</li>
+          <li>1 clara</li>
+          <li>4 xícaras de farinha de trigo</li>
+          <li>1 pitada de sal</li>
+          <li>1 colher (sopa) de água</li>
+          <li>Manteiga e farinha para untar</li>
+        </ul>
+
+        <h2>Modo de preparo</h2>
+        <ol class="steps">
+          <li>Pré-aqueça a 180 °C. Bata açúcar e gemas até esbranquiçar.</li>
+          <li>Junte clara e bata ~5 min. Incorpore farinha e sal; amasse (água se necessário).</li>
+          <li>Faça bolinhas em duas assadeiras untadas; asse 25 min. Esfrie e congele.</li>
+        </ol>
+        <h2>Observação</h2>
+        <p class="notes">Polvilhe as mãos com farinha ao enrolar. Congelamento: saco sem ar; descongele 1 h e reaqueça 6 min.</p>
+      </article>
+    </main>
+    <script src="../../js/recipe-layout.js" defer></script>
+  </body>
+</html>
