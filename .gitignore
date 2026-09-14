@@ -19,3 +19,4 @@ _build_batches.py
 _curate_apply.py
 _curate_fetch.py
 _inventory.json
+__pycache__/
