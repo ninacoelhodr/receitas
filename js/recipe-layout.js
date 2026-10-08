@@ -22,14 +22,15 @@
 
     var left = document.createElement("section");
     left.className = "recipe-section";
-    left.append(ingHeading, ingredients);
 
     var right = document.createElement("section");
     right.className = "recipe-section";
-    right.append(stepsHeading, steps);
 
+    // Insere o bloco ANTES de mover os títulos, senão ele fica solto fora da página.
     ingHeading.before(body);
     body.append(left, right);
+    left.append(ingHeading, ingredients);
+    right.append(stepsHeading, steps);
     card.dataset.layoutDone = "1";
   }
 
