@@ -70,11 +70,34 @@ e o índice na home mostra subcategorias (ou receitas diretas se não houver sub
 clique na sub abre a lista (`#doces/musses`).
 Categorias sem sub (Massas, Sopas, etc.) abrem a lista direto.
 
+## Biblioteca de livros
+
+A página inicial é uma **estante**: cada receita pertence a um livro (série "A arte
+de congelar", recortes do Pinterest/TikTok, caderno da família…). Ao abrir um livro
+você vê a capa, o **sumário com número de página** e navega pelas receitas na ordem
+original (anterior/próxima). O catálogo por **categoria** (busca, dropdowns,
+"Todas") continua em `catalogo.html`.
+
+| O quê | Onde |
+|-------|------|
+| Fonte única: livros, capas (cor/título), receitas e páginas | `livros/livros.json` |
+| Gerador (estante, páginas de livro, navegação e tema das fichas) | `python scripts/gerar-livros.py` |
+| Verificador (livros, páginas, fotos, links) | `python scripts/verificar.py` |
+| Visual (capas, estante, sumário, tema por livro) | `css/livros.css` |
+
+`index.html`, `livros/<id>/index.html` e o bloco "Neste livro" das fichas são
+**gerados**: edite o JSON e rode o gerador. Para um livro novo, acrescente um item em
+`livros` (com `cor`, `titulo`, `subtitulo`, `layout`: `duas-colunas` ou `simples`) e
+liste as receitas com `slug` (`categoria/slug`) e `pagina`. Receitas que não estão em
+nenhum livro vão sozinhas para o **Caderno da família**. As URLs das fichas
+(`/receitas/<categoria>/<slug>.html`) não mudam, para não perder as notas do Meu
+caderno.
+
 ## Arquitetura
 
 | Parte | Onde |
 |-------|------|
-| Fichas HTML A5, CSS, imagens, índice, busca | Repo (site estático) |
+| Fichas HTML A5, CSS, imagens, estante/livros, catálogo, busca | Repo (site estático) |
 | Artigos Na cozinha | `na-cozinha/` (site estático) |
 | Servidor + API do caderno | `api/` (Express) no **Railway** |
 | Postgres (`users`, `recipe_meta`) | Railway |
@@ -93,6 +116,6 @@ npm run dev
 ```
 
 Abra `http://localhost:3000`. O servidor serve a raiz do repo e injeta o painel
-Meu caderno nas fichas em `/receitas/**/*.html`.
+Meu caderno na estante, no catálogo, nas páginas de livro e nas fichas.
 
 Só o front estático (sem caderno): `npx --yes serve .`

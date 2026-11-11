@@ -10,25 +10,33 @@
     />
     <link rel="stylesheet" href="../../css/site.css" />
     <link rel="stylesheet" href="../../css/print.css" />
+    <link rel="stylesheet" href="../../css/livros.css" />
   </head>
   <body>
     <header class="site-header no-print">
       <a class="brand" href="../../index.html">Livro de Receitas</a>
       <nav class="site-nav" aria-label="Principal">
-        <a href="../../index.html#aves">Aves</a>
+        <a href="../../catalogo.html#aves">Aves</a>
         <a href="../../na-cozinha/">Na cozinha</a>
       </nav>
     </header>
 
     <main class="recipe-page">
       <div class="recipe-actions no-print">
-        <a class="btn btn-ghost" href="../../index.html">← Voltar</a>
+        <a class="btn btn-ghost" href="../../livros/arte-de-congelar-aves/">← Voltar</a>
         <button class="btn" type="button" onclick="window.print()">
           Imprimir
         </button>
       </div>
 
-      <article class="recipe-card">
+    <!-- livro:inicio -->
+    <nav class="livro-nav no-print" aria-label="Neste livro" style="--livro:#8a5a1c">
+      <a class="livro-nav-livro" href="../../livros/arte-de-congelar-aves/">A arte de congelar — Aves e patês</a>
+      <span class="livro-nav-pag">pág. 58</span>
+      <span class="livro-nav-setas"><a rel="prev" href="../aves/frango-na-pucara.html" title="Frango na púcara">← Anterior</a><a rel="next" href="../aves/frango-estufado-com-tomates.html" title="Frango estufado com tomates">Próxima →</a></span>
+    </nav>
+    <!-- livro:fim -->
+      <article class="recipe-card" data-livro="arte-de-congelar-aves" data-pagina="58" data-layout="duas-colunas" style="--livro:#8a5a1c">
         <p class="category">Aves · Frango</p>
         <h1>Frango ao caril</h1>
 
@@ -83,5 +91,6 @@
         <p class="notes">O pó de caril é um tempero indiano feito com canela, cravos, coentro, cominho, cardamomo e pimenta-do-reino; encontra-se à venda nos bons supermercados. <strong>Congelamento:</strong> cubra a travessa com filme plástico e leve ao freezer; retire o frango e o molho congelados da travessa, embale em filme plástico, etiquete e congele. <strong>Descongelamento:</strong> desembale o frango e coloque numa panela; leve ao fogo brando para descongelar e aquecer. Polvilhe com o caril e o coentro restantes, passe para uma travessa e sirva com arroz branco.</p>
       </article>
     </main>
+      <script src="../../js/recipe-layout.js" defer></script>
   </body>
 </html>

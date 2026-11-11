@@ -10,25 +10,33 @@
     />
     <link rel="stylesheet" href="../../css/site.css" />
     <link rel="stylesheet" href="../../css/print.css" />
+    <link rel="stylesheet" href="../../css/livros.css" />
   </head>
   <body>
     <header class="site-header no-print">
       <a class="brand" href="../../index.html">Livro de Receitas</a>
       <nav class="site-nav" aria-label="Principal">
-        <a href="../../index.html#salgados">Salgados</a>
+        <a href="../../catalogo.html#salgados">Salgados</a>
         <a href="../../na-cozinha/">Na cozinha</a>
       </nav>
     </header>
 
     <main class="recipe-page">
       <div class="recipe-actions no-print">
-        <a class="btn btn-ghost" href="../../index.html">← Voltar</a>
+        <a class="btn btn-ghost" href="../../livros/caderno-da-familia/">← Voltar</a>
         <button class="btn" type="button" onclick="window.print()">
           Imprimir
         </button>
       </div>
 
-      <article class="recipe-card">
+    <!-- livro:inicio -->
+    <nav class="livro-nav no-print" aria-label="Neste livro" style="--livro:#5b3a29">
+      <a class="livro-nav-livro" href="../../livros/caderno-da-familia/">Caderno da família — Receitas guardadas ao longo dos anos</a>
+      
+      <span class="livro-nav-setas"><a rel="prev" href="../salgados/folhado-de-linguica-e-ricota.html" title="Folhado de linguiça e ricota">← Anterior</a><a rel="next" href="../salgados/mousse-de-queijo-com-abacaxi.html" title="Mousse de queijo com abacaxi">Próxima →</a></span>
+    </nav>
+    <!-- livro:fim -->
+      <article class="recipe-card" data-livro="caderno-da-familia" data-layout="simples" style="--livro:#5b3a29">
         <p class="category">Salgados · Massas fritas/assadas</p>
         <h1>Maxipastéis de forno</h1>
 

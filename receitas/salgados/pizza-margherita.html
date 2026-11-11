@@ -10,25 +10,33 @@
     />
     <link rel="stylesheet" href="../../css/site.css" />
     <link rel="stylesheet" href="../../css/print.css" />
+    <link rel="stylesheet" href="../../css/livros.css" />
   </head>
   <body>
     <header class="site-header no-print">
       <a class="brand" href="../../index.html">Livro de Receitas</a>
       <nav class="site-nav" aria-label="Principal">
-        <a href="../../index.html#salgados">Salgados</a>
+        <a href="../../catalogo.html#salgados">Salgados</a>
         <a href="../../na-cozinha/">Na cozinha</a>
       </nav>
     </header>
 
     <main class="recipe-page">
       <div class="recipe-actions no-print">
-        <a class="btn btn-ghost" href="../../index.html">← Voltar</a>
+        <a class="btn btn-ghost" href="../../livros/arte-de-congelar-massas-tortas-molhos/">← Voltar</a>
         <button class="btn" type="button" onclick="window.print()">
           Imprimir
         </button>
       </div>
 
-      <article class="recipe-card">
+    <!-- livro:inicio -->
+    <nav class="livro-nav no-print" aria-label="Neste livro" style="--livro:#5f6b3a">
+      <a class="livro-nav-livro" href="../../livros/arte-de-congelar-massas-tortas-molhos/">A arte de congelar — Massas, tortas e molhos</a>
+      <span class="livro-nav-pag">pág. 40</span>
+      <span class="livro-nav-setas"><a rel="prev" href="../massas/nhoque-de-ricota.html" title="Nhoque de ricota">← Anterior</a><a rel="next" href="../salgados/calzone.html" title="Calzone">Próxima →</a></span>
+    </nav>
+    <!-- livro:fim -->
+      <article class="recipe-card" data-livro="arte-de-congelar-massas-tortas-molhos" data-pagina="40" data-layout="duas-colunas" style="--livro:#5f6b3a">
         <p class="category">Salgados · Massas fritas/assadas</p>
         <h1>Pizza Margherita</h1>
 
@@ -70,5 +78,6 @@
         <p class="notes">Se você for fazer pizza com cobertura de aliche, deixe para colocá-lo somente quando descongelar a pizza. <strong>Congelamento:</strong> leve a pizza aberta ao freezer e, quando estiver congelada, desenforme e embrulhe em filme plástico ou coloque em um saco plástico que feche hermeticamente; etiquete e leve de volta ao freezer. Você pode congelar os discos de pizza sem recheio: siga a receita apenas até o passo 2. <strong>Descongelamento:</strong> leve a pizza diretamente do freezer ao forno preaquecido em temperatura alta (220 °C); retire quando a massa ficar dourada e o queijo derreter. <strong>Variação:</strong> para uma pizza de calabresa, frite rodelas de cebola em óleo, retire do fogo e frite as rodelas de linguiça na mesma panela; distribua as rodelas de linguiça sobre a massa de pizza e, por cima, as rodelas de cebola.</p>
       </article>
     </main>
+      <script src="../../js/recipe-layout.js" defer></script>
   </body>
 </html>

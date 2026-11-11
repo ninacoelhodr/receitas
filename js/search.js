@@ -407,7 +407,7 @@
     if (searching) {
       breadcrumbs.hidden = false;
       const home = document.createElement("a");
-      home.href = "./index.html";
+      home.href = "./catalogo.html";
       home.textContent = "Início";
       home.addEventListener("click", goHome);
       breadcrumbs.appendChild(home);
@@ -421,7 +421,7 @@
     if (showingAll) {
       breadcrumbs.hidden = false;
       const home = document.createElement("a");
-      home.href = "./index.html";
+      home.href = "./catalogo.html";
       home.textContent = "Início";
       home.addEventListener("click", goHome);
       breadcrumbs.appendChild(home);
@@ -450,7 +450,7 @@
 
     breadcrumbs.hidden = false;
     const home = document.createElement("a");
-    home.href = "./index.html";
+    home.href = "./catalogo.html";
     home.textContent = "Início";
     home.addEventListener("click", goHome);
     breadcrumbs.appendChild(home);
@@ -786,6 +786,12 @@
     },
     refresh: applyView,
   };
+
+  // Busca vinda da estante: catalogo.html?q=termo
+  try {
+    const qParam = new URLSearchParams(window.location.search).get("q");
+    if (qParam && input) input.value = qParam;
+  } catch (_) {}
 
   openFromHash();
   applyView();

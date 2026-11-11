@@ -10,25 +10,33 @@
     />
     <link rel="stylesheet" href="../../css/site.css" />
     <link rel="stylesheet" href="../../css/print.css" />
+    <link rel="stylesheet" href="../../css/livros.css" />
   </head>
   <body>
     <header class="site-header no-print">
       <a class="brand" href="../../index.html">Livro de Receitas</a>
       <nav class="site-nav" aria-label="Principal">
-        <a href="../../index.html#massas">Massas</a>
+        <a href="../../catalogo.html#massas">Massas</a>
         <a href="../../na-cozinha/">Na cozinha</a>
       </nav>
     </header>
 
     <main class="recipe-page">
       <div class="recipe-actions no-print">
-        <a class="btn btn-ghost" href="../../index.html">← Voltar</a>
+        <a class="btn btn-ghost" href="../../livros/arte-de-congelar-massas-tortas-molhos/">← Voltar</a>
         <button class="btn" type="button" onclick="window.print()">
           Imprimir
         </button>
       </div>
 
-      <article class="recipe-card">
+    <!-- livro:inicio -->
+    <nav class="livro-nav no-print" aria-label="Neste livro" style="--livro:#5f6b3a">
+      <a class="livro-nav-livro" href="../../livros/arte-de-congelar-massas-tortas-molhos/">A arte de congelar — Massas, tortas e molhos</a>
+      <span class="livro-nav-pag">pág. 38</span>
+      <span class="livro-nav-setas"><a rel="prev" href="../tortas-salgadas/torta-de-cogumelos-secos.html" title="Torta de cogumelos secos">← Anterior</a><a rel="next" href="../salgados/pizza-margherita.html" title="Pizza Margherita">Próxima →</a></span>
+    </nav>
+    <!-- livro:fim -->
+      <article class="recipe-card" data-livro="arte-de-congelar-massas-tortas-molhos" data-pagina="38" data-layout="duas-colunas" style="--livro:#5f6b3a">
         <p class="category">Massas</p>
         <h1>Nhoque de ricota</h1>
 
@@ -73,5 +81,6 @@
         <p class="notes">Se, na hora de enrolar o nhoque, a massa ficar um pouco mole e você tiver dificuldade para enrolá-lo, acrescente um pouco mais de farinha de trigo. <strong>Congelamento:</strong> embrulhe as embalagens de alumínio em filme plástico ou coloque em um saco plástico que feche hermeticamente; etiquete e congele. <strong>Descongelamento:</strong> na geladeira de um dia para o outro, ou no micro-ondas, ou no forno em temperatura baixa; cubra com o molho de sua preferência e aqueça. Sirva com parmesão ralado à parte.</p>
       </article>
     </main>
+      <script src="../../js/recipe-layout.js" defer></script>
   </body>
 </html>

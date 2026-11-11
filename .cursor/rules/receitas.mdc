@@ -11,6 +11,11 @@ Ao analisar entradas (Telegram `pending/`, anexos ou texto no chat):
    “processa entradas”). Classifica **receita** vs artigo **Na cozinha**.
 2. **Receita** → skill `processar-receitas-foto` (ficha A5 + `curar-foto-prato`).
 3. **Na cozinha** → `na-cozinha/<slug>.html` + índice `na-cozinha/index.html`.
+   **Biblioteca:** o site é uma estante de livros (`index.html` e `livros/` são
+   **gerados** por `python scripts/gerar-livros.py` a partir de `livros/livros.json` —
+   nunca editar à mão). O catálogo por categoria é `catalogo.html`. Registrar o livro
+   e a página de cada receita em `livros/livros.json`; sem livro = Caderno da família.
+   Rodar `python scripts/verificar.py` antes de commitar.
 4. **Não duplicar** — revisar/completar; se completa, só **deletar** a fonte.
 5. **Não embutir** foto manuscrita/Telegram no HTML.
 6. Aceitar **foto**, **link** (`*.link.txt`) ou **texto** (`*.recipe.txt` / chat).

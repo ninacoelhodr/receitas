@@ -10,25 +10,33 @@
     />
     <link rel="stylesheet" href="../../css/site.css" />
     <link rel="stylesheet" href="../../css/print.css" />
+    <link rel="stylesheet" href="../../css/livros.css" />
   </head>
   <body>
     <header class="site-header no-print">
       <a class="brand" href="../../index.html">Livro de Receitas</a>
       <nav class="site-nav" aria-label="Principal">
-        <a href="../../index.html#tortas-salgadas">Tortas salgadas</a>
+        <a href="../../catalogo.html#tortas-salgadas">Tortas salgadas</a>
         <a href="../../na-cozinha/">Na cozinha</a>
       </nav>
     </header>
 
     <main class="recipe-page">
       <div class="recipe-actions no-print">
-        <a class="btn btn-ghost" href="../../index.html">← Voltar</a>
+        <a class="btn btn-ghost" href="../../livros/arte-de-congelar-aves/">← Voltar</a>
         <button class="btn" type="button" onclick="window.print()">
           Imprimir
         </button>
       </div>
 
-      <article class="recipe-card">
+    <!-- livro:inicio -->
+    <nav class="livro-nav no-print" aria-label="Neste livro" style="--livro:#8a5a1c">
+      <a class="livro-nav-livro" href="../../livros/arte-de-congelar-aves/">A arte de congelar — Aves e patês</a>
+      <span class="livro-nav-pag">pág. 46</span>
+      <span class="livro-nav-setas"><a rel="prev" href="../salgados/pate-de-figado-de-galinha.html" title="Patê de fígado de galinha">← Anterior</a><a rel="next" href="../aves/enroladinhos-meireles.html" title="Enroladinhos Meireles">Próxima →</a></span>
+    </nav>
+    <!-- livro:fim -->
+      <article class="recipe-card" data-livro="arte-de-congelar-aves" data-pagina="46" data-layout="duas-colunas" style="--livro:#8a5a1c">
         <p class="category">Tortas salgadas</p>
         <h1>Torta de frango</h1>
 
@@ -95,5 +103,6 @@
         <p class="notes">Se quiser congelar a torta crua, deixe para pincelar a superfície com a gema batida depois de descongelar. <strong>Congelamento:</strong> embale a fôrma refratária com a torta em filme plástico, ou num saco plástico que feche hermeticamente; etiquete e congele. <strong>Descongelamento:</strong> de um dia para o outro na geladeira; retire o filme e leve ao forno coberta com papel-alumínio para aquecer.</p>
       </article>
     </main>
+      <script src="../../js/recipe-layout.js" defer></script>
   </body>
 </html>

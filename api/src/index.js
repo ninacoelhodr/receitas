@@ -46,16 +46,43 @@ function sendHtmlWithCaderno(res, filePath) {
   res.type("html").send(html);
 }
 
-function serveIndexWithCaderno(_req, res, next) {
-  const filePath = path.join(SITE_ROOT, "index.html");
-  if (!fs.existsSync(filePath) || !fs.statSync(filePath).isFile()) {
-    return next();
-  }
-  return sendHtmlWithCaderno(res, filePath);
+function serveRootPageWithCaderno(file) {
+  return function (_req, res, next) {
+    const filePath = path.join(SITE_ROOT, file);
+    if (!fs.existsSync(filePath) || !fs.statSync(filePath).isFile()) {
+      return next();
+    }
+    return sendHtmlWithCaderno(res, filePath);
+  };
 }
 
-app.get("/", serveIndexWithCaderno);
-app.get("/index.html", serveIndexWithCaderno);
+// Estante (home) e catálogo por categoria.
+app.get("/", serveRootPageWithCaderno("index.html"));
+app.get("/index.html", serveRootPageWithCaderno("index.html"));
+app.get(["/catalogo", "/catalogo.html"], serveRootPageWithCaderno("catalogo.html"));
+
+// Páginas de cada livro: /livros/<id>/ e /livros/<id>/index.html
+const LIVROS_ROOT = path.join(SITE_ROOT, "livros");
+app.use((req, res, next) => {
+  if (req.method !== "GET" && req.method !== "HEAD") return next();
+  if (!req.path.startsWith("/livros/")) return next();
+
+  try {
+    let rel = decodeURIComponent(req.path.slice("/livros/".length));
+    if (rel === "" || rel.endsWith("/")) rel += "index.html";
+    if (!/\.html$/i.test(rel)) return next();
+    const filePath = path.normalize(path.join(LIVROS_ROOT, rel));
+    if (!filePath.startsWith(LIVROS_ROOT)) {
+      return res.status(400).send("Caminho inválido");
+    }
+    if (!fs.existsSync(filePath) || !fs.statSync(filePath).isFile()) {
+      return next();
+    }
+    return sendHtmlWithCaderno(res, filePath);
+  } catch (err) {
+    return next(err);
+  }
+});
 
 app.use((req, res, next) => {
   if (req.method !== "GET" && req.method !== "HEAD") return next();

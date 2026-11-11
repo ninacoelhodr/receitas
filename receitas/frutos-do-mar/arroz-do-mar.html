@@ -10,25 +10,33 @@
     />
     <link rel="stylesheet" href="../../css/site.css" />
     <link rel="stylesheet" href="../../css/print.css" />
+    <link rel="stylesheet" href="../../css/livros.css" />
   </head>
   <body>
     <header class="site-header no-print">
       <a class="brand" href="../../index.html">Livro de Receitas</a>
       <nav class="site-nav" aria-label="Principal">
-        <a href="../../index.html#frutos-do-mar">Frutos do mar</a>
+        <a href="../../catalogo.html#frutos-do-mar">Frutos do mar</a>
         <a href="../../na-cozinha/">Na cozinha</a>
       </nav>
     </header>
 
     <main class="recipe-page">
       <div class="recipe-actions no-print">
-        <a class="btn btn-ghost" href="../../index.html">← Voltar</a>
+        <a class="btn btn-ghost" href="../../livros/caderno-da-familia/">← Voltar</a>
         <button class="btn" type="button" onclick="window.print()">
           Imprimir
         </button>
       </div>
 
-      <article class="recipe-card">
+    <!-- livro:inicio -->
+    <nav class="livro-nav no-print" aria-label="Neste livro" style="--livro:#5b3a29">
+      <a class="livro-nav-livro" href="../../livros/caderno-da-familia/">Caderno da família — Receitas guardadas ao longo dos anos</a>
+      
+      <span class="livro-nav-setas"><a rel="prev" href="../aves/souffle-de-frango-macedo.html" title="Soufflé de frango Macedo">← Anterior</a><a rel="next" href="../frutos-do-mar/atum-fresco-grelhado-ao-curry.html" title="Atum fresco grelhado ao molho de curry e leite de coco">Próxima →</a></span>
+    </nav>
+    <!-- livro:fim -->
+      <article class="recipe-card" data-livro="caderno-da-familia" data-layout="simples" style="--livro:#5b3a29">
         <p class="category">Frutos do mar · Camarões e frutos</p>
         <h1>Arroz do mar</h1>
         <figure class="dish-photo no-print">

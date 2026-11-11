@@ -10,25 +10,33 @@
     />
     <link rel="stylesheet" href="../../css/site.css" />
     <link rel="stylesheet" href="../../css/print.css" />
+    <link rel="stylesheet" href="../../css/livros.css" />
   </head>
   <body>
     <header class="site-header no-print">
       <a class="brand" href="../../index.html">Livro de Receitas</a>
       <nav class="site-nav" aria-label="Principal">
-        <a href="../../index.html#salgados">Salgados</a>
+        <a href="../../catalogo.html#salgados">Salgados</a>
         <a href="../../na-cozinha/">Na cozinha</a>
       </nav>
     </header>
 
     <main class="recipe-page">
       <div class="recipe-actions no-print">
-        <a class="btn btn-ghost" href="../../index.html">← Voltar</a>
+        <a class="btn btn-ghost" href="../../livros/arte-de-congelar-massas-tortas-molhos/">← Voltar</a>
         <button class="btn" type="button" onclick="window.print()">
           Imprimir
         </button>
       </div>
 
-      <article class="recipe-card">
+    <!-- livro:inicio -->
+    <nav class="livro-nav no-print" aria-label="Neste livro" style="--livro:#5f6b3a">
+      <a class="livro-nav-livro" href="../../livros/arte-de-congelar-massas-tortas-molhos/">A arte de congelar — Massas, tortas e molhos</a>
+      <span class="livro-nav-pag">pág. 62</span>
+      <span class="livro-nav-setas"><a rel="prev" href="../salgados/massa-basica-de-pao.html" title="Massa básica de pão">← Anterior</a><span class="livro-nav-off">Próxima →</span></span>
+    </nav>
+    <!-- livro:fim -->
+      <article class="recipe-card" data-livro="arte-de-congelar-massas-tortas-molhos" data-pagina="62" data-layout="duas-colunas" style="--livro:#5f6b3a">
         <p class="category">Salgados · Massas fritas/assadas</p>
         <h1>Pão integral com malte</h1>
 
@@ -86,5 +94,6 @@
         <p class="notes">Verifique se o pão está assado: desenforme, bata no lado inferior e, se fizer um ruído oco, estará no ponto. <strong>Congelamento:</strong> embrulhe os pães já frios em papel-alumínio e depois em filme plástico ou saco plástico que feche hermeticamente; etiquete e leve ao freezer. <strong>Descongelamento:</strong> retire o filme plástico e leve os pães, embrulhados no papel-alumínio, ao forno para descongelar e aquecer.</p>
       </article>
     </main>
+      <script src="../../js/recipe-layout.js" defer></script>
   </body>
 </html>

@@ -10,25 +10,33 @@
     />
     <link rel="stylesheet" href="../../css/site.css" />
     <link rel="stylesheet" href="../../css/print.css" />
+    <link rel="stylesheet" href="../../css/livros.css" />
   </head>
   <body>
     <header class="site-header no-print">
       <a class="brand" href="../../index.html">Livro de Receitas</a>
       <nav class="site-nav" aria-label="Principal">
-        <a href="../../index.html#salgados">Salgados</a>
+        <a href="../../catalogo.html#salgados">Salgados</a>
         <a href="../../na-cozinha/">Na cozinha</a>
       </nav>
     </header>
 
     <main class="recipe-page">
       <div class="recipe-actions no-print">
-        <a class="btn btn-ghost" href="../../index.html">← Voltar</a>
+        <a class="btn btn-ghost" href="../../livros/arte-de-congelar-aves/">← Voltar</a>
         <button class="btn" type="button" onclick="window.print()">
           Imprimir
         </button>
       </div>
 
-      <article class="recipe-card">
+    <!-- livro:inicio -->
+    <nav class="livro-nav no-print" aria-label="Neste livro" style="--livro:#8a5a1c">
+      <a class="livro-nav-livro" href="../../livros/arte-de-congelar-aves/">A arte de congelar — Aves e patês</a>
+      <span class="livro-nav-pag">pág. 44</span>
+      <span class="livro-nav-setas"><span class="livro-nav-off">← Anterior</span><a rel="next" href="../tortas-salgadas/torta-de-frango.html" title="Torta de frango">Próxima →</a></span>
+    </nav>
+    <!-- livro:fim -->
+      <article class="recipe-card" data-livro="arte-de-congelar-aves" data-pagina="44" data-layout="duas-colunas" style="--livro:#8a5a1c">
         <p class="category">Salgados · Petiscos</p>
         <h1>Patê de fígado de galinha</h1>
 
@@ -68,5 +76,6 @@
         <p class="notes"><strong>Congelamento:</strong> coloque a fôrma com o patê dentro de um saco plástico e leve ao freezer para endurecer; retire da fôrma, embale em filme plástico, etiquete e congele. <strong>Descongelamento:</strong> de um dia para o outro na geladeira. Decore com tiras de pimentão vermelho em conserva e sirva com torradas. Para servir quente: travessa refratária, coberta com papel-alumínio, no forno bem baixo depois de descongelado.</p>
       </article>
     </main>
+      <script src="../../js/recipe-layout.js" defer></script>
   </body>
 </html>

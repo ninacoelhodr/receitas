@@ -10,25 +10,33 @@
     />
     <link rel="stylesheet" href="../../css/site.css" />
     <link rel="stylesheet" href="../../css/print.css" />
+    <link rel="stylesheet" href="../../css/livros.css" />
   </head>
   <body>
     <header class="site-header no-print">
       <a class="brand" href="../../index.html">Livro de Receitas</a>
       <nav class="site-nav" aria-label="Principal">
-        <a href="../../index.html#aves">Aves</a>
+        <a href="../../catalogo.html#aves">Aves</a>
         <a href="../../na-cozinha/">Na cozinha</a>
       </nav>
     </header>
 
     <main class="recipe-page">
       <div class="recipe-actions no-print">
-        <a class="btn btn-ghost" href="../../index.html">← Voltar</a>
+        <a class="btn btn-ghost" href="../../livros/arte-de-congelar-aves/">← Voltar</a>
         <button class="btn" type="button" onclick="window.print()">
           Imprimir
         </button>
       </div>
 
-      <article class="recipe-card">
+    <!-- livro:inicio -->
+    <nav class="livro-nav no-print" aria-label="Neste livro" style="--livro:#8a5a1c">
+      <a class="livro-nav-livro" href="../../livros/arte-de-congelar-aves/">A arte de congelar — Aves e patês</a>
+      <span class="livro-nav-pag">pág. 50</span>
+      <span class="livro-nav-setas"><a rel="prev" href="../aves/enroladinhos-meireles.html" title="Enroladinhos Meireles">← Anterior</a><a rel="next" href="../aves/files-de-frango-recheados.html" title="Filés de frango recheados">Próxima →</a></span>
+    </nav>
+    <!-- livro:fim -->
+      <article class="recipe-card" data-livro="arte-de-congelar-aves" data-pagina="50" data-layout="duas-colunas" style="--livro:#8a5a1c">
         <p class="category">Aves · Frango</p>
         <h1>Enrolados de frango</h1>
 
@@ -80,5 +88,6 @@
         <p class="notes">Antes de embrulhar os pedaços de frango para congelar, embeba-os no molho para não ficarem ressecados. <strong>Congelamento:</strong> leve a fôrma com os rolinhos ao freezer, sem cobrir, até ficarem congelados; passe-os para um saco plástico, retire o ar, vede, etiquete e congele. Coloque o molho de laranja num recipiente rígido, tampe e congele. <strong>Descongelamento:</strong> na geladeira de um dia para o outro; esquente o molho em fogo brando e despeje sobre os rolinhos aquecidos em forno coberto com papel-alumínio.</p>
       </article>
     </main>
+      <script src="../../js/recipe-layout.js" defer></script>
   </body>
 </html>

@@ -796,7 +796,7 @@ a:hover {
   }
 
   .hero-eyebrow {
-    margin: 0 0 0.2rem !important;
+    margin: 0 auto 0.2rem !important;
     color: var(--accent) !important;
     font-family: var(--font-hand);
     font-size: 1.7rem !important;

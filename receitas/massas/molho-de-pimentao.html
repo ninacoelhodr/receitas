@@ -10,25 +10,33 @@
     />
     <link rel="stylesheet" href="../../css/site.css" />
     <link rel="stylesheet" href="../../css/print.css" />
+    <link rel="stylesheet" href="../../css/livros.css" />
   </head>
   <body>
     <header class="site-header no-print">
       <a class="brand" href="../../index.html">Livro de Receitas</a>
       <nav class="site-nav" aria-label="Principal">
-        <a href="../../index.html#massas">Massas</a>
+        <a href="../../catalogo.html#massas">Massas</a>
         <a href="../../na-cozinha/">Na cozinha</a>
       </nav>
     </header>
 
     <main class="recipe-page">
       <div class="recipe-actions no-print">
-        <a class="btn btn-ghost" href="../../index.html">← Voltar</a>
+        <a class="btn btn-ghost" href="../../livros/arte-de-congelar-massas-tortas-molhos/">← Voltar</a>
         <button class="btn" type="button" onclick="window.print()">
           Imprimir
         </button>
       </div>
 
-      <article class="recipe-card">
+    <!-- livro:inicio -->
+    <nav class="livro-nav no-print" aria-label="Neste livro" style="--livro:#5f6b3a">
+      <a class="livro-nav-livro" href="../../livros/arte-de-congelar-massas-tortas-molhos/">A arte de congelar — Massas, tortas e molhos</a>
+      <span class="livro-nav-pag">pág. 20</span>
+      <span class="livro-nav-setas"><a rel="prev" href="../massas/molho-a-amatriciana.html" title="Molho à amatriciana">← Anterior</a><a rel="next" href="../frutos-do-mar/molho-de-frutos-do-mar.html" title="Molho de frutos do mar">Próxima →</a></span>
+    </nav>
+    <!-- livro:fim -->
+      <article class="recipe-card" data-livro="arte-de-congelar-massas-tortas-molhos" data-pagina="20" data-layout="duas-colunas" style="--livro:#5f6b3a">
         <p class="category">Massas</p>
         <h1>Molho de pimentão</h1>
 
@@ -74,5 +82,6 @@
         <p class="notes">Para economizar tempo, despele os pimentões no micro-ondas: fure-os com um garfo, ponha numa vasilha com um pouco de água e leve ao micro-ondas na potência média máxima por 8 minutos, virando-os a cada 2 minutos. <strong>Congelamento:</strong> coloque o molho em recipiente rígido ou em pote de polietileno; retire o ar, feche bem, etiquete e leve ao freezer (ou direto num saco plástico, retirando o ar). <strong>Descongelamento:</strong> na geladeira de um dia para o outro, ou numa panela em fogo brando, em banho-maria; junte o creme de leite e aqueça, sem deixar ferver. Verifique o tempero e sirva.</p>
       </article>
     </main>
+      <script src="../../js/recipe-layout.js" defer></script>
   </body>
 </html>

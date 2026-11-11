@@ -10,25 +10,33 @@
     />
     <link rel="stylesheet" href="../../css/site.css" />
     <link rel="stylesheet" href="../../css/print.css" />
+    <link rel="stylesheet" href="../../css/livros.css" />
   </head>
   <body>
     <header class="site-header no-print">
       <a class="brand" href="../../index.html">Livro de Receitas</a>
       <nav class="site-nav" aria-label="Principal">
-        <a href="../../index.html#massas">Massas</a>
+        <a href="../../catalogo.html#massas">Massas</a>
         <a href="../../na-cozinha/">Na cozinha</a>
       </nav>
     </header>
 
     <main class="recipe-page">
       <div class="recipe-actions no-print">
-        <a class="btn btn-ghost" href="../../index.html">← Voltar</a>
+        <a class="btn btn-ghost" href="../../livros/arte-de-congelar-massas-tortas-molhos/">← Voltar</a>
         <button class="btn" type="button" onclick="window.print()">
           Imprimir
         </button>
       </div>
 
-      <article class="recipe-card">
+    <!-- livro:inicio -->
+    <nav class="livro-nav no-print" aria-label="Neste livro" style="--livro:#5f6b3a">
+      <a class="livro-nav-livro" href="../../livros/arte-de-congelar-massas-tortas-molhos/">A arte de congelar — Massas, tortas e molhos</a>
+      <span class="livro-nav-pag">pág. 14</span>
+      <span class="livro-nav-setas"><span class="livro-nav-off">← Anterior</span><a rel="next" href="../massas/molho-de-queijos.html" title="Molho de queijos">Próxima →</a></span>
+    </nav>
+    <!-- livro:fim -->
+      <article class="recipe-card" data-livro="arte-de-congelar-massas-tortas-molhos" data-pagina="14" data-layout="duas-colunas" style="--livro:#5f6b3a">
         <p class="category">Massas</p>
         <h1>Molho de tomate</h1>
 
@@ -73,5 +81,6 @@
         <p class="notes">Se preferir um molho de tomate mais espesso, acrescente 1 ou 2 colheres (sopa) de extrato de tomate na última etapa do cozimento. <strong>Estoque:</strong> você pode triplicar a receita e congelar em 3 porções para usar depois em lasanha, molho de carne, peixes etc. <strong>Congelamento:</strong> coloque o molho num saco plástico que feche hermeticamente, ou em potes de polietileno; etiquete e leve ao freezer. <strong>Descongelamento:</strong> na geladeira de um dia para o outro, ou no micro-ondas, ou numa panela em fogo brando, em banho-maria.</p>
       </article>
     </main>
+      <script src="../../js/recipe-layout.js" defer></script>
   </body>
 </html>

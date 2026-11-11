@@ -10,25 +10,33 @@
     />
     <link rel="stylesheet" href="../../css/site.css" />
     <link rel="stylesheet" href="../../css/print.css" />
+    <link rel="stylesheet" href="../../css/livros.css" />
   </head>
   <body>
     <header class="site-header no-print">
       <a class="brand" href="../../index.html">Livro de Receitas</a>
       <nav class="site-nav" aria-label="Principal">
-        <a href="../../index.html#massas">Massas</a>
+        <a href="../../catalogo.html#massas">Massas</a>
         <a href="../../na-cozinha/">Na cozinha</a>
       </nav>
     </header>
 
     <main class="recipe-page">
       <div class="recipe-actions no-print">
-        <a class="btn btn-ghost" href="../../index.html">← Voltar</a>
+        <a class="btn btn-ghost" href="../../livros/arte-de-congelar-massas-tortas-molhos/">← Voltar</a>
         <button class="btn" type="button" onclick="window.print()">
           Imprimir
         </button>
       </div>
 
-      <article class="recipe-card">
+    <!-- livro:inicio -->
+    <nav class="livro-nav no-print" aria-label="Neste livro" style="--livro:#5f6b3a">
+      <a class="livro-nav-livro" href="../../livros/arte-de-congelar-massas-tortas-molhos/">A arte de congelar — Massas, tortas e molhos</a>
+      <span class="livro-nav-pag">pág. 28</span>
+      <span class="livro-nav-setas"><a rel="prev" href="../massas/massa-basica-de-macarrao.html" title="Massa básica de macarrão">← Anterior</a><a rel="next" href="../massas/cannelloni.html" title="Cannelloni">Próxima →</a></span>
+    </nav>
+    <!-- livro:fim -->
+      <article class="recipe-card" data-livro="arte-de-congelar-massas-tortas-molhos" data-pagina="28" data-layout="duas-colunas" style="--livro:#5f6b3a">
         <p class="category">Massas</p>
         <h1>Lasanha de espinafre e gorgonzola</h1>
 
@@ -77,5 +85,6 @@
         <p class="notes">Você pode montar a lasanha em embalagens de papel-alumínio: assim, não terá as suas travessas ocupadas. <strong>Congelamento:</strong> embale a fôrma com a lasanha já fria em filme plástico, ou coloque em um saco plástico que feche hermeticamente; etiquete e congele. <strong>Descongelamento:</strong> retire a lasanha do freezer e descongele na geladeira de um dia para o outro; ou leve ao forno, em banho-maria, coberta com papel-alumínio até descongelar; retire o papel e deixe dourar.</p>
       </article>
     </main>
+      <script src="../../js/recipe-layout.js" defer></script>
   </body>
 </html>

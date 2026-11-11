@@ -1,0 +1,371 @@
+{
+  "livros": [
+    {
+      "id": "arte-de-congelar-paes-bolos-biscoitos",
+      "titulo": "A arte de congelar",
+      "subtitulo": "Pães, bolos e biscoitos",
+      "serie": "Receitas para o freezer",
+      "cor": "#a9432a",
+      "texto": "#fff6ea",
+      "layout": "duas-colunas",
+      "capa_provisoria": true,
+      "artigos": [
+        {
+          "href": "na-cozinha/a-arte-de-congelar-paes-bolos-e-biscoitos.html",
+          "titulo": "A arte de congelar: pães, bolos e biscoitos",
+          "pagina": 3
+        }
+      ],
+      "receitas": [
+        {
+          "slug": "salgados/pao-de-forma",
+          "pagina": 14
+        },
+        {
+          "slug": "salgados/pao-integral-com-melado",
+          "pagina": 16
+        },
+        {
+          "slug": "salgados/paezinhos-rapidos",
+          "pagina": 18
+        },
+        {
+          "slug": "salgados/pao-sirio",
+          "pagina": 20
+        },
+        {
+          "slug": "doces/broinhas-de-fuba",
+          "pagina": 22
+        },
+        {
+          "slug": "doces/muffins",
+          "pagina": 24
+        },
+        {
+          "slug": "doces/rosca-de-natal",
+          "pagina": 26
+        },
+        {
+          "slug": "doces/bolo-merenda",
+          "pagina": 28
+        },
+        {
+          "slug": "doces/bolo-de-especiarias",
+          "pagina": 30
+        },
+        {
+          "slug": "doces/bolo-de-mandioca",
+          "pagina": 32
+        },
+        {
+          "slug": "doces/bolo-de-chocolate",
+          "pagina": 34
+        },
+        {
+          "slug": "doces/bolo-de-laranja",
+          "pagina": 36
+        },
+        {
+          "slug": "doces/bolo-de-abacaxi",
+          "pagina": 38
+        },
+        {
+          "slug": "doces/bolo-de-fuba-e-coco",
+          "pagina": 40
+        },
+        {
+          "slug": "doces/bolo-gelado-de-goiaba",
+          "pagina": 42
+        },
+        {
+          "slug": "doces/bolo-de-sorvete-com-cerejas",
+          "pagina": 44
+        },
+        {
+          "slug": "doces/biscoitinhos-coloridos",
+          "pagina": 46
+        },
+        {
+          "slug": "doces/biscoitinhos-de-cerveja",
+          "pagina": 48
+        },
+        {
+          "slug": "doces/biscoitinhos-de-ameixa-preta",
+          "pagina": 50
+        },
+        {
+          "slug": "doces/biscoitinhos-de-chocolate-e-coco",
+          "pagina": 52
+        },
+        {
+          "slug": "doces/biscoitinhos-de-caramelo",
+          "pagina": 54
+        },
+        {
+          "slug": "doces/esquecidos",
+          "pagina": 56
+        },
+        {
+          "slug": "doces/casadinhos-recheados",
+          "pagina": 58
+        },
+        {
+          "slug": "doces/sequilhos-de-coco",
+          "pagina": 60
+        },
+        {
+          "slug": "doces/waffles-com-iogurte",
+          "pagina": 62
+        }
+      ]
+    },
+    {
+      "id": "arte-de-congelar-massas-tortas-molhos",
+      "titulo": "A arte de congelar",
+      "subtitulo": "Massas, tortas e molhos",
+      "serie": "Receitas para o freezer",
+      "cor": "#5f6b3a",
+      "texto": "#fbf7e6",
+      "layout": "duas-colunas",
+      "capa_provisoria": true,
+      "artigos": [
+        {
+          "href": "na-cozinha/a-arte-de-congelar-massas-tortas-e-molhos.html",
+          "titulo": "A arte de congelar: massas, tortas e molhos",
+          "pagina": 3
+        }
+      ],
+      "receitas": [
+        {
+          "slug": "massas/molho-de-tomate",
+          "pagina": 14
+        },
+        {
+          "slug": "massas/molho-de-queijos",
+          "pagina": 16
+        },
+        {
+          "slug": "massas/molho-a-amatriciana",
+          "pagina": 18
+        },
+        {
+          "slug": "massas/molho-de-pimentao",
+          "pagina": 20
+        },
+        {
+          "slug": "frutos-do-mar/molho-de-frutos-do-mar",
+          "pagina": 22
+        },
+        {
+          "slug": "massas/molho-parisiense",
+          "pagina": 24
+        },
+        {
+          "slug": "massas/massa-basica-de-macarrao",
+          "pagina": 26
+        },
+        {
+          "slug": "massas/lasanha-de-espinafre-e-gorgonzola",
+          "pagina": 28
+        },
+        {
+          "slug": "massas/cannelloni",
+          "pagina": 30
+        },
+        {
+          "slug": "massas/ravioli",
+          "pagina": 32
+        },
+        {
+          "slug": "salgados/massa-folhada",
+          "pagina": 34
+        },
+        {
+          "slug": "tortas-salgadas/torta-de-cogumelos-secos",
+          "pagina": 36
+        },
+        {
+          "slug": "massas/nhoque-de-ricota",
+          "pagina": 38
+        },
+        {
+          "slug": "salgados/pizza-margherita",
+          "pagina": 40
+        },
+        {
+          "slug": "salgados/calzone",
+          "pagina": 42
+        },
+        {
+          "slug": "salgados/sfiha",
+          "pagina": 44
+        },
+        {
+          "slug": "salgados/pastel-de-carne",
+          "pagina": 46
+        },
+        {
+          "slug": "salgados/empanadas",
+          "pagina": 48
+        },
+        {
+          "slug": "salgados/rissoles",
+          "pagina": 50
+        },
+        {
+          "slug": "salgados/empadinha-de-palmito",
+          "pagina": 52
+        },
+        {
+          "slug": "salgados/choux-recheados",
+          "pagina": 54
+        },
+        {
+          "slug": "tortas-salgadas/quiche-lorraine",
+          "pagina": 56
+        },
+        {
+          "slug": "massas/crepes-de-ricota",
+          "pagina": 58
+        },
+        {
+          "slug": "salgados/massa-basica-de-pao",
+          "pagina": 60
+        },
+        {
+          "slug": "salgados/pao-integral-com-malte",
+          "pagina": 62
+        }
+      ]
+    },
+    {
+      "id": "arte-de-congelar-aves",
+      "titulo": "A arte de congelar",
+      "subtitulo": "Aves e patês",
+      "serie": "Receitas para o freezer",
+      "cor": "#8a5a1c",
+      "texto": "#fff3dc",
+      "layout": "duas-colunas",
+      "capa_provisoria": true,
+      "artigos": [
+        {
+          "href": "na-cozinha/a-arte-de-congelar.html",
+          "titulo": "A arte de congelar (carnes e aves)"
+        }
+      ],
+      "receitas": [
+        {
+          "slug": "salgados/pate-de-figado-de-galinha",
+          "pagina": 44
+        },
+        {
+          "slug": "tortas-salgadas/torta-de-frango",
+          "pagina": 46
+        },
+        {
+          "slug": "aves/enroladinhos-meireles",
+          "pagina": 48
+        },
+        {
+          "slug": "aves/enrolados-de-frango",
+          "pagina": 50
+        },
+        {
+          "slug": "aves/files-de-frango-recheados",
+          "pagina": 52
+        },
+        {
+          "slug": "aves/frango-assado-com-cerveja",
+          "pagina": 54
+        },
+        {
+          "slug": "aves/frango-na-pucara",
+          "pagina": 56
+        },
+        {
+          "slug": "aves/frango-ao-caril",
+          "pagina": 58
+        },
+        {
+          "slug": "aves/frango-estufado-com-tomates",
+          "pagina": 60
+        },
+        {
+          "slug": "aves/peru-recheado-com-risoto",
+          "pagina": 62
+        }
+      ]
+    },
+    {
+      "id": "recortes-e-redes",
+      "titulo": "Recortes e redes",
+      "subtitulo": "Pinterest, TikTok e receitas coladas",
+      "serie": "Caderno de achados",
+      "cor": "#3f5d7a",
+      "texto": "#f1f6fb",
+      "layout": "simples",
+      "capa_provisoria": true,
+      "artigos": [],
+      "receitas": [
+        {
+          "slug": "doces/cheesecake-basco-de-chocolate"
+        },
+        {
+          "slug": "doces/bolacha-de-nescau-com-4-ingredientes"
+        },
+        {
+          "slug": "doces/bolinho-de-chuva-receita-de-avo"
+        },
+        {
+          "slug": "acompanhamentos/molho-furioso"
+        },
+        {
+          "slug": "acompanhamentos/molho-kfc"
+        },
+        {
+          "slug": "acompanhamentos/molho-supreme"
+        },
+        {
+          "slug": "salgados/mini-pizzas-caseiras"
+        },
+        {
+          "slug": "salgados/burritos-de-carne-moida"
+        },
+        {
+          "slug": "salgados/quesadillas-de-frango-cremoso"
+        },
+        {
+          "slug": "carnes/hamburguer-caseiro-de-patinho"
+        },
+        {
+          "slug": "carnes/almondegas-de-carne-com-queijo"
+        },
+        {
+          "slug": "aves/escondidinho-de-frango-com-batata"
+        },
+        {
+          "slug": "aves/sobrecoxa-estilo-shawarma"
+        }
+      ]
+    },
+    {
+      "id": "caderno-da-familia",
+      "titulo": "Caderno da família",
+      "subtitulo": "Receitas guardadas ao longo dos anos",
+      "serie": "",
+      "cor": "#5b3a29",
+      "texto": "#f8ecd9",
+      "layout": "simples",
+      "capa_provisoria": true,
+      "agrupar": "categoria",
+      "automatico": true,
+      "artigos": [
+        {
+          "href": "na-cozinha/equivalencia-de-pesos-e-medidas.html",
+          "titulo": "Equivalência de pesos e medidas"
+        }
+      ],
+      "receitas": []
+    }
+  ]
+}

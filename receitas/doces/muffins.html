@@ -10,25 +10,33 @@
     />
     <link rel="stylesheet" href="../../css/site.css" />
     <link rel="stylesheet" href="../../css/print.css" />
+    <link rel="stylesheet" href="../../css/livros.css" />
   </head>
   <body>
     <header class="site-header no-print">
       <a class="brand" href="../../index.html">Livro de Receitas</a>
       <nav class="site-nav" aria-label="Principal">
-        <a href="../../index.html#doces">Doces</a>
+        <a href="../../catalogo.html#doces">Doces</a>
         <a href="../../na-cozinha/">Na cozinha</a>
       </nav>
     </header>
 
     <main class="recipe-page">
       <div class="recipe-actions no-print">
-        <a class="btn btn-ghost" href="../../index.html">← Voltar</a>
+        <a class="btn btn-ghost" href="../../livros/arte-de-congelar-paes-bolos-biscoitos/">← Voltar</a>
         <button class="btn" type="button" onclick="window.print()">
           Imprimir
         </button>
       </div>
 
-      <article class="recipe-card">
+    <!-- livro:inicio -->
+    <nav class="livro-nav no-print" aria-label="Neste livro" style="--livro:#a9432a">
+      <a class="livro-nav-livro" href="../../livros/arte-de-congelar-paes-bolos-biscoitos/">A arte de congelar — Pães, bolos e biscoitos</a>
+      <span class="livro-nav-pag">pág. 24</span>
+      <span class="livro-nav-setas"><a rel="prev" href="../doces/broinhas-de-fuba.html" title="Broinhas de fubá">← Anterior</a><a rel="next" href="../doces/rosca-de-natal.html" title="Rosca de Natal">Próxima →</a></span>
+    </nav>
+    <!-- livro:fim -->
+      <article class="recipe-card" data-livro="arte-de-congelar-paes-bolos-biscoitos" data-pagina="24" data-layout="duas-colunas" style="--livro:#a9432a">
         <p class="category">Doces · Tortas e bolos</p>
         <h1>Muffins</h1>
 
@@ -81,5 +89,6 @@
         <p class="notes">Se você não tiver fôrmas para muffins ou quindins em casa, use forminhas de empada com 7 cm de diâmetro, bem untadas com manteiga. <strong>Congelamento:</strong> coloque os muffins num recipiente rígido, próximos uns dos outros, preenchendo os espaços vazios com toalhas de papel; intercale cada camada de muffins também com toalhas de papel. Vede bem, etiquete e congele. <strong>Descongelamento:</strong> em temperatura ambiente por 1 hora e leve ao forno para aquecê-los. Sirva-os quentes, acompanhados de manteiga e geleia, na hora do lanche ou no café da manhã.</p>
       </article>
     </main>
+      <script src="../../js/recipe-layout.js" defer></script>
   </body>
 </html>

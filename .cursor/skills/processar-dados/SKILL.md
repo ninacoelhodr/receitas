@@ -53,7 +53,8 @@ Em **dúvida**: perguntar uma linha antes de gravar.
 Task Progress:
 - [ ] Listar fontes (pending + anexos do chat)
 - [ ] Classificar cada item (receita | Na cozinha | dúvida)
-- [ ] Receita → skill processar-receitas-foto (ficha + index + foto)
+- [ ] Receita → skill processar-receitas-foto (ficha + catalogo.html + foto)
+- [ ] Registrar livro e página em livros/livros.json; rodar `python scripts/gerar-livros.py` e `python scripts/verificar.py`
 - [ ] Artigo → criar na-cozinha/<slug>.html + atualizar na-cozinha/index.html
 - [ ] DELETAR fonte processada em pending/ (não arquivar)
 - [ ] Commit/push se pedido
@@ -62,7 +63,14 @@ Task Progress:
 ### Receita
 
 Seguir a skill `processar-receitas-foto` (molde A5, categorias, `curar-foto-prato`,
-`index.html`). Não duplicar essas regras aqui.
+`catalogo.html`). Não duplicar essas regras aqui.
+
+**Livro de origem:** a foto vem de um livro? Descubra o livro (capa/título na foto ou
+pergunte uma linha) e a **página**. Registre em `livros/livros.json` (`receitas`:
+`{ "slug": "categoria/slug", "pagina": N }`). Se não souber o livro, não registre:
+a ficha cai sozinha em **Caderno da família**. Depois rode
+`python scripts/gerar-livros.py` (cria sumário, navegação anterior/próxima e tema) e
+`python scripts/verificar.py` (confere links, fotos e livros).
 
 No nav da ficha nova, incluir também:
 
@@ -104,7 +112,7 @@ No nav da ficha nova, incluir também:
       <a class="brand" href="../index.html">Livro de Receitas</a>
       <nav class="site-nav" aria-label="Principal">
         <a href="../index.html">Início</a>
-        <a href="../index.html#categorias">Categorias</a>
+        <a href="../catalogo.html#categorias">Categorias</a>
         <a href="./">Na cozinha</a>
       </nav>
     </header>

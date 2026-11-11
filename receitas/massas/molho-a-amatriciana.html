@@ -10,25 +10,33 @@
     />
     <link rel="stylesheet" href="../../css/site.css" />
     <link rel="stylesheet" href="../../css/print.css" />
+    <link rel="stylesheet" href="../../css/livros.css" />
   </head>
   <body>
     <header class="site-header no-print">
       <a class="brand" href="../../index.html">Livro de Receitas</a>
       <nav class="site-nav" aria-label="Principal">
-        <a href="../../index.html#massas">Massas</a>
+        <a href="../../catalogo.html#massas">Massas</a>
         <a href="../../na-cozinha/">Na cozinha</a>
       </nav>
     </header>
 
     <main class="recipe-page">
       <div class="recipe-actions no-print">
-        <a class="btn btn-ghost" href="../../index.html">← Voltar</a>
+        <a class="btn btn-ghost" href="../../livros/arte-de-congelar-massas-tortas-molhos/">← Voltar</a>
         <button class="btn" type="button" onclick="window.print()">
           Imprimir
         </button>
       </div>
 
-      <article class="recipe-card">
+    <!-- livro:inicio -->
+    <nav class="livro-nav no-print" aria-label="Neste livro" style="--livro:#5f6b3a">
+      <a class="livro-nav-livro" href="../../livros/arte-de-congelar-massas-tortas-molhos/">A arte de congelar — Massas, tortas e molhos</a>
+      <span class="livro-nav-pag">pág. 18</span>
+      <span class="livro-nav-setas"><a rel="prev" href="../massas/molho-de-queijos.html" title="Molho de queijos">← Anterior</a><a rel="next" href="../massas/molho-de-pimentao.html" title="Molho de pimentão">Próxima →</a></span>
+    </nav>
+    <!-- livro:fim -->
+      <article class="recipe-card" data-livro="arte-de-congelar-massas-tortas-molhos" data-pagina="18" data-layout="duas-colunas" style="--livro:#5f6b3a">
         <p class="category">Massas</p>
         <h1>Molho à amatriciana</h1>
 
@@ -78,5 +86,6 @@
         <p class="notes">Lembre-se de usar pouco sal, pois o congelamento aumenta o sabor dos temperos; depois de reaquecer, verifique o tempero e sirva. <strong>Congelamento:</strong> coloque o molho já frio em um recipiente rígido que possa ir ao freezer, ou em potes de polietileno; retire o ar, feche bem, etiquete e leve ao freezer (se preferir, direto num saco plástico que feche hermeticamente). <strong>Descongelamento:</strong> na geladeira de um dia para o outro; ponha numa panela e leve ao fogo brando, em banho-maria; aqueça e junte o creme de leite mexendo bem, sem deixar ferver.</p>
       </article>
     </main>
+      <script src="../../js/recipe-layout.js" defer></script>
   </body>
 </html>

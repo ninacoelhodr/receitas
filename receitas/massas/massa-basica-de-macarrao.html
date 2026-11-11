@@ -10,25 +10,33 @@
     />
     <link rel="stylesheet" href="../../css/site.css" />
     <link rel="stylesheet" href="../../css/print.css" />
+    <link rel="stylesheet" href="../../css/livros.css" />
   </head>
   <body>
     <header class="site-header no-print">
       <a class="brand" href="../../index.html">Livro de Receitas</a>
       <nav class="site-nav" aria-label="Principal">
-        <a href="../../index.html#massas">Massas</a>
+        <a href="../../catalogo.html#massas">Massas</a>
         <a href="../../na-cozinha/">Na cozinha</a>
       </nav>
     </header>
 
     <main class="recipe-page">
       <div class="recipe-actions no-print">
-        <a class="btn btn-ghost" href="../../index.html">← Voltar</a>
+        <a class="btn btn-ghost" href="../../livros/arte-de-congelar-massas-tortas-molhos/">← Voltar</a>
         <button class="btn" type="button" onclick="window.print()">
           Imprimir
         </button>
       </div>
 
-      <article class="recipe-card">
+    <!-- livro:inicio -->
+    <nav class="livro-nav no-print" aria-label="Neste livro" style="--livro:#5f6b3a">
+      <a class="livro-nav-livro" href="../../livros/arte-de-congelar-massas-tortas-molhos/">A arte de congelar — Massas, tortas e molhos</a>
+      <span class="livro-nav-pag">pág. 26</span>
+      <span class="livro-nav-setas"><a rel="prev" href="../massas/molho-parisiense.html" title="Molho parisiense">← Anterior</a><a rel="next" href="../massas/lasanha-de-espinafre-e-gorgonzola.html" title="Lasanha de espinafre e gorgonzola">Próxima →</a></span>
+    </nav>
+    <!-- livro:fim -->
+      <article class="recipe-card" data-livro="arte-de-congelar-massas-tortas-molhos" data-pagina="26" data-layout="duas-colunas" style="--livro:#5f6b3a">
         <p class="category">Massas</p>
         <h1>Massa básica de macarrão</h1>
 
@@ -62,5 +70,6 @@
         <p class="notes">Para utilizar em sopas, quebre a massa ainda congelada em pedaços e jogue na sopa, no final do cozimento. <strong>Variação:</strong> para fazer uma massa verde, use 3 ½ xícaras de farinha de trigo, 3 ovos, 2 colheres (sopa) de espinafre cozido e picado fino e ½ colher (chá) de sal. <strong>Congelamento:</strong> coloque a massa já cortada em saco plástico que feche hermeticamente, etiquete e leve ao freezer. <strong>Descongelamento:</strong> retire a massa do saco plástico, coloque em água fervente com sal e cozinhe.</p>
       </article>
     </main>
+      <script src="../../js/recipe-layout.js" defer></script>
   </body>
 </html>

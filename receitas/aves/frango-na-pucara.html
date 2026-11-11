@@ -10,25 +10,33 @@
     />
     <link rel="stylesheet" href="../../css/site.css" />
     <link rel="stylesheet" href="../../css/print.css" />
+    <link rel="stylesheet" href="../../css/livros.css" />
   </head>
   <body>
     <header class="site-header no-print">
       <a class="brand" href="../../index.html">Livro de Receitas</a>
       <nav class="site-nav" aria-label="Principal">
-        <a href="../../index.html#aves">Aves</a>
+        <a href="../../catalogo.html#aves">Aves</a>
         <a href="../../na-cozinha/">Na cozinha</a>
       </nav>
     </header>
 
     <main class="recipe-page">
       <div class="recipe-actions no-print">
-        <a class="btn btn-ghost" href="../../index.html">← Voltar</a>
+        <a class="btn btn-ghost" href="../../livros/arte-de-congelar-aves/">← Voltar</a>
         <button class="btn" type="button" onclick="window.print()">
           Imprimir
         </button>
       </div>
 
-      <article class="recipe-card">
+    <!-- livro:inicio -->
+    <nav class="livro-nav no-print" aria-label="Neste livro" style="--livro:#8a5a1c">
+      <a class="livro-nav-livro" href="../../livros/arte-de-congelar-aves/">A arte de congelar — Aves e patês</a>
+      <span class="livro-nav-pag">pág. 56</span>
+      <span class="livro-nav-setas"><a rel="prev" href="../aves/frango-assado-com-cerveja.html" title="Frango assado com cerveja">← Anterior</a><a rel="next" href="../aves/frango-ao-caril.html" title="Frango ao caril">Próxima →</a></span>
+    </nav>
+    <!-- livro:fim -->
+      <article class="recipe-card" data-livro="arte-de-congelar-aves" data-pagina="56" data-layout="duas-colunas" style="--livro:#8a5a1c">
         <p class="category">Aves · Frango</p>
         <h1>Frango na púcara</h1>
 
@@ -94,5 +102,6 @@
         <p class="notes">Este frango é um clássico da cozinha regional portuguesa; o nome vem do tacho de barro com tampa onde é preparado, chamado de púcara. <strong>Congelamento:</strong> coloque o frango num recipiente rígido, cubra com filme plástico e leve ao freezer até congelar; retire do recipiente e embale em filme plástico, vede bem, etiquete e congele. <strong>Descongelamento:</strong> na geladeira de um dia para o outro; aqueça na panela de barro refratário tampada e leve à mesa na mesma panela. Acompanhe com batatas fritas em palitos e arroz.</p>
       </article>
     </main>
+      <script src="../../js/recipe-layout.js" defer></script>
   </body>
 </html>

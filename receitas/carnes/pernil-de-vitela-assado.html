@@ -10,25 +10,33 @@
     />
     <link rel="stylesheet" href="../../css/site.css" />
     <link rel="stylesheet" href="../../css/print.css" />
+    <link rel="stylesheet" href="../../css/livros.css" />
   </head>
   <body>
     <header class="site-header no-print">
       <a class="brand" href="../../index.html">Livro de Receitas</a>
       <nav class="site-nav" aria-label="Principal">
-        <a href="../../index.html#carnes">Carnes</a>
+        <a href="../../catalogo.html#carnes">Carnes</a>
         <a href="../../na-cozinha/">Na cozinha</a>
       </nav>
     </header>
 
     <main class="recipe-page">
       <div class="recipe-actions no-print">
-        <a class="btn btn-ghost" href="../../index.html">← Voltar</a>
+        <a class="btn btn-ghost" href="../../livros/caderno-da-familia/">← Voltar</a>
         <button class="btn" type="button" onclick="window.print()">
           Imprimir
         </button>
       </div>
 
-      <article class="recipe-card">
+    <!-- livro:inicio -->
+    <nav class="livro-nav no-print" aria-label="Neste livro" style="--livro:#5b3a29">
+      <a class="livro-nav-livro" href="../../livros/caderno-da-familia/">Caderno da família — Receitas guardadas ao longo dos anos</a>
+      
+      <span class="livro-nav-setas"><a rel="prev" href="../carnes/pernil-a-brasileira.html" title="Pernil à brasileira">← Anterior</a><a rel="next" href="../carnes/pernil-recheado-com-canjiquinha.html" title="Pernil recheado com canjiquinha">Próxima →</a></span>
+    </nav>
+    <!-- livro:fim -->
+      <article class="recipe-card" data-livro="caderno-da-familia" data-layout="simples" style="--livro:#5b3a29">
         <p class="category">Carnes · Bovinos</p>
         <h1>Pernil de vitela assado</h1>
         <figure class="dish-photo no-print">

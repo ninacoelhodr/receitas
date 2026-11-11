@@ -55,7 +55,8 @@ Task Progress:
 - [ ] Extrair receita (imagem / URL / texto)
 - [ ] Duplicata? criar ou completar
 - [ ] curar-foto-prato
-- [ ] Atualizar index se nova
+- [ ] Atualizar catalogo.html se nova (listas em ordem alfabética)
+- [ ] Registrar livro/página em livros/livros.json e rodar scripts/gerar-livros.py + scripts/verificar.py
 - [ ] DELETAR fonte em pending/
 - [ ] Commit/push se pedido
 ```
@@ -92,9 +93,9 @@ campo. Mapa:
 | Frutos do mar | Peixes · Camarões e frutos · Massas com frutos do mar |
 
 Sem subcategoria: Sopas, Acompanhamentos, Bebidas, Tortas salgadas, Massas
-(massas com frutos do mar ficam em `frutos-do-mar`). No index: `<h3 class="subcategory">`
+(massas com frutos do mar ficam em `frutos-do-mar`). No `catalogo.html` (o catálogo por categoria; `index.html` agora é a estante de livros): `<h3 class="subcategory">`
 + `data-subcategory` na lista (o JS monta o drill-down Categoria → Sub → receitas;
-hash `#<categoria>/<sub-slug>`). Nav da ficha: link `../../index.html#<categoria>` **e**
+hash `#<categoria>/<sub-slug>`). Nav da ficha: link `../../catalogo.html#<categoria>` **e**
 `<a href="../../na-cozinha/">Na cozinha</a>`.
 
 **Categorias extras** (aparecer em mais de um lugar no índice, sem duplicar o

@@ -10,25 +10,33 @@
     />
     <link rel="stylesheet" href="../../css/site.css" />
     <link rel="stylesheet" href="../../css/print.css" />
+    <link rel="stylesheet" href="../../css/livros.css" />
   </head>
   <body>
     <header class="site-header no-print">
       <a class="brand" href="../../index.html">Livro de Receitas</a>
       <nav class="site-nav" aria-label="Principal">
-        <a href="../../index.html#salgados">Salgados</a>
+        <a href="../../catalogo.html#salgados">Salgados</a>
         <a href="../../na-cozinha/">Na cozinha</a>
       </nav>
     </header>
 
     <main class="recipe-page">
       <div class="recipe-actions no-print">
-        <a class="btn btn-ghost" href="../../index.html">← Voltar</a>
+        <a class="btn btn-ghost" href="../../livros/recortes-e-redes/">← Voltar</a>
         <button class="btn" type="button" onclick="window.print()">
           Imprimir
         </button>
       </div>
 
-      <article class="recipe-card">
+    <!-- livro:inicio -->
+    <nav class="livro-nav no-print" aria-label="Neste livro" style="--livro:#3f5d7a">
+      <a class="livro-nav-livro" href="../../livros/recortes-e-redes/">Recortes e redes — Pinterest, TikTok e receitas coladas</a>
+      
+      <span class="livro-nav-setas"><a rel="prev" href="../salgados/mini-pizzas-caseiras.html" title="Mini pizzas caseiras">← Anterior</a><a rel="next" href="../salgados/quesadillas-de-frango-cremoso.html" title="Quesadillas de frango cremoso">Próxima →</a></span>
+    </nav>
+    <!-- livro:fim -->
+      <article class="recipe-card" data-livro="recortes-e-redes" data-layout="simples" style="--livro:#3f5d7a">
         <p class="category">Salgados · Massas fritas/assadas</p>
         <h1>Burritos de carne moída</h1>
 
@@ -70,5 +78,6 @@
         <p class="notes"><strong>No dia:</strong> descongele no micro-ondas, aqueça completamente e doure na frigideira por 2 minutos de cada lado.</p>
       </article>
     </main>
+      <script src="../../js/recipe-layout.js" defer></script>
   </body>
 </html>

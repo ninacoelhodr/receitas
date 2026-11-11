@@ -10,25 +10,33 @@
     />
     <link rel="stylesheet" href="../../css/site.css" />
     <link rel="stylesheet" href="../../css/print.css" />
+    <link rel="stylesheet" href="../../css/livros.css" />
   </head>
   <body>
     <header class="site-header no-print">
       <a class="brand" href="../../index.html">Livro de Receitas</a>
       <nav class="site-nav" aria-label="Principal">
-        <a href="../../index.html#tortas-salgadas">Tortas salgadas</a>
+        <a href="../../catalogo.html#tortas-salgadas">Tortas salgadas</a>
         <a href="../../na-cozinha/">Na cozinha</a>
       </nav>
     </header>
 
     <main class="recipe-page">
       <div class="recipe-actions no-print">
-        <a class="btn btn-ghost" href="../../index.html">← Voltar</a>
+        <a class="btn btn-ghost" href="../../livros/arte-de-congelar-massas-tortas-molhos/">← Voltar</a>
         <button class="btn" type="button" onclick="window.print()">
           Imprimir
         </button>
       </div>
 
-      <article class="recipe-card">
+    <!-- livro:inicio -->
+    <nav class="livro-nav no-print" aria-label="Neste livro" style="--livro:#5f6b3a">
+      <a class="livro-nav-livro" href="../../livros/arte-de-congelar-massas-tortas-molhos/">A arte de congelar — Massas, tortas e molhos</a>
+      <span class="livro-nav-pag">pág. 36</span>
+      <span class="livro-nav-setas"><a rel="prev" href="../salgados/massa-folhada.html" title="Massa folhada">← Anterior</a><a rel="next" href="../massas/nhoque-de-ricota.html" title="Nhoque de ricota">Próxima →</a></span>
+    </nav>
+    <!-- livro:fim -->
+      <article class="recipe-card" data-livro="arte-de-congelar-massas-tortas-molhos" data-pagina="36" data-layout="duas-colunas" style="--livro:#5f6b3a">
         <p class="category">Tortas salgadas</p>
         <h1>Torta de cogumelos secos</h1>
 
@@ -84,5 +92,6 @@
         <p class="notes">Os pratos feitos com massa folhada não devem ser congelados já recheados, pois o recheio umedece a massa. <strong>Congelamento:</strong> embale a massa folhada em filme plástico, etiquete e congele; ponha o recheio num saco plástico que feche hermeticamente, ou embale em filme plástico, etiquete e congele. <strong>Descongelamento:</strong> descongele a massa e o recheio em temperatura ambiente; junte os ovos batidos ao recheio e misture. <strong>Montagem:</strong> preaqueça o forno em temperatura média (180 °C). Abra a massa folhada e forre o fundo de uma fôrma com 25 cm de diâmetro, untada. Pincele a borda da fôrma com o ovo batido. Corte uma tira de massa com 1,5 cm de largura e ponha sobre a parte pincelada, formando uma borda; aperte para firmar. Faça alguns furos na massa e leve ao forno até a massa ficar levemente dourada. Retire do forno e recheie. Leve de volta ao forno até o recheio firmar, sem deixar queimar as bordas da massa. Retire do forno, deixe esfriar por 5 minutos e sirva.</p>
       </article>
     </main>
+      <script src="../../js/recipe-layout.js" defer></script>
   </body>
 </html>

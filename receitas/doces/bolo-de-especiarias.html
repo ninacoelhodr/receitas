@@ -10,25 +10,33 @@
     />
     <link rel="stylesheet" href="../../css/site.css" />
     <link rel="stylesheet" href="../../css/print.css" />
+    <link rel="stylesheet" href="../../css/livros.css" />
   </head>
   <body>
     <header class="site-header no-print">
       <a class="brand" href="../../index.html">Livro de Receitas</a>
       <nav class="site-nav" aria-label="Principal">
-        <a href="../../index.html#doces">Doces</a>
+        <a href="../../catalogo.html#doces">Doces</a>
         <a href="../../na-cozinha/">Na cozinha</a>
       </nav>
     </header>
 
     <main class="recipe-page">
       <div class="recipe-actions no-print">
-        <a class="btn btn-ghost" href="../../index.html">← Voltar</a>
+        <a class="btn btn-ghost" href="../../livros/arte-de-congelar-paes-bolos-biscoitos/">← Voltar</a>
         <button class="btn" type="button" onclick="window.print()">
           Imprimir
         </button>
       </div>
 
-      <article class="recipe-card">
+    <!-- livro:inicio -->
+    <nav class="livro-nav no-print" aria-label="Neste livro" style="--livro:#a9432a">
+      <a class="livro-nav-livro" href="../../livros/arte-de-congelar-paes-bolos-biscoitos/">A arte de congelar — Pães, bolos e biscoitos</a>
+      <span class="livro-nav-pag">pág. 30</span>
+      <span class="livro-nav-setas"><a rel="prev" href="../doces/bolo-merenda.html" title="Bolo merenda">← Anterior</a><a rel="next" href="../doces/bolo-de-mandioca.html" title="Bolo de mandioca">Próxima →</a></span>
+    </nav>
+    <!-- livro:fim -->
+      <article class="recipe-card" data-livro="arte-de-congelar-paes-bolos-biscoitos" data-pagina="30" data-layout="duas-colunas" style="--livro:#a9432a">
         <p class="category">Doces · Tortas e bolos</p>
         <h1>Bolo de especiarias</h1>
 
@@ -74,5 +82,6 @@
         <p class="notes">Os bolos congelam melhor sem cremes, recheios de geleias ou glacês de açúcar, embora os decorados ou recheados com glacê à base de manteiga possam ser congelados antes de serem embalados. <strong>Congelamento:</strong> cubra o bolo com plástico e leve ao freezer até congelar; embrulhe em papel-alumínio ou em filme plástico e, depois, coloque num saco plástico; retire o ar, vede bem, etiquete e congele. <strong>Descongelamento:</strong> em temperatura ambiente por 2 horas, no forno por 10 minutos ou no micro-ondas por 3 minutos na potência de descongelamento.</p>
       </article>
     </main>
+      <script src="../../js/recipe-layout.js" defer></script>
   </body>
 </html>

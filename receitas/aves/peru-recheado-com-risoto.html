@@ -10,25 +10,33 @@
     />
     <link rel="stylesheet" href="../../css/site.css" />
     <link rel="stylesheet" href="../../css/print.css" />
+    <link rel="stylesheet" href="../../css/livros.css" />
   </head>
   <body>
     <header class="site-header no-print">
       <a class="brand" href="../../index.html">Livro de Receitas</a>
       <nav class="site-nav" aria-label="Principal">
-        <a href="../../index.html#aves">Aves</a>
+        <a href="../../catalogo.html#aves">Aves</a>
         <a href="../../na-cozinha/">Na cozinha</a>
       </nav>
     </header>
 
     <main class="recipe-page">
       <div class="recipe-actions no-print">
-        <a class="btn btn-ghost" href="../../index.html">← Voltar</a>
+        <a class="btn btn-ghost" href="../../livros/arte-de-congelar-aves/">← Voltar</a>
         <button class="btn" type="button" onclick="window.print()">
           Imprimir
         </button>
       </div>
 
-      <article class="recipe-card">
+    <!-- livro:inicio -->
+    <nav class="livro-nav no-print" aria-label="Neste livro" style="--livro:#8a5a1c">
+      <a class="livro-nav-livro" href="../../livros/arte-de-congelar-aves/">A arte de congelar — Aves e patês</a>
+      <span class="livro-nav-pag">pág. 62</span>
+      <span class="livro-nav-setas"><a rel="prev" href="../aves/frango-estufado-com-tomates.html" title="Frango estufado com tomates">← Anterior</a><span class="livro-nav-off">Próxima →</span></span>
+    </nav>
+    <!-- livro:fim -->
+      <article class="recipe-card" data-livro="arte-de-congelar-aves" data-pagina="62" data-layout="duas-colunas" style="--livro:#8a5a1c">
         <p class="category">Aves · Outras aves</p>
         <h1>Peru recheado com risoto</h1>
 
@@ -82,5 +90,6 @@
         <p class="notes">Quando for assar, calcule cerca de 1 hora de forno para cada quilo de peru. <strong>Congelamento:</strong> coloque o risoto num recipiente rígido, cubra e leve ao freezer; passe para um saco plástico, etiquete e congele. Envolva o peru em papel-alumínio, coloque num saco plástico, retire o ar, vede bem e congele. <strong>Descongelamento:</strong> descongele o peru e o risoto na geladeira de um dia para o outro; coloque o peru numa assadeira e recheie com o risoto. Cubra com papel-alumínio e leve ao forno preaquecido em temperatura alta (200 °C) por 4 a 5 horas, regando com caldo de galinha para não secar; cerca de 40 minutos antes de terminar, retire o papel para dourar. Sirva acompanhado de gomos de laranja.</p>
       </article>
     </main>
+      <script src="../../js/recipe-layout.js" defer></script>
   </body>
 </html>

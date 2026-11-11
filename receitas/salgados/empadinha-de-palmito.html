@@ -10,25 +10,33 @@
     />
     <link rel="stylesheet" href="../../css/site.css" />
     <link rel="stylesheet" href="../../css/print.css" />
+    <link rel="stylesheet" href="../../css/livros.css" />
   </head>
   <body>
     <header class="site-header no-print">
       <a class="brand" href="../../index.html">Livro de Receitas</a>
       <nav class="site-nav" aria-label="Principal">
-        <a href="../../index.html#salgados">Salgados</a>
+        <a href="../../catalogo.html#salgados">Salgados</a>
         <a href="../../na-cozinha/">Na cozinha</a>
       </nav>
     </header>
 
     <main class="recipe-page">
       <div class="recipe-actions no-print">
-        <a class="btn btn-ghost" href="../../index.html">← Voltar</a>
+        <a class="btn btn-ghost" href="../../livros/arte-de-congelar-massas-tortas-molhos/">← Voltar</a>
         <button class="btn" type="button" onclick="window.print()">
           Imprimir
         </button>
       </div>
 
-      <article class="recipe-card">
+    <!-- livro:inicio -->
+    <nav class="livro-nav no-print" aria-label="Neste livro" style="--livro:#5f6b3a">
+      <a class="livro-nav-livro" href="../../livros/arte-de-congelar-massas-tortas-molhos/">A arte de congelar — Massas, tortas e molhos</a>
+      <span class="livro-nav-pag">pág. 52</span>
+      <span class="livro-nav-setas"><a rel="prev" href="../salgados/rissoles.html" title="Rissoles">← Anterior</a><a rel="next" href="../salgados/choux-recheados.html" title="Choux recheados">Próxima →</a></span>
+    </nav>
+    <!-- livro:fim -->
+      <article class="recipe-card" data-livro="arte-de-congelar-massas-tortas-molhos" data-pagina="52" data-layout="duas-colunas" style="--livro:#5f6b3a">
         <p class="category">Salgados · Petiscos</p>
         <h1>Empadinha de palmito</h1>
 
@@ -81,5 +89,6 @@
         <p class="notes">Você pode congelar a massa de empada sem o recheio: siga a receita apenas até o passo 2. Com essa mesma massa você pode fazer barquetes, empadão etc. e colocar o recheio de sua preferência. <strong>Congelamento:</strong> leve as forminhas ao freezer, sem cobrir, até as empadas ficarem duras; desenforme e coloque-as, lado a lado, em uma bandeja de papel-alumínio, cubra com filme plástico, etiquete e congele. <strong>Descongelamento:</strong> leve diretamente do freezer ao forno para aquecer por cerca de 15 minutos.</p>
       </article>
     </main>
+      <script src="../../js/recipe-layout.js" defer></script>
   </body>
 </html>
